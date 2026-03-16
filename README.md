@@ -8,14 +8,11 @@ A comprehensive nutrition and meal tracking application built with **Flask**, **
 - **PWA Ready:** Install the app on your mobile device for easy access.
 - **Dark Mode Support:** Modern UI that adapts to your system preferences.
 
-## UI Screenshots
-Here is a look at the NutriTrack interface:
+## 📱 App Preview
 
-<p align="center">
-  <img src="screenShotsOfUi/home.png" width="30%" alt="Home Dashboard">
-  <img src="screenShotsOfUi/todayLog.png" width="30%" alt="Today's Meal Log">
-  <img src="screenShotsOfUi/statistics.png" width="30%" alt="Statistics and Trends">
-</p>
+| Home Screen | Today's Log | Statistics |
+| :---: | :---: | :---: |
+| ![Home](images/home.png) | ![Today's Log](images/todayLog.png) | ![Statistics](images/statistics.png) |
 
 ## Getting Started
 
