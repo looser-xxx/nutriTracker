@@ -1,7 +1,12 @@
+import os
+
+from dotenv import load_dotenv
 from flask import Flask
 
 from models import db
-from routeMeals import mealBp
+from routeMeals import mealBp, oauth
+
+load_dotenv()
 
 
 def createApp():
@@ -9,8 +14,10 @@ def createApp():
 
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-key")
 
     db.init_app(app)
+    oauth.init_app(app)
 
     app.register_blueprint(mealBp)
 

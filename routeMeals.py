@@ -1,47 +1,132 @@
+import os
 from datetime import datetime, timezone
 
-from flask import Blueprint, request
-from sqlalchemy import func, true
+from authlib.integrations.flask_client import OAuth
+from dotenv import load_dotenv
+from flask import Blueprint, redirect, render_template, request, session, url_for
+from sqlalchemy import func
 
-from models import FoodDirectory, FoodLog, db
+from models import FoodDirectory, FoodLog, User, db
+
+load_dotenv()
 
 mealBp = Blueprint("mealBp", __name__)
 
+oauth = OAuth()
+google = oauth.register(
+    name="google",
+    client_id=os.getenv("GOOGLE_CLIENT_ID"),
+    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
+    access_token_url="https://accounts.google.com/o/oauth2/token",
+    access_token_params=None,
+    authorize_url="https://accounts.google.com/o/oauth2/auth",
+    authorize_params=None,
+    api_base_url="https://www.googleapis.com/oauth2/v1/",
+    client_kwargs={"scope": "openid email profile"},
+    server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
+)
 
-@mealBp.route("/api/dataBase/admin/addFood", methods=["POST"])
-def addFoodToDirectory():
-    data = request.get_json()
 
-    requiredFields = ["foodName", "calories", "protein", "carbs", "fat", "fiber"]
-    for field in requiredFields:
-        if field not in data:
-            return {"error": f"Missing field: {field}"}, 400
+def loginRequired(f):
+    from functools import wraps
 
-    if data.get("adminPassword") != "lightWeightBaby":
-        return {"error": "Unauthorized access"}, 401
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "user_id" not in session:
+            return redirect(url_for("mealBp.login"))
+        return f(*args, **kwargs)
 
-    newFood = FoodDirectory(
-        foodName=data["foodName"],
-        calories=data["calories"],
-        protein=data["protein"],
-        carbs=data["carbs"],
-        fat=data["fat"],
-        fiber=data["fiber"],
-    )
+    return decorated_function
 
-    try:
-        db.session.add(newFood)
+
+@mealBp.route("/")
+@loginRequired
+def home():
+    user = User.query.get(session["user_id"])
+    if not user.full_name:
+        return redirect(url_for("mealBp.onboarding"))
+    return render_template("index.html", user_name=user.full_name.split()[0])
+
+
+@mealBp.route("/login")
+def login():
+    return render_template("login.html")
+
+
+@mealBp.route("/google-login")
+def googleLogin():
+    redirect_uri = url_for("mealBp.authorize", _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+
+@mealBp.route("/authorize")
+def authorize():
+    token = google.authorize_access_token()
+    resp = google.get("userinfo")
+    user_info = resp.json()
+
+    user = User.query.filter_by(google_id=user_info["id"]).first()
+    if not user:
+        user = User(
+            google_id=user_info["id"],
+            email=user_info["email"],
+            name=user_info["name"],
+            picture=user_info.get("picture"),
+        )
+        db.session.add(user)
         db.session.commit()
-        return {
-            "message": f"{newFood.foodName} added to dataBase",
-            "id": newFood.id,
-        }, 201
-    except Exception as e:
-        db.session.rollback()
-        return {"error": f"Food name already exists or database error: {e}"}, 400
+
+    session["user_id"] = user.id
+    return redirect(url_for("mealBp.home"))
+
+
+@mealBp.route("/api/logout")
+def logout():
+    session.pop("user_id", None)
+    return {"success": True, "redirect": url_for("mealBp.login")}
+
+
+@mealBp.route("/onboarding")
+@loginRequired
+def onboarding():
+    return render_template("onboarding.html")
+
+
+@mealBp.route("/api/saveProfile", methods=["POST"])
+@loginRequired
+def saveProfile():
+    data = request.get_json()
+    user = User.query.get(session["user_id"])
+
+    user.full_name = data.get("fullName")
+    user.age = data.get("age")
+    user.sex = data.get("sex")
+    user.height = data.get("height")
+    user.weight = data.get("weight")
+    user.bicep_size = data.get("bicepSize")
+
+    db.session.commit()
+    return {"success": True}
+
+
+@mealBp.route("/api/profile")
+@loginRequired
+def getProfile():
+    user = User.query.get(session["user_id"])
+    return {
+        "fullName": user.full_name,
+        "username": user.email,
+        "serialNumber": f"NUT-{user.id:04d}",
+        "age": user.age,
+        "sex": user.sex,
+        "height": user.height,
+        "weight": user.weight,
+        "bicepSize": user.bicep_size,
+    }
 
 
 @mealBp.route("/api/dataBase/directory", methods=["GET"])
+@loginRequired
 def getFoodDirectory():
     allFood = FoodDirectory.query.all()
     output = []
@@ -63,6 +148,7 @@ def getFoodDirectory():
 
 
 @mealBp.route("/api/logs/logMeal", methods=["POST"])
+@loginRequired
 def logMeal():
 
     data = request.get_json()
@@ -78,6 +164,7 @@ def logMeal():
     macros = calculateSnapshotMacros(foodItem, gramsEaten)
 
     newLog = FoodLog(
+        user_id=session["user_id"],
         foodName=foodItem.foodName,
         amountInG=gramsEaten,
         calories=macros["calories"],
@@ -116,9 +203,10 @@ def calculateSnapshotMacros(foodItem, grams):
 
 
 @mealBp.route("/api/logs/nutritionConsumed/<int:id>", methods=["GET"])
+@loginRequired
 def nutritionConsumed(id):
 
-    mealData = FoodLog.query.get(id)
+    mealData = FoodLog.query.filter_by(id=id, user_id=session["user_id"]).first()
 
     if not mealData:
         return {"error": "meal log not found"}, 404
@@ -141,6 +229,7 @@ def nutritionConsumed(id):
 
 
 @mealBp.route("/api/logs/today/totalNutriConsumed", methods=["GET"])
+@loginRequired
 def totalNutriConsumed():
     todayDate = datetime.now(timezone.utc).date()
 
@@ -153,6 +242,7 @@ def totalNutriConsumed():
             func.sum(FoodLog.fiber).label("fiber"),
         )
         .filter(func.date(FoodLog.dateLogged) == todayDate)
+        .filter(FoodLog.user_id == session["user_id"])
         .first()
     )
 
@@ -166,11 +256,13 @@ def totalNutriConsumed():
 
 
 @mealBp.route("/api/logs/today/allLogs", methods=["GET"])
+@loginRequired
 def today():
     todayDate = datetime.now(timezone.utc).date()
 
     logsForToday = FoodLog.query.filter(
-        func.date(FoodLog.dateLogged) == todayDate
+        func.date(FoodLog.dateLogged) == todayDate,
+        FoodLog.user_id == session["user_id"],
     ).all()
 
     dailyMeals = []
@@ -192,8 +284,9 @@ def today():
 
 
 @mealBp.route("/api/logs/today/delete/<int:id>", methods=["DELETE"])
+@loginRequired
 def deleteFood(id):
-    logToDelete = FoodLog.query.get(id)
+    logToDelete = FoodLog.query.filter_by(id=id, user_id=session["user_id"]).first()
 
     if not logToDelete:
         return {"error": "Log not found"}, 404
@@ -204,10 +297,8 @@ def deleteFood(id):
     return {"id": id}, 200
 
 
-from datetime import datetime, timezone
-
-
 @mealBp.route("/api/logs/avg/<int:days>", methods=["GET"])
+@loginRequired
 def sendAvg(days):
     return calculateAvg(getLogsForAvg(days), days)
 
@@ -226,7 +317,8 @@ def getLogsForAvg(days):
 
     while True:
         logsChunk = (
-            FoodLog.query.order_by(FoodLog.dateLogged.desc())
+            FoodLog.query.filter_by(user_id=session["user_id"])
+            .order_by(FoodLog.dateLogged.desc())
             .limit(batchSize)
             .offset(offsetAmount)
             .all()
@@ -275,6 +367,7 @@ def calculateAvg(logs, days):
         fat += log.fat
         fiber += log.fiber
 
+    days = max(days, 1)
     return {
         "average": {
             "calories": round(calories / days, 1),
