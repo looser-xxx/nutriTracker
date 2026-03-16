@@ -40,22 +40,59 @@
         .full-width {
             grid-column: span 2;
         }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+        .loading-overlay {
+            display: none;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            border-radius: 20px;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 10;
+            flex-direction: column;
+        }
+        .onboarding-card { position: relative; }
+        
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin-bottom: 15px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
 
 <div class="onboarding-card">
-    <div class="header">
-        <h2>Welcome!</h2>
-        <p>Let's get to know you better to personalize your tracking.</p>
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loader"></div>
+        <p>AI is calculating your targets...</p>
     </div>
 
-    <form id="onboardingForm">
+    <!-- Step 1: Basic Profile -->
+    <div id="step1" class="step active">
+        <div class="header">
+            <h2>Step 1: Profile</h2>
+            <p>Tell us a bit about yourself.</p>
+        </div>
         <div class="formGroup full-width">
             <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" class="formControl" placeholder="e.g. Knoor " required>
+            <input type="text" id="fullName" class="formControl" placeholder="e.g. Knoor" required>
         </div>
-
         <div class="form-grid">
             <div class="formGroup">
                 <label for="age">Age</label>
@@ -64,8 +101,8 @@
             <div class="formGroup">
                 <label for="sex">Sex</label>
                 <select id="sex" class="formControl" required>
-                    <option value="Male">Gay</option>
-                    <option value="Female">Trans</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
             </div>
             <div class="formGroup">
@@ -77,61 +114,103 @@
                 <input type="number" id="weight" class="formControl" placeholder="kg" step="0.1" required>
             </div>
         </div>
-
         <div class="formGroup full-width">
             <label for="bicep">Bicep Size (inches) <small style="color:var(--text-muted)">(Optional)</small></label>
             <input type="number" id="bicep" class="formControl" placeholder="in" step="0.1">
         </div>
+        <button onclick="nextStep(1)" class="submitBtn full-width" style="margin-top: 10px;">Next</button>
+    </div>
 
-        <div class="header" style="margin-top: 20px;">
-            <h3>Daily Nutritional Targets</h3>
-            <p>Set your goals for optimal tracking.</p>
+    <!-- Step 2: Goals -->
+    <div id="step2" class="step">
+        <div class="header">
+            <h2>Step 2: Goals</h2>
+            <p>What do you want to achieve?</p>
         </div>
+        <div class="formGroup full-width">
+            <label for="fitnessGoal">Fitness Goal</label>
+            <select id="fitnessGoal" class="formControl">
+                <option value="lose weight">Lose Weight</option>
+                <option value="gain weight">Gain Weight</option>
+                <option value="maintain weight">Maintain</option>
+                <option value="maingain (build muscle while staying lean)">Maingain</option>
+            </select>
+        </div>
+        <div class="formGroup full-width">
+            <label for="workoutFrequency">Workouts per week</label>
+            <input type="number" id="workoutFrequency" class="formControl" placeholder="e.g. 4" min="0" max="14" required>
+        </div>
+        <div class="form-grid">
+            <button onclick="prevStep(2)" class="submitBtn" style="background: var(--bg-secondary);">Back</button>
+            <button onclick="generateAITargets()" class="submitBtn">Generate Targets</button>
+        </div>
+    </div>
 
+    <!-- Step 3: Nutrition Targets -->
+    <div id="step3" class="step">
+        <div class="header">
+            <h2>Step 3: Verify</h2>
+            <p>AI-generated targets. You can tweak them if needed.</p>
+        </div>
         <div class="form-grid">
             <div class="formGroup">
                 <label for="targetCalories">Calories (kcal)</label>
-                <input type="number" id="targetCalories" class="formControl" value="2500" required>
+                <input type="number" id="targetCalories" class="formControl" required>
             </div>
             <div class="formGroup">
                 <label for="targetProtein">Protein (g)</label>
-                <input type="number" id="targetProtein" class="formControl" value="150" required>
+                <input type="number" id="targetProtein" class="formControl" required>
             </div>
             <div class="formGroup">
                 <label for="targetCarbs">Carbs (g)</label>
-                <input type="number" id="targetCarbs" class="formControl" value="300" required>
+                <input type="number" id="targetCarbs" class="formControl" required>
             </div>
             <div class="formGroup">
                 <label for="targetFat">Fat (g)</label>
-                <input type="number" id="targetFat" class="formControl" value="80" required>
+                <input type="number" id="targetFat" class="formControl" required>
             </div>
             <div class="formGroup full-width">
                 <label for="targetFiber">Fiber (g)</label>
-                <input type="number" id="targetFiber" class="formControl" value="30" required>
+                <input type="number" id="targetFiber" class="formControl" required>
             </div>
         </div>
-
-        <button type="submit" class="submitBtn full-width" style="margin-top: 10px;">Save Profile</button>
-    </form>
+        <div class="form-grid">
+            <button onclick="prevStep(3)" class="submitBtn" style="background: var(--bg-secondary);">Back</button>
+            <button onclick="saveFinalProfile()" class="submitBtn">Finish Setup</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
+    function showStep(n) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + n).classList.add('active');
+    }
+
+    function nextStep(current) {
+        if (current === 1) {
+            saveBasicProfile();
+        }
+    }
+
+    function prevStep(current) {
+        showStep(current - 1);
+    }
+
+    async function saveBasicProfile() {
         const payload = {
             fullName: document.getElementById('fullName').value,
-            age: document.getElementById('age').value,
+            age: parseInt(document.getElementById('age').value),
             sex: document.getElementById('sex').value,
-            height: document.getElementById('height').value,
-            weight: document.getElementById('weight').value,
-            bicepSize: document.getElementById('bicep').value,
-            targetCalories: document.getElementById('targetCalories').value,
-            targetProtein: document.getElementById('targetProtein').value,
-            targetCarbs: document.getElementById('targetCarbs').value,
-            targetFat: document.getElementById('targetFat').value,
-            targetFiber: document.getElementById('targetFiber').value
+            height: parseFloat(document.getElementById('height').value),
+            weight: parseFloat(document.getElementById('weight').value),
+            bicepSize: parseFloat(document.getElementById('bicep').value) || 0
         };
+
+        if (!payload.fullName || !payload.age || !payload.height || !payload.weight) {
+            alert("Please fill all required fields.");
+            return;
+        }
 
         try {
             const res = await fetch('/api/saveProfile', {
@@ -139,18 +218,74 @@
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(payload)
             });
+            const data = await res.json();
+            if (data.success) {
+                showStep(2);
+            }
+        } catch (err) {
+            alert("Error saving step 1");
+        }
+    }
+
+    async function generateAITargets() {
+        const goal = document.getElementById('fitnessGoal').value;
+        const frequency = document.getElementById('workoutFrequency').value;
+        
+        if (!frequency) {
+            alert("Please enter workout frequency.");
+            return;
+        }
+
+        document.getElementById('loadingOverlay').style.display = 'flex';
+
+        try {
+            const res = await fetch('/api/generateTargets', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ goal, frequency })
+            });
+            const data = await res.json();
             
+            if (data.success) {
+                document.getElementById('targetCalories').value = data.targets.calories;
+                document.getElementById('targetProtein').value = data.targets.protein;
+                document.getElementById('targetCarbs').value = data.targets.carbs;
+                document.getElementById('targetFat').value = data.targets.fat;
+                document.getElementById('targetFiber').value = data.targets.fiber;
+                showStep(3);
+            } else {
+                alert("AI generation failed: " + (data.error || "Unknown error"));
+            }
+        } catch (err) {
+            alert("Connection error while talking to AI.");
+        } finally {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+    }
+
+    async function saveFinalProfile() {
+        const payload = {
+            calories: parseFloat(document.getElementById('targetCalories').value),
+            protein: parseFloat(document.getElementById('targetProtein').value),
+            carbs: parseFloat(document.getElementById('targetCarbs').value),
+            fat: parseFloat(document.getElementById('targetFat').value),
+            fiber: parseFloat(document.getElementById('targetFiber').value)
+        };
+
+        try {
+            const res = await fetch('/api/saveTargets', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            });
             const data = await res.json();
             if (data.success) {
                 window.location.href = '/';
-            } else {
-                alert("Error saving profile: " + data.message);
             }
         } catch (err) {
-            console.error(err);
-            alert("Failed to save profile.");
+            alert("Error saving final targets");
         }
-    });
+    }
 </script>
 
 </body>

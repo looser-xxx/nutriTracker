@@ -95,7 +95,6 @@ def logout():
 def onboarding():
     return render_template("onboarding.html")
 
-
 @mealBp.route("/api/saveProfile", methods=["POST"])
 @loginRequired
 def saveProfile():
@@ -108,13 +107,78 @@ def saveProfile():
     user.height = data.get("height")
     user.weight = data.get("weight")
     user.bicep_size = data.get("bicepSize")
-    
-    # Save Targets
-    user.target_calories = data.get("targetCalories", 2500)
-    user.target_protein = data.get("targetProtein", 150)
-    user.target_carbs = data.get("targetCarbs", 300)
-    user.target_fat = data.get("targetFat", 80)
-    user.target_fiber = data.get("targetFiber", 30)
+
+    db.session.commit()
+    return {"success": True}
+
+
+@mealBp.route("/api/generateTargets", methods=["POST"])
+@loginRequired
+def generateTargets():
+    import requests
+    import json
+
+    data = request.get_json()
+    user = User.query.get(session["user_id"])
+
+    weight = user.weight
+    height = user.height
+    age = user.age
+    goal = data.get("goal")
+    frequency = data.get("frequency")
+
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        return {"error": "Gemini API key not configured"}, 500
+
+    prompt = (
+        f"my weight is {weight} kg, My height is {height} cm and my age is {age}. "
+        f"I want {goal}. What should be my target calories, protein, fat, carbs and fiber. "
+        f"I workout {frequency} times a week please give the output in json format. "
+        f"in the json just write the nutritient name as key and amount in values. "
+        f"Do not add any message or unit. Just amount needed as key. "
+        f"Keys must be protein, calories, fat, carbs, fiber."
+    )
+
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    headers = {'Content-Type': 'application/json'}
+    payload = {
+        "contents": [{
+            "parts": [{"text": prompt}]
+        }]
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()
+        result = response.json()
+
+        # Extract JSON from Gemini response
+        content = result['candidates'][0]['content']['parts'][0]['text']
+        # Remove markdown code blocks if present
+        if "```json" in content:
+            content = content.split("```json")[1].split("```")[0]
+        elif "```" in content:
+            content = content.split("```")[1].split("```")[0]
+
+        targets = json.loads(content.strip())
+        return {"success": True, "targets": targets}
+    except Exception as e:
+        print(f"Gemini API error: {e}")
+        return {"error": str(e)}, 500
+
+
+@mealBp.route("/api/saveTargets", methods=["POST"])
+@loginRequired
+def saveTargets():
+    data = request.get_json()
+    user = User.query.get(session["user_id"])
+
+    user.target_calories = data.get("calories")
+    user.target_protein = data.get("protein")
+    user.target_carbs = data.get("carbs")
+    user.target_fat = data.get("fat")
+    user.target_fiber = data.get("fiber")
 
     db.session.commit()
     return {"success": True}
