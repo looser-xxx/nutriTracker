@@ -22,6 +22,13 @@ class User(db.Model):
     weight = db.Column(db.Float, nullable=True)
     bicep_size = db.Column(db.Float, nullable=True)
     
+    # Nutrition Targets
+    target_calories = db.Column(db.Float, default=2500.0)
+    target_protein = db.Column(db.Float, default=150.0)
+    target_carbs = db.Column(db.Float, default=300.0)
+    target_fat = db.Column(db.Float, default=80.0)
+    target_fiber = db.Column(db.Float, default=30.0)
+    
     date_joined = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
     logs = db.relationship("FoodLog", backref="user", lazy=True)

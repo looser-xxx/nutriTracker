@@ -104,6 +104,13 @@ def saveProfile():
     user.height = data.get("height")
     user.weight = data.get("weight")
     user.bicep_size = data.get("bicepSize")
+    
+    # Save Targets
+    user.target_calories = data.get("targetCalories", 2500)
+    user.target_protein = data.get("targetProtein", 150)
+    user.target_carbs = data.get("targetCarbs", 300)
+    user.target_fat = data.get("targetFat", 80)
+    user.target_fiber = data.get("targetFiber", 30)
 
     db.session.commit()
     return {"success": True}
@@ -122,6 +129,26 @@ def getProfile():
         "height": user.height,
         "weight": user.weight,
         "bicepSize": user.bicep_size,
+        "targets": {
+            "calories": user.target_calories,
+            "protein": user.target_protein,
+            "carbs": user.target_carbs,
+            "fat": user.target_fat,
+            "fiber": user.target_fiber
+        }
+    }
+
+
+@mealBp.route("/api/user/targets")
+@loginRequired
+def getUserTargets():
+    user = User.query.get(session["user_id"])
+    return {
+        "calories": user.target_calories,
+        "protein": user.target_protein,
+        "carbs": user.target_carbs,
+        "fat": user.target_fat,
+        "fiber": user.target_fiber
     }
 
 
