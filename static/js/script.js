@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const infoFat = document.getElementById('infoFat');
 
     // View DB Elements
-    const viewDbItem = document.getElementById('viewDbItem');
     const dbViewContainer = document.getElementById('dbViewContainer');
     const closeDbViewBtn = document.getElementById('closeDbView');
     const dbFoodList = document.getElementById('dbFoodList');
@@ -653,13 +652,6 @@ document.addEventListener('DOMContentLoaded', () => {
         closeMenuBtn.addEventListener('click', () => toggleModal(menuOverlay, false));
     }
 
-    // View DB listeners
-    if (viewDbItem) {
-        viewDbItem.addEventListener('click', () => {
-            toggleModal(menuOverlay, false); // Close menu
-            toggleModal(dbViewContainer, true); // Open DB view
-        });
-    }
 
     if (closeDbViewBtn) {
         closeDbViewBtn.addEventListener('click', () => toggleModal(dbViewContainer, false));
