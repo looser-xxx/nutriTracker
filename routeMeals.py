@@ -27,15 +27,17 @@ def loginRequired(f):
 
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if "user_id" not in session:
-            return redirect(url_for("mealBp.login"))
-        
-        user = User.query.get(session["user_id"])
-        if not user:
+        # Allow access if user is logged in OR if they are in the onboarding process
+        if "user_id" in session:
+            user = User.query.get(session["user_id"])
+            if user:
+                return f(*args, **kwargs)
             session.pop("user_id", None)
-            return redirect(url_for("mealBp.login"))
             
-        return f(*args, **kwargs)
+        if "temp_user" in session:
+            return f(*args, **kwargs)
+            
+        return redirect(url_for("mealBp.login"))
 
     return decorated_function
 
@@ -43,6 +45,9 @@ def loginRequired(f):
 @mealBp.route("/")
 @loginRequired
 def home():
+    if "user_id" not in session:
+        return redirect(url_for("mealBp.onboarding"))
+    
     user = User.query.get(session["user_id"])
     if not user.full_name:
         return redirect(url_for("mealBp.onboarding"))
@@ -65,20 +70,19 @@ def authorize():
     token = google.authorize_access_token()
     user_info = token.get("userinfo")
     if not user_info:
-        # Fallback if userinfo is not in token (depends on scopes/provider)
         resp = google.get("https://www.googleapis.com/oauth2/v3/userinfo")
         user_info = resp.json()
 
     user = User.query.filter_by(google_id=user_info["sub"]).first()
     if not user:
-        user = User(
-            google_id=user_info["sub"],
-            email=user_info["email"],
-            name=user_info["name"],
-            picture=user_info.get("picture"),
-        )
-        db.session.add(user)
-        db.session.commit()
+        # DO NOT CREATE USER YET. Store info in session for onboarding.
+        session["temp_user"] = {
+            "google_id": user_info["sub"],
+            "email": user_info["email"],
+            "name": user_info["name"],
+            "picture": user_info.get("picture")
+        }
+        return redirect(url_for("mealBp.onboarding"))
 
     session["user_id"] = user.id
     return redirect(url_for("mealBp.home"))
@@ -87,6 +91,7 @@ def authorize():
 @mealBp.route("/api/logout")
 def logout():
     session.pop("user_id", None)
+    session.pop("temp_user", None)
     return {"success": True, "redirect": url_for("mealBp.login")}
 
 
@@ -95,20 +100,35 @@ def logout():
 def onboarding():
     return render_template("onboarding.html")
 
+
 @mealBp.route("/api/saveProfile", methods=["POST"])
 @loginRequired
 def saveProfile():
     data = request.get_json()
-    user = User.query.get(session["user_id"])
-
-    user.full_name = data.get("fullName")
-    user.age = data.get("age")
-    user.sex = data.get("sex")
-    user.height = data.get("height")
-    user.weight = data.get("weight")
-    user.bicep_size = data.get("bicepSize")
-
-    db.session.commit()
+    
+    if "user_id" in session:
+        user = User.query.get(session["user_id"])
+        user.full_name = data.get("fullName")
+        user.age = data.get("age")
+        user.sex = data.get("sex")
+        user.height = data.get("height")
+        user.weight = data.get("weight")
+        user.bicep_size = data.get("bicepSize")
+        db.session.commit()
+    elif "temp_user" in session:
+        # Update session data
+        session["temp_user"].update({
+            "full_name": data.get("fullName"),
+            "age": data.get("age"),
+            "sex": data.get("sex"),
+            "height": data.get("height"),
+            "weight": data.get("weight"),
+            "bicep_size": data.get("bicepSize")
+        })
+        session.modified = True
+    else:
+        return {"error": "Not authorized"}, 401
+        
     return {"success": True}
 
 
@@ -119,11 +139,16 @@ def generateTargets():
     import json
 
     data = request.get_json()
-    user = User.query.get(session["user_id"])
+    
+    if "user_id" in session:
+        user = User.query.get(session["user_id"])
+        weight, height, age = user.weight, user.height, user.age
+    elif "temp_user" in session:
+        u = session["temp_user"]
+        weight, height, age = u["weight"], u["height"], u["age"]
+    else:
+        return {"error": "Not authorized"}, 401
 
-    weight = user.weight
-    height = user.height
-    age = user.age
     goal = data.get("goal")
     frequency = data.get("frequency")
 
@@ -140,7 +165,8 @@ def generateTargets():
         f"Keys must be protein, calories, fat, carbs, fiber."
     )
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    # Fixed URL: using v1beta and gemini-flash-latest alias
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={api_key}"
     headers = {'Content-Type': 'application/json'}
     payload = {
         "contents": [{
@@ -150,17 +176,25 @@ def generateTargets():
 
     try:
         response = requests.post(url, headers=headers, json=payload)
+        print(f"Gemini Response Status: {response.status_code}")
+        if response.status_code != 200:
+            print(f"Gemini Error Body: {response.text}")
         response.raise_for_status()
         result = response.json()
-
+        
         # Extract JSON from Gemini response
-        content = result['candidates'][0]['content']['parts'][0]['text']
+        parts = result.get('candidates', [{}])[0].get('content', {}).get('parts', [])
+        if not parts:
+            print(f"Gemini unexpected result structure: {result}")
+            return {"error": "Unexpected AI response format"}, 500
+            
+        content = parts[0]['text']
         # Remove markdown code blocks if present
         if "```json" in content:
             content = content.split("```json")[1].split("```")[0]
         elif "```" in content:
             content = content.split("```")[1].split("```")[0]
-
+            
         targets = json.loads(content.strip())
         return {"success": True, "targets": targets}
     except Exception as e:
@@ -172,7 +206,30 @@ def generateTargets():
 @loginRequired
 def saveTargets():
     data = request.get_json()
-    user = User.query.get(session["user_id"])
+    
+    if "user_id" in session:
+        user = User.query.get(session["user_id"])
+    elif "temp_user" in session:
+        # FINAL STEP: Create user in database now
+        u = session["temp_user"]
+        user = User(
+            google_id=u["google_id"],
+            email=u["email"],
+            name=u["name"],
+            picture=u["picture"],
+            full_name=u["full_name"],
+            age=u["age"],
+            sex=u["sex"],
+            height=u["height"],
+            weight=u["weight"],
+            bicep_size=u["bicep_size"]
+        )
+        db.session.add(user)
+        db.session.commit()
+        session["user_id"] = user.id
+        session.pop("temp_user", None)
+    else:
+        return {"error": "Not authorized"}, 401
 
     user.target_calories = data.get("calories")
     user.target_protein = data.get("protein")
@@ -223,7 +280,14 @@ def getUserTargets():
 @mealBp.route("/api/dataBase/directory", methods=["GET"])
 @loginRequired
 def getFoodDirectory():
-    allFood = FoodDirectory.query.all()
+    query = request.args.get("q", "").strip()
+    
+    if len(query) < 3:
+        return {"count": 0, "directory": [], "message": "Search query too short"}, 200
+
+    # Case-insensitive search using SQLAlchemy ilike
+    allFood = FoodDirectory.query.filter(FoodDirectory.foodName.ilike(f"%{query}%")).all()
+    
     output = []
     for food in allFood:
         output.append(
@@ -240,6 +304,36 @@ def getFoodDirectory():
             }
         )
     return {"count": len(output), "directory": output}, 200
+
+
+@mealBp.route("/api/dataBase/addFood", methods=["POST"])
+@loginRequired
+def addFood():
+    data = request.get_json()
+    
+    # Basic validation
+    required = ["name", "calories", "protein", "carbs", "fat", "fiber"]
+    if not all(k in data for k in required):
+        return {"error": f"Missing required fields: {required}"}, 400
+
+    # Check if already exists
+    existing = FoodDirectory.query.filter_by(foodName=data['name']).first()
+    if existing:
+        return {"error": "Food already exists in directory"}, 400
+
+    newFood = FoodDirectory(
+        foodName=data['name'],
+        calories=data['calories'],
+        protein=data['protein'],
+        carbs=data['carbs'],
+        fat=data['fat'],
+        fiber=data['fiber']
+    )
+
+    db.session.add(newFood)
+    db.session.commit()
+
+    return {"success": True, "id": newFood.id}, 201
 
 
 @mealBp.route("/api/logs/logMeal", methods=["POST"])

@@ -513,24 +513,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (foodSearch) {
         const fetchAndFilter = async () => {
-            if (serverFoodDatabase.length === 0) {
+            const query = foodSearch.value.trim();
+            
+            if (query.length < 3) {
+                foodListContainer.innerHTML = '';
+                foodListContainer.classList.remove('active');
+                clearSearchBtn.classList.add('hiddenView');
+                return;
+            }
+
+            clearSearchBtn.classList.remove('hiddenView');
+
+            // Debounce the search
+            if (typingTimer) clearTimeout(typingTimer);
+            
+            typingTimer = setTimeout(async () => {
                 try {
-                    const res = await fetch('/api/dataBase/directory');
+                    const res = await fetch(`/api/dataBase/directory?q=${encodeURIComponent(query)}`);
                     const data = await res.json();
-                    serverFoodDatabase = data.directory || [];
+                    renderFoodList(data.directory || []);
                 } catch (e) {
                     console.error("Failed to fetch food list", e);
                 }
-            }
-            const query = foodSearch.value.toLowerCase();
-            const filtered = serverFoodDatabase.filter(food => food.name.toLowerCase().includes(query));
-            renderFoodList(filtered);
-            if (query.length > 0) clearSearchBtn.classList.remove('hiddenView');
-            else clearSearchBtn.classList.add('hiddenView');
+            }, 300); // 300ms debounce
         };
         foodSearch.addEventListener('input', fetchAndFilter);
         foodSearch.addEventListener('focus', fetchAndFilter);
-        foodSearch.addEventListener('click', fetchAndFilter);
     }
 
     if (clearSearchBtn) {
@@ -539,7 +547,8 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedFoodInput.value = '';
             clearSearchBtn.classList.add('hiddenView');
             updateNutritionDisplay(null);
-            renderFoodList(foodDatabase);
+            foodListContainer.innerHTML = '';
+            foodListContainer.classList.remove('active');
             foodSearch.focus();
         });
     }
