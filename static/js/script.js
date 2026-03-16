@@ -448,3 +448,304 @@ document.addEventListener('DOMContentLoaded', () => {
             div.textContent = food.name;
             if (food.name === selectedFoodInput.value) div.classList.add('selected');
             div.addEventListener('click', () => {
+                selectedFoodInput.value = food.name;
+                selectedFoodInput.setAttribute('data-id', food.id);
+                // Store full macros for display
+                selectedFoodInput.setAttribute('data-nutrients', JSON.stringify(food.macros));
+                
+                foodSearch.value = food.name;
+                updateNutritionDisplay(food.macros);
+                foodListContainer.classList.remove('active');
+                clearSearchBtn.classList.remove('hiddenView');
+            });
+            foodListContainer.appendChild(div);
+        });
+        foodListContainer.classList.add('active');
+    };
+
+    // --- Event Listeners ---
+    
+    // Accordion Logic for Today's Meals
+    if (todaysMealList) {
+        todaysMealList.addEventListener('click', (e) => {
+            const item = e.target.closest('.expandable');
+            if (!item) return;
+
+            const targetId = item.getAttribute('data-details');
+            const targetDetails = document.getElementById(targetId);
+
+            // Close all others
+            const allItems = todaysMealList.querySelectorAll('.expandable');
+            const allDetails = todaysMealList.querySelectorAll('.mealDetails');
+
+            allItems.forEach(i => {
+                if (i !== item) i.classList.remove('expanded');
+            });
+            allDetails.forEach(d => {
+                if (d !== targetDetails) d.classList.add('hiddenView');
+            });
+
+            // Toggle current
+            item.classList.toggle('expanded');
+            targetDetails.classList.toggle('hiddenView');
+        });
+    }
+
+
+    if (foodSearch) {
+        const fetchAndFilter = async () => {
+            if (serverFoodDatabase.length === 0) {
+                try {
+                    const res = await fetch('/api/dataBase/directory');
+                    const data = await res.json();
+                    serverFoodDatabase = data.directory || [];
+                } catch (e) {
+                    console.error("Failed to fetch food list", e);
+                }
+            }
+            const query = foodSearch.value.toLowerCase();
+            const filtered = serverFoodDatabase.filter(food => food.name.toLowerCase().includes(query));
+            renderFoodList(filtered);
+            if (query.length > 0) clearSearchBtn.classList.remove('hiddenView');
+            else clearSearchBtn.classList.add('hiddenView');
+        };
+        foodSearch.addEventListener('input', fetchAndFilter);
+        foodSearch.addEventListener('focus', fetchAndFilter);
+        foodSearch.addEventListener('click', fetchAndFilter);
+    }
+
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+            foodSearch.value = '';
+            selectedFoodInput.value = '';
+            clearSearchBtn.classList.add('hiddenView');
+            updateNutritionDisplay(null);
+            renderFoodList(foodDatabase);
+            foodSearch.focus();
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        if (!foodSearch.contains(e.target) && !foodListContainer.contains(e.target) && e.target !== clearSearchBtn) {
+            foodListContainer.classList.remove('active');
+        }
+    });
+
+    if (qtyDec && qtyInc && foodQuantity) {
+        qtyDec.addEventListener('click', () => {
+            let currentVal = parseInt(foodQuantity.value) || 0;
+            if (currentVal > 0) foodQuantity.value = Math.max(0, currentVal - 10);
+        });
+        qtyInc.addEventListener('click', () => {
+            let currentVal = parseInt(foodQuantity.value) || 0;
+            foodQuantity.value = currentVal + 10;
+        });
+    }
+
+    if (tabBtns.length > 0) {
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                playStatsAnimation();
+            });
+        });
+    }
+
+    if (todayMain) todayMain.addEventListener('click', () => toggleModal(modalNutrients, true));
+    if (closeNutrientsBtn) closeNutrientsBtn.addEventListener('click', () => toggleModal(modalNutrients, false));
+    if (modalNutrients) modalNutrients.addEventListener('click', (e) => { if (e.target === modalNutrients) toggleModal(modalNutrients, false); });
+
+    if (navAdd) navAdd.addEventListener('click', () => toggleModal(addMealModal, true));
+    if (closeAddMealBtn) closeAddMealBtn.addEventListener('click', () => toggleModal(addMealModal, false));
+    if (addMealModal) addMealModal.addEventListener('click', (e) => { if (e.target === addMealModal) toggleModal(addMealModal, false); });
+
+    if (navStats) navStats.addEventListener('click', () => toggleModal(statsContainer, true));
+    if (closeStatsBtn) closeStatsBtn.addEventListener('click', () => toggleModal(statsContainer, false));
+
+    if (navWorkout) navWorkout.addEventListener('click', () => toggleModal(workoutContainer, true));
+    if (closeWorkoutBtn) closeWorkoutBtn.addEventListener('click', () => toggleModal(workoutContainer, false));
+
+    // Today's Meals Toggle
+    if (viewAllMealsBtn) viewAllMealsBtn.addEventListener('click', () => toggleModal(todaysMealsContainer, true));
+    if (closeTodaysMealsBtn) closeTodaysMealsBtn.addEventListener('click', () => toggleModal(todaysMealsContainer, false));
+
+    // Side Menu Toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenuBtn = document.getElementById('closeMenu');
+    
+    // Profile Elements
+    const profileMenuItem = document.querySelector('.menuList .menuItem:first-child');
+    const profileContainer = document.getElementById('profileContainer');
+    const closeProfileBtn = document.getElementById('closeProfile');
+
+    const fetchAndRenderProfile = async () => {
+        try {
+            const res = await fetch('/api/profile');
+            if (res.ok) {
+                const data = await res.json();
+                document.getElementById('profName').textContent = data.fullName || '-';
+                document.getElementById('profUser').textContent = data.username || '-';
+                document.getElementById('profSerial').textContent = data.serialNumber || '-';
+                document.getElementById('profAge').textContent = data.age || '-';
+                document.getElementById('profSex').textContent = data.sex || '-';
+                document.getElementById('profHeight').textContent = data.height ? data.height + ' cm' : '-';
+                document.getElementById('profWeight').textContent = data.weight ? data.weight + ' kg' : '-';
+                document.getElementById('profBicep').textContent = data.bicepSize ? data.bicepSize + ' in' : '-';
+            }
+        } catch (err) {
+            console.error("Error fetching profile:", err);
+        }
+    };
+
+    if (profileMenuItem) {
+        profileMenuItem.addEventListener('click', () => {
+            toggleModal(menuOverlay, false);
+            toggleModal(profileContainer, true);
+            fetchAndRenderProfile();
+        });
+    }
+
+    if (closeProfileBtn) {
+        closeProfileBtn.addEventListener('click', () => toggleModal(profileContainer, false));
+    }
+
+    if (profileContainer) {
+        profileContainer.addEventListener('click', (e) => {
+            if (e.target === profileContainer) toggleModal(profileContainer, false);
+        });
+    }
+
+    if (menuBtn) {
+        menuBtn.addEventListener('click', () => toggleModal(menuOverlay, true));
+    }
+
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', () => toggleModal(menuOverlay, false));
+    }
+
+    // View DB listeners
+    if (viewDbItem) {
+        viewDbItem.addEventListener('click', () => {
+            toggleModal(menuOverlay, false); // Close menu
+            toggleModal(dbViewContainer, true); // Open DB view
+        });
+    }
+
+    if (closeDbViewBtn) {
+        closeDbViewBtn.addEventListener('click', () => toggleModal(dbViewContainer, false));
+    }
+
+    if (dbViewContainer) {
+        dbViewContainer.addEventListener('click', (e) => {
+            if (e.target === dbViewContainer) toggleModal(dbViewContainer, false);
+        });
+    }
+
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', (e) => {
+            if (e.target === menuOverlay) {
+                toggleModal(menuOverlay, false);
+            }
+        });
+    }
+
+
+    if (addMealForm) {
+        addMealForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const foodName = selectedFoodInput.value;
+            const foodId = selectedFoodInput.getAttribute('data-id');
+            const amount = parseFloat(foodQuantity.value);
+            
+            if (!foodId || isNaN(amount) || amount <= 0) {
+                alert("Please select a food and enter a valid quantity.");
+                return;
+            }
+
+            const payload = {
+                foodId: parseInt(foodId),
+                amountInG: amount
+            };
+
+            try {
+                const response = await fetch('/api/logs/logMeal', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                
+                if (response.status === 201 || result.message) {
+                    toggleModal(addMealModal, false);
+                    // Refresh data
+                    fetchTodayStats();
+                    renderHomeMealList();
+                    // Reset form
+                    foodSearch.value = '';
+                    selectedFoodInput.value = '';
+                    selectedFoodInput.removeAttribute('data-id');
+                    foodQuantity.value = '100';
+                    updateNutritionDisplay(null);
+                    clearSearchBtn.classList.add('hiddenView');
+                } else {
+                    alert("Error adding meal: " + (result.error || result.message));
+                }
+            } catch (error) {
+                console.error("Error submitting meal:", error);
+                alert("Failed to add meal. See console.");
+            }
+        });
+    }
+
+    if (workoutForm) {
+        workoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+        });
+    }
+
+    // Theme Toggle
+    const themeSwitch = document.getElementById('themeSwitch');
+    
+    // Check saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+        if (themeSwitch) themeSwitch.checked = false;
+    } else {
+        // Default to dark or use saved dark
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (themeSwitch) themeSwitch.checked = true;
+    }
+
+    if (themeSwitch) {
+        themeSwitch.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
+
+    // Logout Handler
+    const logoutItem = document.getElementById('logoutItem');
+    if (logoutItem) {
+        logoutItem.addEventListener('click', async () => {
+            try {
+                const res = await fetch('/api/logout');
+                const data = await res.json();
+                if (data.success) {
+                    window.location.href = data.redirect;
+                }
+            } catch (err) {
+                console.error("Logout failed", err);
+            }
+        });
+    }
+});
