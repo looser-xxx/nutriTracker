@@ -308,5 +308,99 @@
     </div>
 </div>
 
+<div id="statsContainer" class="modalOverlay hiddenView">
+    <div class="statsView">
+        <header id="statsHeaderId" class="statsHeader">
+            <h3>Statistics</h3>
+            <button id="closeStats" class="iconBtn">&times;</button>
+        </header>
+        
+        <div class="statsTabs">
+            <button class="tabBtn active" data-tab="weekly">Weekly</button>
+            <button class="tabBtn" data-tab="monthly">Monthly</button>
+        </div>
+
+        <div class="statsContent">
+            <!-- Charts Section -->
+            <div class="chartSection">
+                <h4>Nutrient Trends</h4>
+                <div class="chartPlaceholder">
+                    <!-- Placeholder for Chart.js or similar -->
+                    <div class="bar" style="height: 60%"></div>
+                    <div class="bar" style="height: 80%"></div>
+                    <div class="bar" style="height: 40%"></div>
+                    <div class="bar" style="height: 90%"></div>
+                    <div class="bar" style="height: 50%"></div>
+                    <div class="bar" style="height: 70%"></div>
+                    <div class="bar" style="height: 30%"></div>
+                </div>
+            </div>
+
+            <!-- LLM Insights Section -->
+            <div id="llmInsightsContainer" class="insightsSection">
+                <div class="insightsHeader">
+                    <svg class="insightIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.663 17H14.337C14.677 17 14.945 17.29 14.897 17.625L14.471 20.605C14.422 20.949 14.125 21.2 13.778 21.2H10.222C9.875 21.2 9.578 20.949 9.529 20.605L9.103 17.625C9.055 17.29 9.323 17 9.663 17Z" stroke="#f1c40f" stroke-width="2"/>
+                        <path d="M12 17V17C15.866 17 19 13.866 19 10C19 6.13401 15.866 3 12 3C8.13401 3 5 6.13401 5 10C5 13.866 8.13401 17 12 17Z" stroke="#f1c40f" stroke-width="2"/>
+                        <path d="M9 10H15" stroke="#f1c40f" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h4>Smart Insights</h4>
+                </div>
+                <p id="insightText">Analyzing your patterns... Our AI will soon suggest ways to optimize your nutrition based on your weekly trends!</p>
+            </div>
+
+            <!-- Averages Table converted to Progress Bars -->
+            <div class="avgSection">
+                <h4>Average Intake</h4>
+                <div class="goalList">
+                    <!-- Calories -->
+                    <div class="goalItem">
+                        <div class="goalHeader">
+                            <span class="goalLabel">Calories</span>
+                            <span class="goalNumbers"><span class="countUp" data-target="2100">0</span> / 2500</span>
+                        </div>
+                        <div class="goalTrack">
+                            <div class="goalFill" data-width="84%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Protein -->
+                    <div class="goalItem">
+                        <div class="goalHeader">
+                            <span class="goalLabel">Protein</span>
+                            <span class="goalNumbers"><span class="countUp" data-target="140">0</span> / 180g</span>
+                        </div>
+                        <div class="goalTrack">
+                            <div class="goalFill" data-width="77%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Carbs -->
+                    <div class="goalItem">
+                        <div class="goalHeader">
+                            <span class="goalLabel">Carbs</span>
+                            <span class="goalNumbers"><span class="countUp" data-target="250">0</span> / 300g</span>
+                        </div>
+                        <div class="goalTrack">
+                            <div class="goalFill" data-width="83%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Fat -->
+                    <div class="goalItem">
+                        <div class="goalHeader">
+                            <span class="goalLabel">Fat</span>
+                            <span class="goalNumbers"><span class="countUp" data-target="65">0</span> / 80g</span>
+                        </div>
+                        <div class="goalTrack">
+                            <div class="goalFill" data-width="81%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
