@@ -17,13 +17,8 @@ google = oauth.register(
     name="google",
     client_id=os.getenv("GOOGLE_CLIENT_ID"),
     client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
-    access_token_url="https://accounts.google.com/o/oauth2/token",
-    access_token_params=None,
-    authorize_url="https://accounts.google.com/o/oauth2/auth",
-    authorize_params=None,
-    api_base_url="https://www.googleapis.com/oauth2/v1/",
-    client_kwargs={"scope": "openid email profile"},
     server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
+    client_kwargs={"scope": "openid email profile"},
 )
 
 
@@ -62,13 +57,16 @@ def googleLogin():
 @mealBp.route("/auth/callback")
 def authorize():
     token = google.authorize_access_token()
-    resp = google.get("userinfo")
-    user_info = resp.json()
+    user_info = token.get("userinfo")
+    if not user_info:
+        # Fallback if userinfo is not in token (depends on scopes/provider)
+        resp = google.get("https://www.googleapis.com/oauth2/v3/userinfo")
+        user_info = resp.json()
 
-    user = User.query.filter_by(google_id=user_info["id"]).first()
+    user = User.query.filter_by(google_id=user_info["sub"]).first()
     if not user:
         user = User(
-            google_id=user_info["id"],
+            google_id=user_info["sub"],
             email=user_info["email"],
             name=user_info["name"],
             picture=user_info.get("picture"),
