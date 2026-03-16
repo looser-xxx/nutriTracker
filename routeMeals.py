@@ -1,16 +1,11 @@
 from datetime import datetime, timezone
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, request
 from sqlalchemy import func
 
 from models import FoodDirectory, FoodLog, db
 
 mealBp = Blueprint("mealBp", __name__)
-
-
-@mealBp.route("/")
-def home():
-    return render_template("index.html")
 
 
 @mealBp.route("/api/dataBase/admin/addFood", methods=["POST"])
@@ -145,6 +140,31 @@ def nutritionConsumed(id):
     return fetchedNutrition
 
 
+@mealBp.route("/api/logs/today/totalNutriConsumed", methods=["GET"])
+def totalNutriConsumed():
+    todayDate = datetime.now(timezone.utc).date()
+
+    stats = (
+        db.session.query(
+            func.sum(FoodLog.calories).label("calories"),
+            func.sum(FoodLog.protein).label("protein"),
+            func.sum(FoodLog.carbs).label("carbs"),
+            func.sum(FoodLog.fat).label("fat"),
+            func.sum(FoodLog.fiber).label("fiber"),
+        )
+        .filter(func.date(FoodLog.dateLogged) == todayDate)
+        .first()
+    )
+
+    return {
+        "calories": round(stats.calories or 0, 1),
+        "protein": round(stats.protein or 0, 1),
+        "carbs": round(stats.carbs or 0, 1),
+        "fat": round(stats.fat or 0, 1),
+        "fiber": round(stats.fiber or 0, 1),
+    }
+
+
 @mealBp.route("/api/logs/today/allLogs", methods=["GET"])
 def today():
     todayDate = datetime.now(timezone.utc).date()
@@ -171,32 +191,6 @@ def today():
     return {"date": str(todayDate), "mealsConsumed": dailyMeals}
 
 
-@mealBp.route("/api/logs/today/totalNutriConsumed", methods=["GET"])
-@mealBp.route("/api/todayStats", methods=["GET"])
-def getTodayStats():
-    todayDate = datetime.now(timezone.utc).date()
-
-    stats = (
-        db.session.query(
-            func.sum(FoodLog.calories).label("calories"),
-            func.sum(FoodLog.protein).label("protein"),
-            func.sum(FoodLog.carbs).label("carbs"),
-            func.sum(FoodLog.fat).label("fat"),
-            func.sum(FoodLog.fiber).label("fiber"),
-        )
-        .filter(func.date(FoodLog.dateLogged) == todayDate)
-        .first()
-    )
-
-    return {
-        "calories": round(stats.calories or 0, 1),
-        "protein": round(stats.protein or 0, 1),
-        "carbs": round(stats.carbs or 0, 1),
-        "fat": round(stats.fat or 0, 1),
-        "fiber": round(stats.fiber or 0, 1),
-    }
-
-
 @mealBp.route("/api/logs/today/delete/<int:id>", methods=["DELETE"])
 def deleteFood(id):
     logToDelete = FoodLog.query.get(id)
@@ -208,6 +202,3 @@ def deleteFood(id):
     db.session.commit()
 
     return {"id": id}, 200
-
-
-# sldf
