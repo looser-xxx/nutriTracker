@@ -8,7 +8,7 @@ from models import FoodDirectory, FoodLog, db
 mealBp = Blueprint("mealBp", __name__)
 
 
-@mealBp.route("/api/admin/addFood", methods=["POST"])
+@mealBp.route("/api/dataBase/admin/addFood", methods=["POST"])
 def addFoodToDirectory():
     data = request.get_json()
 
@@ -41,7 +41,7 @@ def addFoodToDirectory():
         return {"error": f"Food name already exists or database error: {e}"}, 400
 
 
-@mealBp.route("/api/directory", methods=["GET"])
+@mealBp.route("/api/dataBase/directory", methods=["GET"])
 def getFoodDirectory():
     allFood = FoodDirectory.query.all()
     output = []
@@ -62,20 +62,30 @@ def getFoodDirectory():
     return {"count": len(output), "directory": output}, 200
 
 
-@mealBp.route("/api/logMeal", methods=["POST"])
+@mealBp.route("/api/logs/logMeal", methods=["POST"])
 def logMeal():
 
     data = request.get_json()
 
-    targetFoodId = data.get("foodId")
+    targetId = data.get("foodId")
     gramsEaten = data.get("amountInG")
 
-    foodItem = FoodDirectory.query.get(targetFoodId)
+    foodItem = FoodDirectory.query.get(targetId)
 
     if not foodItem:
         return {"error": "Food ID not found in directory. Please add it first."}, 404
 
-    newLog = FoodLog(foodId=targetFoodId, amountInG=gramsEaten)
+    macros = calculateSnapshotMacros(foodItem, gramsEaten)
+
+    newLog = FoodLog(
+        foodName=foodItem.foodName,
+        amountInG=gramsEaten,
+        calories=macros["calories"],
+        protein=macros["protein"],
+        carbs=macros["carbs"],
+        fat=macros["fat"],
+        fiber=macros["fiber"],
+    )
 
     db.session.add(newLog)
     db.session.commit()
@@ -83,30 +93,29 @@ def logMeal():
     return {
         "message": "Meal logged successfully!",
         "details": {
-            "foodName": foodItem.foodName,
-            "grams": gramsEaten,
-            "date": newLog.dateLogged,
+            "foodName": newLog.foodName,
+            "grams": newLog.amountInG,
+            "calories": newLog.calories,
+            "date": (
+                newLog.dateLogged.strftime("%Y-%m-%d") if newLog.dateLogged else None
+            ),
         },
     }, 201
 
 
-def calculateMacros(mealLog):
-    food = mealLog.foodItem
-    amountInG = mealLog.amountInG
-    mult = amountInG / 100
+def calculateSnapshotMacros(foodItem, grams):
+    multiplier = grams / 100
 
     return {
-        "foodName": food.foodName,
-        "gramsEaten": amountInG,
-        "protein": round(food.protein * mult, 1),
-        "calories": round(food.calories * mult, 1),
-        "carbs": round(food.carbs * mult, 1),
-        "fat": round(food.fat * mult, 1),
-        "fiber": round(food.fiber * mult, 1),
+        "calories": round(foodItem.calories * multiplier, 1),
+        "protein": round(foodItem.protein * multiplier, 1),
+        "carbs": round(foodItem.carbs * multiplier, 1),
+        "fat": round(foodItem.fat * multiplier, 1),
+        "fiber": round(foodItem.fiber * multiplier, 1),
     }
 
 
-@mealBp.route("/api/nutritionConsumed/<int:id>", methods=["GET"])
+@mealBp.route("/api/logs/nutritionConsumed/<int:id>", methods=["GET"])
 def nutritionConsumed(id):
 
     mealData = FoodLog.query.get(id)
@@ -114,22 +123,57 @@ def nutritionConsumed(id):
     if not mealData:
         return {"error": "meal log not found"}, 404
 
-    calculatedNutrition = calculateMacros(mealData)
+    fetchedNutrition = {
+        "logId": mealData.id,
+        "foodName": mealData.foodName,
+        "gramsEaten": mealData.amountInG,
+        "protein": mealData.protein,
+        "calories": mealData.calories,
+        "carbs": mealData.carbs,
+        "fat": mealData.fat,
+        "fiber": mealData.fiber,
+        "date": (
+            mealData.dateLogged.strftime("%Y-%m-%d") if mealData.dateLogged else None
+        ),
+    }
 
-    return calculatedNutrition
+    return fetchedNutrition
 
 
-@mealBp.route("/api/today", methods=["GET"])
+@mealBp.route("/api/logs/today/allLogs", methods=["GET"])
 def today():
     todayDate = datetime.now(timezone.utc).date()
 
     logsForToday = FoodLog.query.filter(
         func.date(FoodLog.dateLogged) == todayDate
     ).all()
+
     dailyMeals = []
 
     for log in logsForToday:
-        mealData = calculateMacros(log)
+        mealData = {
+            "logId": log.id,
+            "foodName": log.foodName,
+            "gramsEaten": log.amountInG,
+            "protein": log.protein,
+            "calories": log.calories,
+            "carbs": log.carbs,
+            "fat": log.fat,
+            "fiber": log.fiber,
+        }
         dailyMeals.append(mealData)
 
     return {"date": str(todayDate), "mealsConsumed": dailyMeals}
+
+
+@mealBp.route("/api/logs/today/delete/<int:id>", methods=["DELETE"])
+def deleteFood(id):
+    logToDelete = FoodLog.query.get(id)
+
+    if not logToDelete:
+        return {"error": "Log not found"}, 404
+
+    db.session.delete(logToDelete)
+    db.session.commit()
+
+    return {"id": id}, 200
