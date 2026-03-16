@@ -104,5 +104,130 @@
     </nav>
 </div>
 
+<!-- Modal Container for Full Meal List -->
+<div id="todaysMealsContainer" class="modalOverlay hiddenView">
+    <div class="statsView">
+        <header id="todaysMealsHeader" class="statsHeader">
+            <h3>Today's Meals</h3>
+            <button id="closeTodaysMeals" class="iconBtn">&times;</button>
+        </header>
+        <div class="statsContent">
+            <ul class="mealList" id="todaysMealList">
+                <!-- Oatmeal -->
+                <li>
+                    <div class="mealItem expandable" data-details="details-1">
+                        <div class="mealInfo">
+                            <span class="mealName">Oatmeal & Berries</span>
+                        </div>
+                        <span class="mealCals">150g</span>
+                    </div>
+                    <div id="details-1" class="mealDetails hiddenView">
+                        <div class="detailGrid">
+                            <div class="detailItem"><span class="dLabel">Calories</span><span class="dVal">350</span></div>
+                            <div class="detailItem"><span class="dLabel">Protein</span><span class="dVal">12g</span></div>
+                            <div class="detailItem"><span class="dLabel">Carbs</span><span class="dVal">45g</span></div>
+                            <div class="detailItem"><span class="dLabel">Fat</span><span class="dVal">6g</span></div>
+                            <div class="detailItem"><span class="dLabel">Fiber</span><span class="dVal">8g</span></div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Chicken Salad -->
+                <li>
+                    <div class="mealItem expandable" data-details="details-2">
+                        <div class="mealInfo">
+                            <span class="mealName">Grilled Chicken Salad</span>
+                        </div>
+                        <span class="mealCals">300g</span>
+                    </div>
+                    <div id="details-2" class="mealDetails hiddenView">
+                        <div class="detailGrid">
+                            <div class="detailItem"><span class="dLabel">Calories</span><span class="dVal">450</span></div>
+                            <div class="detailItem"><span class="dLabel">Protein</span><span class="dVal">40g</span></div>
+                            <div class="detailItem"><span class="dLabel">Carbs</span><span class="dVal">12g</span></div>
+                            <div class="detailItem"><span class="dLabel">Fat</span><span class="dVal">20g</span></div>
+                            <div class="detailItem"><span class="dLabel">Fiber</span><span class="dVal">5g</span></div>
+                        </div>
+                    </div>
+                </li>
+
+                 <!-- Apple -->
+                <li>
+                    <div class="mealItem expandable" data-details="details-3">
+                        <div class="mealInfo">
+                            <span class="mealName">Apple</span>
+                        </div>
+                        <span class="mealCals">120g</span>
+                    </div>
+                    <div id="details-3" class="mealDetails hiddenView">
+                        <div class="detailGrid">
+                            <div class="detailItem"><span class="dLabel">Calories</span><span class="dVal">95</span></div>
+                            <div class="detailItem"><span class="dLabel">Protein</span><span class="dVal">0.5g</span></div>
+                            <div class="detailItem"><span class="dLabel">Carbs</span><span class="dVal">25g</span></div>
+                            <div class="detailItem"><span class="dLabel">Fat</span><span class="dVal">0.3g</span></div>
+                            <div class="detailItem"><span class="dLabel">Fiber</span><span class="dVal">4g</span></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="workoutContainer" class="modalOverlay hiddenView">
+    <div class="statsView"> <!-- Reusing stats view container for full screen -->
+        <header class="statsHeader">
+            <h3>Workouts</h3>
+            <button id="closeWorkout" class="iconBtn">&times;</button>
+        </header>
+        
+        <div class="statsContent">
+            <!-- Add Exercise Section -->
+            <div id="logExerciseContainer" class="chartSection" style="padding-bottom: 10px; margin-top: 20px;">
+                <h4>Log Exercise</h4>
+                <form id="workoutForm">
+                    <div class="formGroup">
+                        <input type="text" id="exerciseName" class="formControl" placeholder="Exercise Name (e.g. Bench Press)">
+                    </div>
+                    <div class="miniNutrientGrid" style="gap: 10px; margin-bottom: 15px;">
+                        <div class="formGroup" style="margin:0; flex:1;">
+                            <input type="number" id="sets" class="formControl" placeholder="Sets" style="text-align:center;">
+                        </div>
+                        <div class="formGroup" style="margin:0; flex:1;">
+                            <input type="number" id="reps" class="formControl" placeholder="Reps" style="text-align:center;">
+                        </div>
+                        <div class="formGroup" style="margin:0; flex:1;">
+                            <input type="number" id="weight" class="formControl" placeholder="kg" style="text-align:center;">
+                        </div>
+                    </div>
+                    <button type="submit" class="submitBtn" style="padding: 10px;">Add Set</button>
+                </form>
+            </div>
+
+            <!-- Today's Workout List -->
+            <div class="sectionHeader">
+                <h3>Today's Log</h3>
+            </div>
+            <ul id="workoutList" class="mealList">
+                <!-- Placeholder Data -->
+                <li class="mealItem">
+                    <div class="mealInfo">
+                        <span class="mealName">Squats</span>
+                        <span class="mealTime">3 sets</span>
+                    </div>
+                    <span class="mealCals">100kg x 5</span>
+                </li>
+                <li class="mealItem">
+                    <div class="mealInfo">
+                        <span class="mealName">Bench Press</span>
+                        <span class="mealTime">4 sets</span>
+                    </div>
+                    <span class="mealCals">80kg x 8</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
