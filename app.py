@@ -6,15 +6,25 @@ from flask import Flask
 from models import db
 from routeMeals import mealBp, oauth
 
+from werkzeug.middleware.proxy_fix import ProxyFix
+
 load_dotenv()
 
 
 def createApp():
     app = Flask(__name__)
+    
+    # Handle Proxy (Cloudflare Tunnel)
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-key")
+
+    # Production HTTPS settings
+    if not app.debug:
+        app.config["SESSION_COOKIE_SECURE"] = True
+        app.config["REMOTE_ADDR"] = "127.0.0.1" # Standard for tunnels
 
     db.init_app(app)
     oauth.init_app(app)

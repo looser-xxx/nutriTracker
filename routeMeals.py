@@ -59,7 +59,7 @@ def googleLogin():
     return google.authorize_redirect(redirect_uri)
 
 
-@mealBp.route("/authorize")
+@mealBp.route("/auth/callback")
 def authorize():
     token = google.authorize_access_token()
     resp = google.get("userinfo")
