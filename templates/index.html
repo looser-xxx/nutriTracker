@@ -402,5 +402,94 @@
     </div>
 </div>
 
-</body>
+<!-- Side Menu Overlay & Drawer -->
+<div id="menuOverlay" class="modalOverlay hiddenView" style="justify-content: flex-end;">
+    <div id="sideMenu" class="sideMenu">
+        <header class="menuHeader">
+            <h3>Menu</h3>
+            <button id="closeMenu" class="iconBtn">&times;</button>
+        </header>
+        <div style="padding: 20px 20px 0; color: var(--text-secondary); font-size: 0.9rem;">
+            Hi, <strong style="color: var(--primary-color);">{{ user_name }}</strong>
+        </div>
+        <ul class="menuList">
+            <li class="menuItem">
+                <span class="menuIcon">👤</span>
+                <span>Profile</span>
+            </li>
+            <li class="menuItem">
+                <span class="menuIcon">🎯</span>
+                <span>Goals</span>
+            </li>
+            <li class="menuItem">
+                <span class="menuIcon">⚙️</span>
+                <span>Settings</span>
+            </li>
+            <li class="menuItem" id="viewDbItem">
+                <span class="menuIcon">🗄️</span>
+                <span>View DB</span>
+            </li>
+            <li class="menuItem" id="themeToggleItem">
+                <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span class="menuIcon">🌓</span>
+                        <span>Dark Mode</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="themeSwitch" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </li>
+            <li class="menuItem" id="logoutItem" style="border-bottom: none; color: #e74c3c;">
+                <span class="menuIcon">🚪</span>
+                <span>Logout</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="profileContainer" class="modalOverlay hiddenView">
+    <div class="nutrientModal">
+        <h3>My Profile</h3>
+        <div class="nutrientGrid" style="grid-template-columns: 1fr;">
+            <div class="nutrientItem" style="grid-column: span 1; align-items: flex-start; text-align: left;">
+                <span class="nutrientLabel">Full Name</span>
+                <span class="nutrientValue" id="profName">-</span>
+            </div>
+            <div class="nutrientItem" style="grid-column: span 1; align-items: flex-start; text-align: left;">
+                <span class="nutrientLabel">Email / Username</span>
+                <span class="nutrientValue" id="profUser" style="font-size: 1rem;">-</span>
+            </div>
+             <div class="nutrientItem" style="grid-column: span 1; align-items: flex-start; text-align: left;">
+                <span class="nutrientLabel">Serial Number</span>
+                <span class="nutrientValue" id="profSerial" style="font-size: 1rem; color: var(--text-muted);">-</span>
+            </div>
+            <div class="detailGrid" style="width: 100%; margin-top: 10px;">
+                <div class="detailItem"><span class="dLabel">Age</span><span class="dVal" id="profAge">-</span></div>
+                <div class="detailItem"><span class="dLabel">Sex</span><span class="dVal" id="profSex">-</span></div>
+                <div class="detailItem"><span class="dLabel">Height</span><span class="dVal" id="profHeight">-</span></div>
+                <div class="detailItem"><span class="dLabel">Weight</span><span class="dVal" id="profWeight">-</span></div>
+                <div class="detailItem"><span class="dLabel">Bicep</span><span class="dVal" id="profBicep">-</span></div>
+            </div>
+        </div>
+        <button id="closeProfile" class="closeBtn" style="margin-top: 20px;">Close</button>
+    </div>
+</div>
+
+<div id="dbViewContainer" class="modalOverlay hiddenView">
+    <div class="statsView">
+        <header class="statsHeader">
+            <h3>Food Database</h3>
+            <button id="closeDbView" class="iconBtn">&times;</button>
+        </header>
+        <div class="statsContent">
+            <ul id="dbFoodList" class="mealList">
+                <!-- Populated by JS -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="../static/js/script.js?v={{ version }}"></script>
 </html>
