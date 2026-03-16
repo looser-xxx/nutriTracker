@@ -51,7 +51,7 @@ def home():
     user = User.query.get(session["user_id"])
     if not user.full_name:
         return redirect(url_for("mealBp.onboarding"))
-    return render_template("index.html", user_name=user.full_name.split()[0])
+    return render_template("index.html", user_name=user.full_name.split()[0], version=datetime.now().timestamp())
 
 
 @mealBp.route("/login")
@@ -98,7 +98,7 @@ def logout():
 @mealBp.route("/onboarding")
 @loginRequired
 def onboarding():
-    return render_template("onboarding.html")
+    return render_template("onboarding.html", version=datetime.now().timestamp())
 
 
 @mealBp.route("/api/saveProfile", methods=["POST"])
@@ -281,12 +281,20 @@ def getUserTargets():
 @loginRequired
 def getFoodDirectory():
     query = request.args.get("q", "").strip()
+    print(f"DEBUG: Directory search requested. Query: '{query}'")
     
-    if len(query) < 3:
-        return {"count": 0, "directory": [], "message": "Search query too short"}, 200
+    if not query:
+        return {"count": 0, "directory": []}, 200
 
-    # Case-insensitive search using SQLAlchemy ilike
-    allFood = FoodDirectory.query.filter(FoodDirectory.foodName.ilike(f"%{query}%")).all()
+    if query == "all":
+        allFood = FoodDirectory.query.all()
+    elif len(query) < 3:
+        return {"count": 0, "directory": [], "message": "Search query too short"}, 200
+    else:
+        # Match items STARTING with the query (case-insensitive)
+        allFood = FoodDirectory.query.filter(FoodDirectory.foodName.ilike(f"{query}%")).all()
+    
+    print(f"DEBUG: Found {len(allFood)} results for '{query}'")
     
     output = []
     for food in allFood:

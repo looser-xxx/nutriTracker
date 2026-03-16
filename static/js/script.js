@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchAndRenderDb = async () => {
         try {
-            const response = await fetch('/api/dataBase/directory');
+            const response = await fetch('/api/dataBase/directory?q=all');
             if (!response.ok) throw new Error('Failed to fetch food data');
             const data = await response.json();
             const foodItems = data.directory || [];
@@ -512,6 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (foodSearch) {
         const fetchAndFilter = async () => {
+            console.log("FETCH TRIGGERED");
             const query = foodSearch.value.trim();
             
             if (query.length < 3) {
@@ -527,9 +528,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typingTimer) clearTimeout(typingTimer);
             
             typingTimer = setTimeout(async () => {
+                console.log("Fetching results for:", query);
                 try {
                     const res = await fetch(`/api/dataBase/directory?q=${encodeURIComponent(query)}`);
                     const data = await res.json();
+                    console.log("Results found:", data.count);
                     renderFoodList(data.directory || []);
                 } catch (e) {
                     console.error("Failed to fetch food list", e);
@@ -538,6 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         foodSearch.addEventListener('input', fetchAndFilter);
         foodSearch.addEventListener('focus', fetchAndFilter);
+        foodSearch.addEventListener('click', fetchAndFilter);
     }
 
     if (clearSearchBtn) {
