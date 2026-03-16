@@ -1,0 +1,86 @@
+:root {
+    --bg-body: #cfd9df;
+    --bg-gradient: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%);
+    --bg-card: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-highlight: #e8f5e9;
+    --bg-highlight-2: #f0f7f4;
+    --bg-input: #f9f9f9;
+    --bg-hover: #f0f0f0;
+    
+    --text-primary: #333333;
+    --text-secondary: #888888;
+    --text-muted: #aaaaaa;
+    --text-inverse: #ffffff;
+    
+    --primary-color: #3f7d69;
+    --primary-dark: #2a5a4b;
+    
+    --border-color: #eeeeee;
+    --border-highlight: #c8e6c9;
+    
+    --shadow-color: rgba(0,0,0,0.05);
+    --shadow-card: rgba(0,0,0,0.02);
+    --shadow-strong: rgba(0,0,0,0.2);
+    
+    --accent-yellow-bg: #fffdf0;
+    --accent-yellow-border: #f1c40f;
+    --accent-yellow-text: #856404;
+    
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+    
+    --chart-cal: #3f7d69;
+    --chart-pro: #3498db;
+    --chart-carb: #f39c12;
+    --chart-fat: #e74c3c;
+    --chart-fiber: #27ae60;
+}
+
+[data-theme="dark"] {
+    --bg-body: #1c1e22;
+    --bg-gradient: linear-gradient(135deg, #1c1e22 0%, #0f1013 100%);
+    --bg-card: #1e1e1e;
+    --bg-secondary: #2c2c2c;
+    --bg-highlight: #2a3b35;
+    --bg-highlight-2: #25332e;
+    --bg-input: #2c2c2c;
+    --bg-hover: #333333;
+    
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --text-muted: #666666;
+    --text-inverse: #ffffff; /* Still white on buttons usually */
+    
+    --primary-color: #58b093;
+    --primary-dark: #3f7d69;
+    
+    --border-color: #333333;
+    --border-highlight: #3a5045;
+    
+    --shadow-color: rgba(0,0,0,0.5);
+    --shadow-card: rgba(0,0,0,0.3);
+    --shadow-strong: rgba(0,0,0,0.5);
+    
+    --accent-yellow-bg: #2c2a1e;
+    --accent-yellow-border: #d4ac0d;
+    --accent-yellow-text: #f1c40f;
+    
+    --overlay-bg: rgba(0, 0, 0, 0.8);
+}
+
+* {
+    font-family: "JetBrains Mono Medium", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden; /* Prevent body scroll, use container */
+    transition: background 0.3s ease, color 0.3s ease;
+}
