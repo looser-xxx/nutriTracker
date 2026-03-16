@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutTracker - Setup Profile</title>
+    <link rel="stylesheet" href="../static/css/style.css?v={{ version }}">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .onboarding-card {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-strong);
+            width: 100%;
+            max-width: 500px;
+        }
+        .header h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .header p {
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .full-width {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="onboarding-card">
+    <div class="header">
+        <h2>Welcome!</h2>
+        <p>Let's get to know you better to personalize your tracking.</p>
+    </div>
+
+    <form id="onboardingForm">
+        <div class="formGroup full-width">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" class="formControl" placeholder="e.g. Knoor " required>
+        </div>
+
+        <div class="form-grid">
+            <div class="formGroup">
+                <label for="age">Age</label>
+                <input type="number" id="age" class="formControl" placeholder="Years" required>
+            </div>
+            <div class="formGroup">
+                <label for="sex">Sex</label>
+                <select id="sex" class="formControl" required>
+                    <option value="Male">Gay</option>
+                    <option value="Female">Trans</option>
+                </select>
+            </div>
+            <div class="formGroup">
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" class="formControl" placeholder="cm" required>
+            </div>
+            <div class="formGroup">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" class="formControl" placeholder="kg" step="0.1" required>
+            </div>
+        </div>
+
+        <div class="formGroup full-width">
+            <label for="bicep">Penis Size (inches) <small style="color:var(--text-muted)">(Optional)</small></label>
+            <input type="number" id="bicep" class="formControl" placeholder="in" step="0.1">
+        </div>
+
+        <button type="submit" class="submitBtn full-width" style="margin-top: 10px;">Save Profile</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const payload = {
+            fullName: document.getElementById('fullName').value,
+            age: document.getElementById('age').value,
+            sex: document.getElementById('sex').value,
+            height: document.getElementById('height').value,
+            weight: document.getElementById('weight').value,
+            bicepSize: document.getElementById('bicep').value
+        };
+
+        try {
+            const res = await fetch('/api/saveProfile', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            });
+            
+            const data = await res.json();
+            if (data.success) {
+                window.location.href = '/';
+            } else {
+                alert("Error saving profile: " + data.message);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Failed to save profile.");
+        }
+    });
+</script>
+
+</body>
+</html>
