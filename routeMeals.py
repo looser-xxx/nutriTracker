@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
 from flask import Blueprint, request
-from sqlalchemy import func
+from sqlalchemy import func, true
 
 from models import FoodDirectory, FoodLog, db
 
@@ -202,3 +202,87 @@ def deleteFood(id):
     db.session.commit()
 
     return {"id": id}, 200
+
+
+from datetime import datetime, timezone
+
+
+@mealBp.route("/api/logs/avg/<int:days>", methods=["GET"])
+def sendAvg(days):
+    return calculateAvg(getLogsForAvg(days), days)
+
+
+def getLogsForAvg(days):
+    daysPassedCount = 0
+    targetCount = days
+
+    todayDate = datetime.now(timezone.utc).date()
+    tempDate = todayDate
+
+    batchSize = 20
+    offsetAmount = 0
+
+    logsForAvg = []
+
+    while True:
+        logsChunk = (
+            FoodLog.query.order_by(FoodLog.dateLogged.desc())
+            .limit(batchSize)
+            .offset(offsetAmount)
+            .all()
+        )
+
+        if not logsChunk:
+            break
+
+        for log in logsChunk:
+
+            if log.dateLogged:
+                logDate = log.dateLogged.date()
+            else:
+                logDate = None
+
+            if logDate == todayDate:
+                continue
+
+            if logDate != tempDate:
+                tempDate = logDate
+                daysPassedCount += 1
+
+            if daysPassedCount > targetCount:
+                return logsForAvg
+
+            logsForAvg.append(log)
+
+        offsetAmount += batchSize
+
+    return logsForAvg
+
+
+def calculateAvg(logs, days):
+    calories = 0
+    protein = 0
+    carbs = 0
+    fat = 0
+    fiber = 0
+    graphData = []
+
+    for log in logs:
+        calories += log.calories
+        graphData.append(log.calories)
+        protein += log.protein
+        carbs += log.carbs
+        fat += log.fat
+        fiber += log.fiber
+
+    return {
+        "average": {
+            "calories": round(calories / days, 1),
+            "protein": round(protein / days, 1),
+            "carbs": round(carbs / days, 1),
+            "fat": round(fat / days, 1),
+            "fiber": round(fiber / days, 1),
+        },
+        "graphData": graphData,
+        "daysFound": days,
+    }
