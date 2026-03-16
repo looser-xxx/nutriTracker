@@ -229,5 +229,84 @@
     </div>
 </div>
 
+<div id="modalNutrients" class="modalOverlay hiddenView">
+    <div class="nutrientModal">
+        <h3>Today's Nutrients</h3>
+        <div class="nutrientGrid">
+            <div class="nutrientItem">
+                <span class="nutrientLabel">Calories</span>
+                <span class="nutrientValue" id="valCalories">0</span>
+                <span class="nutrientUnit">kcal / 2500</span>
+                <div class="miniTrack"><div class="miniFill" id="fillCalories"></div></div>
+            </div>
+            <div class="nutrientItem">
+                <span class="nutrientLabel">Protein</span>
+                <span class="nutrientValue" id="valProtein">0</span>
+                <span class="nutrientUnit">g / 180</span>
+                <div class="miniTrack"><div class="miniFill" id="fillProtein"></div></div>
+            </div>
+            <div class="nutrientItem">
+                <span class="nutrientLabel">Carbs</span>
+                <span class="nutrientValue" id="valCarbs">0</span>
+                <span class="nutrientUnit">g / 300</span>
+                <div class="miniTrack"><div class="miniFill" id="fillCarbs"></div></div>
+            </div>
+            <div class="nutrientItem">
+                <span class="nutrientLabel">Fat</span>
+                <span class="nutrientValue" id="valFat">0</span>
+                <span class="nutrientUnit">g / 80</span>
+                <div class="miniTrack"><div class="miniFill" id="fillFat"></div></div>
+            </div>
+            <div class="nutrientItem">
+                <span class="nutrientLabel">Fiber</span>
+                <span class="nutrientValue" id="valFiber">0</span>
+                <span class="nutrientUnit">g / 35</span>
+                <div class="miniTrack"><div class="miniFill" id="fillFiber"></div></div>
+            </div>
+        </div>
+        <button id="closeNutrients" class="closeBtn">Close</button>
+    </div>
+</div>
+
+<div id="addMeal" class="modalOverlay hiddenView">
+    <div class="nutrientModal"> <!-- Reusing container style -->
+        <h3>Add Meal</h3>
+        
+        <form id="addMealForm" class="mealForm">
+            <div class="formGroup">
+                <label for="foodSearch">Select Food</label>
+                <div class="searchWrapper">
+                    <input type="text" id="foodSearch" class="formControl" placeholder="Search food..." autocomplete="off">
+                    <button type="button" id="clearSearch" class="clearSearchBtn hiddenView">&times;</button>
+                </div>
+                <div id="foodList" class="foodListContainer"></div>
+                <input type="hidden" id="selectedFood">
+            </div>
+
+            <div class="nutritionLogSection">
+                <h4>Nutrition per 100g</h4>
+                <div class="miniNutrientGrid">
+                    <div class="miniItem"><span class="lbl">Cal</span><span class="val" id="infoCal">-</span></div>
+                    <div class="miniItem"><span class="lbl">Pro</span><span class="val" id="infoPro">-</span></div>
+                    <div class="miniItem"><span class="lbl">Carb</span><span class="val" id="infoCarb">-</span></div>
+                    <div class="miniItem"><span class="lbl">Fat</span><span class="val" id="infoFat">-</span></div>
+                </div>
+            </div>
+
+            <div class="formGroup">
+                <label for="foodQuantity">Quantity (grams)</label>
+                <div class="qtyStepper">
+                    <button type="button" id="qtyDec" class="stepperBtn minus">&minus;</button>
+                    <input type="number" id="foodQuantity" class="formControl stepperInput" value="100" min="0">
+                    <button type="button" id="qtyInc" class="stepperBtn plus">&plus;</button>
+                </div>
+            </div>
+
+            <button type="submit" class="submitBtn">Add Meal</button>
+            <button type="button" id="closeAddMeal" class="closeBtn secondaryBtn">Cancel</button>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
