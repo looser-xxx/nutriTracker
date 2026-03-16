@@ -17,8 +17,6 @@ class FoodDirectory(db.Model):
     fat = db.Column(db.Float, nullable=False)
     fiber = db.Column(db.Float, nullable=False)
 
-    logs = db.relationship("FoodLog", backref="foodItem", lazy=True)
-
 
 class FoodLog(db.Model):
     __tablename__ = "foodLog"
