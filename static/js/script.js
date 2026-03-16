@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Elements ---
     let serverFoodDatabase = [];
+    let userTargets = { calories: 2500, protein: 150, carbs: 300, fat: 80, fiber: 30 };
     const todayMain = document.getElementById('todayMain');
     const modalNutrients = document.getElementById('modalNutrients');
     const closeNutrientsBtn = document.getElementById('closeNutrients');
@@ -74,6 +75,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Helper Functions ---
 
+    const fetchUserTargets = async () => {
+        try {
+            const response = await fetch('/api/user/targets');
+            if (response.ok) {
+                userTargets = await response.json();
+            }
+        } catch (error) {
+            console.error('Error fetching user targets:', error);
+        }
+    };
+
     const fetchTodayStats = async () => {
         try {
             const response = await fetch('/api/logs/today/totalNutriConsumed');
@@ -84,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (todayMain) {
                 const h1 = todayMain.querySelector('h1');
                 const p = todayMain.querySelector('p');
-                const dailyGoal = 2500; // This could be dynamic later
+                const dailyGoal = userTargets.calories; 
                 
                 if (h1 && data.calories !== undefined) {
                     h1.classList.remove('skeleton'); 
@@ -145,8 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Call immediately on load
-    fetchTodayStats();
-    renderHomeMealList();
+    fetchUserTargets().then(() => {
+        fetchTodayStats();
+        renderHomeMealList();
+    });
 
     const fetchAndRenderDb = async () => {
         try {
@@ -264,11 +278,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         // Hardcoded goals matching HTML text (could be dynamic later)
                         const goals = {
-                            'valCalories': 2500,
-                            'valProtein': 180,
-                            'valCarbs': 300,
-                            'valFat': 80,
-                            'valFiber': 35
+                            'valCalories': userTargets.calories,
+                            'valProtein': userTargets.protein,
+                            'valCarbs': userTargets.carbs,
+                            'valFat': userTargets.fat,
+                            'valFiber': userTargets.fiber
                         };
 
                         // Reset bars first
@@ -341,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 // Clear and Update Graph Bars
                 chartPlaceholder.innerHTML = '';
-                const maxCal = Math.max(...graph, 2500);
+                const maxCal = Math.max(...graph, userTargets.calories);
                 
                 graph.forEach((val) => {
                     const bar = document.createElement('div');
@@ -357,7 +371,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 // Update Progress Bars & Numbers in Avg Section
-                const goals = { calories: 2500, protein: 180, carbs: 300, fat: 80 };
+                const goals = { 
+                    calories: userTargets.calories, 
+                    protein: userTargets.protein, 
+                    carbs: userTargets.carbs, 
+                    fat: userTargets.fat 
+                };
                 const goalItems = document.querySelectorAll('.avgSection .goalItem');
                 goalItems.forEach(item => {
                     const label = item.querySelector('.goalLabel').textContent.toLowerCase();

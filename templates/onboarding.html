@@ -83,6 +83,34 @@
             <input type="number" id="bicep" class="formControl" placeholder="in" step="0.1">
         </div>
 
+        <div class="header" style="margin-top: 20px;">
+            <h3>Daily Nutritional Targets</h3>
+            <p>Set your goals for optimal tracking.</p>
+        </div>
+
+        <div class="form-grid">
+            <div class="formGroup">
+                <label for="targetCalories">Calories (kcal)</label>
+                <input type="number" id="targetCalories" class="formControl" value="2500" required>
+            </div>
+            <div class="formGroup">
+                <label for="targetProtein">Protein (g)</label>
+                <input type="number" id="targetProtein" class="formControl" value="150" required>
+            </div>
+            <div class="formGroup">
+                <label for="targetCarbs">Carbs (g)</label>
+                <input type="number" id="targetCarbs" class="formControl" value="300" required>
+            </div>
+            <div class="formGroup">
+                <label for="targetFat">Fat (g)</label>
+                <input type="number" id="targetFat" class="formControl" value="80" required>
+            </div>
+            <div class="formGroup full-width">
+                <label for="targetFiber">Fiber (g)</label>
+                <input type="number" id="targetFiber" class="formControl" value="30" required>
+            </div>
+        </div>
+
         <button type="submit" class="submitBtn full-width" style="margin-top: 10px;">Save Profile</button>
     </form>
 </div>
@@ -97,7 +125,12 @@
             sex: document.getElementById('sex').value,
             height: document.getElementById('height').value,
             weight: document.getElementById('weight').value,
-            bicepSize: document.getElementById('bicep').value
+            bicepSize: document.getElementById('bicep').value,
+            targetCalories: document.getElementById('targetCalories').value,
+            targetProtein: document.getElementById('targetProtein').value,
+            targetCarbs: document.getElementById('targetCarbs').value,
+            targetFat: document.getElementById('targetFat').value,
+            targetFiber: document.getElementById('targetFiber').value
         };
 
         try {
