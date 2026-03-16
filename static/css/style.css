@@ -199,3 +199,196 @@ body {
     background-color: var(--bg-hover);
 }
 
+/* Expanded state for Today's Meals list */
+.mealItem.expanded {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: 0; /* Attach to details */
+    background-color: var(--bg-highlight); /* Light green highlight */
+}
+
+.mealDetails {
+    background-color: var(--bg-secondary);
+    margin-bottom: 12px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02), 0 2px 5px rgba(0,0,0,0.03);
+    overflow: hidden;
+    
+    /* Slide Down Effect */
+    max-height: 0;
+    padding: 0 20px;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out, background-color 0.3s ease;
+}
+
+.mealDetails:not(.hiddenView) {
+    max-height: 300px; /* Large enough to fit content */
+    padding: 15px 20px;
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from { 
+        opacity: 0; 
+        transform: translateY(-10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.animate-slide-down {
+    animation: slideDown 0.4s ease-out forwards;
+}
+
+.detailGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.detailItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dLabel {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.dVal {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.mealInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.mealName {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.mealTime {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+
+.mealCals {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Bottom Navigation */
+#bottomNav {
+    background-color: var(--bg-card);
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -5px 20px var(--shadow-color);
+    position: relative; /* Needed for absolute positioning of button if desired, but flex works too */
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.navItem {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    width: 60px;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+.navItem:active {
+    transform: scale(0.9);
+    opacity: 0.7;
+}
+
+.navItem.activeNav {
+    color: var(--primary-color);
+}
+
+.navIcon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+}
+
+.navItem .label {
+    font-size: 0.75rem;
+}
+
+/* Floating Add Button */
+.addBtn {
+    position: absolute;
+    top: -30px; /* Float above the bar */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 70px;
+    height: 70px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    color: var(--text-inverse);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    box-shadow: 0 5px 15px rgba(63, 125, 105, 0.4);
+    border: none;
+    transition: transform 0.1s ease, background-color 0.1s ease, border-color 0.3s ease;
+}
+
+.addBtn:active {
+    transform: translateX(-50%) scale(0.9);
+    background-color: var(--primary-dark);
+}
+
+.addBtn .icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* Nav spacer to prevent content from being hidden by the button if we used flex spacer, 
+   but since button is absolute, we just need space in the bar visually */
+.navSpacer {
+    width: 60px; 
+}
+
+/* Modal Styles */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background-color: var(--overlay-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.hiddenView {
+    display: none;
+}
+
+
