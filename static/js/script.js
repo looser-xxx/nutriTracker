@@ -148,3 +148,303 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchTodayStats();
     renderHomeMealList();
 
+    const fetchAndRenderDb = async () => {
+        try {
+            const response = await fetch('/api/dataBase/directory');
+            if (!response.ok) throw new Error('Failed to fetch food data');
+            const data = await response.json();
+            const foodItems = data.directory || [];
+            
+            dbFoodList.innerHTML = '';
+            
+            if (foodItems.length === 0) {
+                const li = document.createElement('li');
+                li.className = 'mealItem';
+                li.style.justifyContent = 'center';
+                li.textContent = 'Database is empty.';
+                dbFoodList.appendChild(li);
+                return;
+            }
+
+            foodItems.forEach(food => {
+                const li = document.createElement('li');
+                li.className = 'mealItem';
+                li.style.flexDirection = 'column';
+                li.style.alignItems = 'flex-start';
+                li.style.gap = '10px';
+                
+                li.innerHTML = `
+                    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                        <span class="mealName" style="font-size: 1.1rem;">${food.name}</span>
+                        <span class="mealCals">${Math.round(food.macros.cal)} kcal</span>
+                    </div>
+                    <div class="miniNutrientGrid" style="width: 100%; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border-color);">
+                        <div class="miniItem"><span class="lbl">Pro</span><span class="val">${food.macros.p}g</span></div>
+                        <div class="miniItem"><span class="lbl">Carb</span><span class="val">${food.macros.c}g</span></div>
+                        <div class="miniItem"><span class="lbl">Fat</span><span class="val">${food.macros.f}g</span></div>
+                        <div class="miniItem"><span class="lbl">Fib</span><span class="val">${food.macros.fib}g</span></div>
+                    </div>
+                `;
+                dbFoodList.appendChild(li);
+            });
+            
+        } catch (error) {
+            console.error('Error loading food DB:', error);
+            dbFoodList.innerHTML = '<li class="mealItem">Error loading data.</li>';
+        }
+    };
+
+    const fetchAndRenderTodayMeals = async () => {
+        try {
+            const response = await fetch('/api/logs/today/allLogs');
+            if (!response.ok) throw new Error('Failed to fetch today meals');
+            const data = await response.json();
+            const meals = data.mealsConsumed || [];
+            
+            todaysMealList.innerHTML = '';
+            
+            if (meals.length === 0) {
+                todaysMealList.innerHTML = '<li class="mealItem" style="justify-content: center;">No meals logged today.</li>';
+                return;
+            }
+
+            meals.forEach((meal, index) => {
+                const detailsId = `details-${meal.logId}`;
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div class="mealItem expandable" data-details="${detailsId}">
+                        <div class="mealInfo">
+                            <span class="mealName">${meal.foodName}</span>
+                        </div>
+                        <span class="mealCals">${Math.round(meal.gramsEaten)}g</span>
+                    </div>
+                    <div id="${detailsId}" class="mealDetails hiddenView">
+                        <div class="detailGrid">
+                            <div class="detailItem"><span class="dLabel">Calories</span><span class="dVal">${Math.round(meal.calories)}</span></div>
+                            <div class="detailItem"><span class="dLabel">Protein</span><span class="dVal">${meal.protein}g</span></div>
+                            <div class="detailItem"><span class="dLabel">Carbs</span><span class="dVal">${meal.carbs}g</span></div>
+                            <div class="detailItem"><span class="dLabel">Fat</span><span class="dVal">${meal.fat}g</span></div>
+                            <div class="detailItem"><span class="dLabel">Fiber</span><span class="dVal">${meal.fiber}g</span></div>
+                        </div>
+                    </div>
+                `;
+                todaysMealList.appendChild(li);
+            });
+        } catch (error) {
+            console.error('Error loading today meals:', error);
+            todaysMealList.innerHTML = '<li class="mealItem">Error loading meals.</li>';
+        }
+    };
+
+    const toggleModal = (modal, show) => {
+        if (show) {
+            modal.classList.remove('hiddenView');
+            // Trigger specific actions when opening
+            if (modal === statsContainer) {
+                playStatsAnimation();
+            }
+            if (modal === dbViewContainer) {
+                fetchAndRenderDb();
+            }
+            if (modal === todaysMealsContainer) {
+                fetchAndRenderTodayMeals();
+            }
+            if (modal === modalNutrients) {
+                // Fetch real daily stats
+                fetch('/api/logs/today/totalNutriConsumed')
+                    .then(res => res.json())
+                    .then(data => {
+                        const targets = {
+                            'valCalories': Math.round(data.calories || 0),
+                            'valProtein': Math.round(data.protein || 0),
+                            'valCarbs': Math.round(data.carbs || 0),
+                            'valFat': Math.round(data.fat || 0),
+                            'valFiber': Math.round(data.fiber || 0)
+                        };
+                        
+                        // Hardcoded goals matching HTML text (could be dynamic later)
+                        const goals = {
+                            'valCalories': 2500,
+                            'valProtein': 180,
+                            'valCarbs': 300,
+                            'valFat': 80,
+                            'valFiber': 35
+                        };
+
+                        // Reset bars first
+                        Object.keys(targets).forEach(id => {
+                            const fillId = id.replace('val', 'fill');
+                            const fillEl = document.getElementById(fillId);
+                            if(fillEl) fillEl.style.width = '0%';
+                        });
+
+                        setTimeout(() => {
+                            Object.keys(targets).forEach(id => {
+                                // Animate Number
+                                const el = document.getElementById(id);
+                                if (el) {
+                                    animateValue(el, 0, targets[id], 1000);
+                                }
+                                
+                                // Animate Bar
+                                const fillId = id.replace('val', 'fill');
+                                const fillEl = document.getElementById(fillId);
+                                if (fillEl) {
+                                    const pct = Math.min((targets[id] / goals[id]) * 100, 100);
+                                    fillEl.style.width = pct + '%';
+                                }
+                            });
+                        }, 50);
+                    })
+                    .catch(err => console.error('Error fetching nutrients for modal:', err));
+            }
+        } else {
+            modal.classList.add('hiddenView');
+            // Reset animations when closing to allow re-play
+            if (modal === statsContainer) {
+                resetStatsAnimation();
+            }
+        }
+    };
+
+    // --- Animation Logic ---
+
+    const resetStatsAnimation = () => {
+        chartBars.forEach(bar => {
+            bar.classList.remove('animate');
+            void bar.offsetWidth; 
+        });
+        goalFills.forEach(fill => {
+            fill.style.width = '0%';
+        });
+        countUpElements.forEach(el => {
+            el.textContent = '0';
+        });
+        if (typingTimer) clearTimeout(typingTimer);
+        insightText.innerHTML = '';
+    };
+
+    const playStatsAnimation = async () => {
+        resetStatsAnimation();
+        
+        // Find active tab
+        const activeTab = document.querySelector('.tabBtn.active').getAttribute('data-tab');
+        const apiUrl = activeTab === 'monthly' ? '/api/logs/avg/30' : '/api/logs/avg/7';
+        const chartPlaceholder = document.querySelector('.chartPlaceholder');
+
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            const avg = data.average;
+            const graph = data.graphData;
+
+            setTimeout(() => {
+                // Clear and Update Graph Bars
+                chartPlaceholder.innerHTML = '';
+                const maxCal = Math.max(...graph, 2500);
+                
+                graph.forEach((val) => {
+                    const bar = document.createElement('div');
+                    bar.className = 'bar';
+                    const height = (val / maxCal) * 100;
+                    bar.style.height = `${Math.max(height, 5)}%`;
+                    // Adjust width based on number of bars
+                    bar.style.width = activeTab === 'monthly' ? '2%' : '10%';
+                    chartPlaceholder.appendChild(bar);
+                    
+                    // Trigger animation
+                    setTimeout(() => bar.classList.add('animate'), 10);
+                });
+
+                // Update Progress Bars & Numbers in Avg Section
+                const goals = { calories: 2500, protein: 180, carbs: 300, fat: 80 };
+                const goalItems = document.querySelectorAll('.avgSection .goalItem');
+                goalItems.forEach(item => {
+                    const label = item.querySelector('.goalLabel').textContent.toLowerCase();
+                    if (avg[label] !== undefined) {
+                        const countUp = item.querySelector('.countUp');
+                        const fill = item.querySelector('.goalFill');
+                        
+                        animateValue(countUp, 0, Math.round(avg[label]), 1000);
+                        const pct = Math.min((avg[label] / goals[label]) * 100, 100);
+                        fill.style.width = `${pct}%`;
+                    }
+                });
+
+                const daysMsg = `${data.daysFound} logged days`;
+                const mockInsight = `Based on your ${activeTab} data (${daysMsg}), you're averaging ${Math.round(avg.calories)} calories. ${avg.calories < 2000 ? "You're consistently in a deficit." : "You're meeting your maintenance goals."}`;
+                typeWriter(mockInsight, insightText, 30);
+            }, 50);
+
+        } catch (error) {
+            console.error("Error loading stats:", error);
+        }
+    };
+
+    const animateValue = (obj, start, end, duration) => {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    };
+
+    const typeWriter = (text, element, speed) => {
+        element.innerHTML = '';
+        let i = 0;
+        
+        // Add cursor
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        
+        const type = () => {
+            if (i < text.length) {
+                // Insert text before the cursor
+                element.innerHTML = text.substring(0, i + 1);
+                element.appendChild(cursor);
+                i++;
+                typingTimer = setTimeout(type, speed);
+            }
+        };
+        
+        type();
+    };
+
+
+    const updateNutritionDisplay = (macros) => {
+        if (!macros) {
+            infoCal.textContent = '-';
+            infoPro.textContent = '-';
+            infoCarb.textContent = '-';
+            infoFat.textContent = '-';
+            return;
+        }
+        infoCal.textContent = Math.round(macros.cal || 0);
+        infoPro.textContent = (macros.p || 0) + 'g';
+        infoCarb.textContent = (macros.c || 0) + 'g';
+        infoFat.textContent = (macros.f || 0) + 'g';
+    };
+
+    const renderFoodList = (foods) => {
+        foodListContainer.innerHTML = '';
+        if (foods.length === 0) {
+            const noResult = document.createElement('div');
+            noResult.className = 'foodOption';
+            noResult.style.cursor = 'default';
+            noResult.style.color = '#999';
+            noResult.textContent = 'No results found';
+            foodListContainer.appendChild(noResult);
+            return;
+        }
+        foods.sort((a, b) => a.name.localeCompare(b.name));
+        foods.forEach(food => {
+            const div = document.createElement('div');
+            div.className = 'foodOption';
+            div.textContent = food.name;
+            if (food.name === selectedFoodInput.value) div.classList.add('selected');
+            div.addEventListener('click', () => {
