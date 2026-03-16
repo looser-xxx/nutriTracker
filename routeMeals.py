@@ -29,6 +29,12 @@ def loginRequired(f):
     def decorated_function(*args, **kwargs):
         if "user_id" not in session:
             return redirect(url_for("mealBp.login"))
+        
+        user = User.query.get(session["user_id"])
+        if not user:
+            session.pop("user_id", None)
+            return redirect(url_for("mealBp.login"))
+            
         return f(*args, **kwargs)
 
     return decorated_function
