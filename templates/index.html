@@ -48,7 +48,60 @@
                 <p>of 2,500 kcal</p>
             </div>
         </div>
+
+        <div class="sectionHeader">
+            <h3>Today's Meals</h3>
+            <button id="viewAllMealsBtn" class="viewAll" style="background:none; border:none; cursor:pointer;">View All</button>
+        </div>
+
+        <ul class="mealList">
+            <!-- Skeleton Loader Items -->
+            <li class="mealItem">
+                <div class="mealInfo" style="width: 60%;">
+                    <span class="mealName skeleton skeleton-text" style="width: 80%;"></span>
+                    <span class="mealTime skeleton skeleton-text" style="width: 40%;"></span>
+                </div>
+                <span class="mealCals skeleton skeleton-text" style="width: 20%;"></span>
+            </li>
+            <li class="mealItem">
+                <div class="mealInfo" style="width: 60%;">
+                    <span class="mealName skeleton skeleton-text" style="width: 70%;"></span>
+                    <span class="mealTime skeleton skeleton-text" style="width: 40%;"></span>
+                </div>
+                <span class="mealCals skeleton skeleton-text" style="width: 20%;"></span>
+            </li>
+            <li class="mealItem">
+                <div class="mealInfo" style="width: 60%;">
+                    <span class="mealName skeleton skeleton-text" style="width: 60%;"></span>
+                    <span class="mealTime skeleton skeleton-text" style="width: 40%;"></span>
+                </div>
+                <span class="mealCals skeleton skeleton-text" style="width: 20%;"></span>
+            </li>
+        </ul>
     </main>
+
+    <nav id="bottomNav">
+        <button id="navWorkout" class="navItem">
+            <svg class="navIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.5 17H3.5C2.67157 17 2 16.3284 2 15.5V8.5C2 7.67157 2.67157 7 3.5 7H6.5M17.5 17H20.5C21.3284 17 22 16.3284 22 15.5V8.5C22 7.67157 21.3284 7 20.5 7H17.5M6.5 17V7M17.5 17V7M6.5 12H17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="label">Workout</span>
+        </button>
+        <div class="navSpacer"></div> <!-- Spacer for the floating button -->
+        <button id="navAdd" class="navItem addBtn">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4V20M4 12H20" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <button id="navStats" class="navItem">
+            <svg class="navIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 20V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 20V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 20V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="label">Stats</span>
+        </button>
+    </nav>
 </div>
 
 </body>
