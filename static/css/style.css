@@ -905,6 +905,139 @@ body {
     transition: width 1s cubic-bezier(0.22, 1, 0.36, 1); /* Smooth easing */
 }
 
+/* SIDE MENU STYLES */
+.sideMenu {
+    background-color: var(--bg-card);
+    width: 70%; /* 70% of screen width */
+    height: 100%;
+    box-shadow: -5px 0 20px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    animation: slideInRight 0.3s ease-out forwards;
+    transition: background-color 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.menuHeader {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.menuHeader h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.menuList {
+    list-style: none;
+    padding: 20px;
+}
+
+.menuList .menuItem {
+    padding: 15px 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--bg-input);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.menuList .menuItem:active {
+    background-color: var(--bg-hover);
+}
+
+.menuIcon {
+    font-size: 1.2rem;
+}
+
+/* Ensure the overlay for menu is specifically right-aligned */
+#menuOverlay {
+    justify-content: flex-end;
+}
+
+/* Toggle Switch Styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 28px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+/* Skeleton Loading */
+.skeleton {
+    background: #e1e9ee;
+    background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-card) 50%, var(--bg-secondary) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+    color: transparent !important;
+    user-select: none;
+}
+
+.skeleton-text {
+    height: 1em;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+
 
 
 
