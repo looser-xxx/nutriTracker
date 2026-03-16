@@ -391,4 +391,245 @@ body {
     display: none;
 }
 
+.nutrientModal {
+    background-color: var(--bg-card);
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px var(--shadow-strong);
+    animation: slideUp 0.3s ease-out;
+    max-height: 90vh; /* Prevent modal from exceeding screen height */
+    overflow-y: auto; /* Allow scrolling inside the modal itself if content is too long */
+    transition: background-color 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.nutrientModal h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+}
+
+.nutrientGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.nutrientItem {
+    background-color: var(--bg-secondary);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.nutrientItem:first-child {
+    grid-column: span 2; /* Make calories span full width */
+    background-color: var(--bg-highlight);
+    border: 1px solid var(--border-highlight);
+}
+
+.nutrientLabel {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nutrientValue {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.nutrientUnit {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Mini Progress Bar for Nutrients */
+.miniTrack {
+    width: 80%; /* Width within the card */
+    height: 6px;
+    background-color: var(--border-color);
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.miniFill {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0; /* Animated by JS */
+    transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: 3px;
+}
+
+/* Specific color tweaks if desired */
+#fillCalories { background-color: var(--chart-cal); }
+#fillProtein { background-color: var(--chart-pro); }
+#fillCarbs { background-color: var(--chart-carb); }
+#fillFat { background-color: var(--chart-fat); }
+#fillFiber { background-color: var(--chart-fiber); }
+
+
+.closeBtn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.closeBtn:active {
+    background-color: var(--primary-dark);
+}
+
+/* Add Meal Form Styles */
+.formGroup {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: bold;
+}
+
+.formControl {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-input);
+    font-size: 1rem;
+    transition: border-color 0.2s, background-color 0.3s, color 0.3s;
+    appearance: none; /* Removes default styling for select on some browsers */
+    color: var(--text-primary);
+}
+
+.formControl:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: var(--bg-card);
+}
+
+/* SEARCHABLE LIST STYLES */
+.searchWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.clearSearchBtn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.foodListContainer {
+    margin-top: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: var(--bg-card);
+    box-shadow: 0 2px 5px var(--shadow-card);
+    display: none; /* Hidden by default until populated/active */
+}
+
+.foodListContainer.active {
+    display: block;
+}
+
+.foodOption {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    transition: background-color 0.1s;
+    color: var(--text-primary);
+}
+
+.foodOption:last-child {
+    border-bottom: none;
+}
+
+.foodOption:hover {
+    background-color: var(--bg-hover);
+}
+
+.foodOption.selected {
+    background-color: var(--bg-highlight);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+/* END SEARCHABLE LIST STYLES */
+
+
+/* Quantity Stepper Styles */
+.qtyStepper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stepperBtn {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    background-color: var(--bg-card);
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.stepperBtn:active {
+    transform: scale(0.9);
+    background-color: var(--bg-highlight-2);
+    border-color: var(--primary-color);
+}
+
+.stepperInput {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 80px;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+}
+/* End Stepper Styles */
+
+
 
