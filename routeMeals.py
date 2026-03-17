@@ -277,6 +277,25 @@ def getUserTargets():
     }
 
 
+@mealBp.route("/api/user/targets", methods=["POST"])
+@loginRequired
+def updateUserTargets():
+    data = request.json
+    user = User.query.get(session["user_id"])
+    
+    if not user:
+        return {"error": "User not found"}, 404
+        
+    user.target_calories = float(data.get("calories", user.target_calories))
+    user.target_protein = float(data.get("protein", user.target_protein))
+    user.target_carbs = float(data.get("carbs", user.target_carbs))
+    user.target_fat = float(data.get("fat", user.target_fat))
+    user.target_fiber = float(data.get("fiber", user.target_fiber))
+    
+    db.session.commit()
+    return {"message": "Targets updated successfully"}, 200
+
+
 @mealBp.route("/api/dataBase/directory", methods=["GET"])
 @loginRequired
 def getFoodDirectory():
