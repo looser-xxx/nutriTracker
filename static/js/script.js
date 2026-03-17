@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Elements ---
     let serverFoodDatabase = [];
     let userTargets = { calories: 2500, protein: 150, carbs: 300, fat: 80, fiber: 30 };
+    
+    // Define these in a way that toggleModal can see them if they are in the same scope
+    // Actually they are already in the same scope (DOMContentLoaded)
+    
     const todayMain = document.getElementById('todayMain');
     const modalNutrients = document.getElementById('modalNutrients');
     const closeNutrientsBtn = document.getElementById('closeNutrients');
@@ -56,6 +60,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeDbViewBtn = document.getElementById('closeDbView');
     const dbFoodList = document.getElementById('dbFoodList');
 
+    const profileMenuItem = document.getElementById('menuProfile') || document.querySelector('.menuList .menuItem:first-child');
+    const menuGoals = document.getElementById('menuGoals') || document.querySelector('.menuList .menuItem:nth-child(2)');
+    
+    console.log('Profile Menu Item found:', !!profileMenuItem);
+    console.log('Goals Menu Item found:', !!menuGoals);
+
+    const profileContainer = document.getElementById('profileContainer');
+    const closeProfileBtn = document.getElementById('closeProfile');
+
+    const userGoalsModal = document.getElementById('userGoalsModal');
+    console.log('userGoalsModal element:', userGoalsModal);
+    const saveGoalsBtn = document.getElementById('saveGoals');
+    const closeGoalsBtn = document.getElementById('closeGoals');
+    const goalInputs = {
+        calories: document.getElementById('goalEditCal'),
+        protein: document.getElementById('goalEditPro'),
+        carbs: document.getElementById('goalEditCar'),
+        fat: document.getElementById('goalEditFat'),
+        fiber: document.getElementById('goalEditFib')
+    };
+
     // --- Mock Data ---
     const foodDatabase = [
         { name: "Apple", id: 101, macros: { cal: 52, p: 0.3, c: 14, f: 0.2, fib: 2.4 } },
@@ -83,6 +108,22 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error fetching user targets:', error);
         }
+    };
+
+    window.changeVal = (id, delta) => {
+        const input = document.getElementById(id);
+        if (input) {
+            const val = parseInt(input.value) || 0;
+            input.value = Math.max(0, val + delta);
+        }
+    };
+
+    const populateGoalInputs = () => {
+        if (goalInputs.calories) goalInputs.calories.value = userTargets.calories;
+        if (goalInputs.protein) goalInputs.protein.value = userTargets.protein;
+        if (goalInputs.carbs) goalInputs.carbs.value = userTargets.carbs;
+        if (goalInputs.fat) goalInputs.fat.value = userTargets.fat;
+        if (goalInputs.fiber) goalInputs.fiber.value = userTargets.fiber;
     };
 
     const fetchTodayStats = async () => {
@@ -304,19 +345,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const toggleModal = (modal, show) => {
+        if (!modal) {
+            console.error('toggleModal called with null modal');
+            return;
+        }
+        console.log('toggleModal called for:', modal.id, 'show:', show);
         if (show) {
             modal.classList.remove('hiddenView');
             // Trigger specific actions when opening
-            if (modal === statsContainer) {
+            if (statsContainer && modal === statsContainer) {
                 playStatsAnimation();
             }
-            if (modal === dbViewContainer) {
+            if (dbViewContainer && modal === dbViewContainer) {
                 fetchAndRenderDb();
             }
-            if (modal === todaysMealsContainer) {
+            if (todaysMealsContainer && modal === todaysMealsContainer) {
                 fetchAndRenderTodayMeals();
             }
-            if (modal === modalNutrients) {
+            if (modalNutrients && modal === modalNutrients) {
                 // Fetch user targets first to ensure they are up to date
                 fetchUserTargets().then(() => {
                     // Fetch real daily stats
@@ -380,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             modal.classList.add('hiddenView');
             // Reset animations when closing to allow re-play
-            if (modal === statsContainer) {
+            if (statsContainer && modal === statsContainer) {
                 resetStatsAnimation();
             }
         }
@@ -679,11 +725,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuBtn = document.getElementById('menuBtn');
     const menuOverlay = document.getElementById('menuOverlay');
     const closeMenuBtn = document.getElementById('closeMenu');
-    
-    // Profile Elements
-    const profileMenuItem = document.querySelector('.menuList .menuItem:first-child');
-    const profileContainer = document.getElementById('profileContainer');
-    const closeProfileBtn = document.getElementById('closeProfile');
 
     const fetchAndRenderProfile = async () => {
         try {
@@ -705,10 +746,63 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (profileMenuItem) {
-        profileMenuItem.addEventListener('click', () => {
+        profileMenuItem.addEventListener('click', (e) => {
+            e.stopPropagation();
             toggleModal(menuOverlay, false);
             toggleModal(profileContainer, true);
             fetchAndRenderProfile();
+        });
+    }
+
+    if (menuGoals) {
+        menuGoals.addEventListener('click', (e) => {
+            e.stopPropagation();
+            console.log('Goals menu clicked');
+            toggleModal(menuOverlay, false);
+            populateGoalInputs();
+            const goalsModal = document.getElementById('userGoalsModal');
+            console.log('Opening goalsModal:', goalsModal);
+            toggleModal(goalsModal, true);
+        });
+    }
+
+    if (saveGoalsBtn) {
+        saveGoalsBtn.addEventListener('click', async () => {
+            const newTargets = {
+                calories: parseInt(goalInputs.calories.value),
+                protein: parseInt(goalInputs.protein.value),
+                carbs: parseInt(goalInputs.carbs.value),
+                fat: parseInt(goalInputs.fat.value),
+                fiber: parseInt(goalInputs.fiber.value)
+            };
+
+            try {
+                const res = await fetch('/api/user/targets', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newTargets)
+                });
+                
+                if (res.ok) {
+                    await fetchUserTargets(); // Refresh local userTargets
+                    fetchTodayStats(); // Refresh main card
+                    toggleModal(userGoalsModal, false);
+                } else {
+                    alert('Failed to save goals.');
+                }
+            } catch (err) {
+                console.error('Error saving goals:', err);
+            }
+        });
+    }
+
+    if (closeGoalsBtn) {
+        closeGoalsBtn.addEventListener('click', () => toggleModal(userGoalsModal, false));
+    }
+
+    if (userGoalsModal) {
+        userGoalsModal.addEventListener('click', (e) => {
+            if (e.target === userGoalsModal) toggleModal(userGoalsModal, false);
         });
     }
 
@@ -723,7 +817,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (menuBtn) {
-        menuBtn.addEventListener('click', () => toggleModal(menuOverlay, true));
+        menuBtn.addEventListener('click', () => {
+            console.log('Menu button clicked');
+            toggleModal(menuOverlay, true);
+        });
     }
 
     if (closeMenuBtn) {
@@ -742,7 +839,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (menuOverlay) {
-        menuOverlay.addEventListener('click', (e) => {
+        menuOverlay.addEventListener('mousedown', (e) => {
             if (e.target === menuOverlay) {
                 toggleModal(menuOverlay, false);
             }
