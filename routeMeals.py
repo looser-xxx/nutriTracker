@@ -76,6 +76,7 @@ def authorize():
     user = User.query.filter_by(google_id=user_info["sub"]).first()
     if not user:
         # DO NOT CREATE USER YET. Store info in session for onboarding.
+        session.permanent = True
         session["temp_user"] = {
             "google_id": user_info["sub"],
             "email": user_info["email"],
@@ -84,6 +85,7 @@ def authorize():
         }
         return redirect(url_for("mealBp.onboarding"))
 
+    session.permanent = True
     session["user_id"] = user.id
     return redirect(url_for("mealBp.home"))
 
@@ -226,6 +228,7 @@ def saveTargets():
         )
         db.session.add(user)
         db.session.commit()
+        session.permanent = True
         session["user_id"] = user.id
         session.pop("temp_user", None)
     else:

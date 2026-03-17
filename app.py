@@ -1,5 +1,6 @@
 import os
 
+from datetime import timedelta
 from dotenv import load_dotenv
 from flask import Flask
 
@@ -20,11 +21,11 @@ def createApp():
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-key")
+    app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=30)
 
     # Production HTTPS settings
     if not app.debug:
         app.config["SESSION_COOKIE_SECURE"] = True
-        app.config["REMOTE_ADDR"] = "127.0.0.1" # Standard for tunnels
 
     db.init_app(app)
     oauth.init_app(app)
