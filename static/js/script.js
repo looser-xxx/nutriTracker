@@ -239,6 +239,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="detailItem"><span class="dLabel">Fat</span><span class="dVal">${meal.fat}g</span></div>
                             <div class="detailItem"><span class="dLabel">Fiber</span><span class="dVal">${meal.fiber}g</span></div>
                         </div>
+                        <div class="detailActions">
+                            <button class="deleteMealBtn" onclick="deleteMeal(${meal.logId}, this)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 6h18"></path>
+                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                </svg>
+                                <span>Delete Log</span>
+                            </button>
+                        </div>
                     </div>
                 `;
                 todaysMealList.appendChild(li);
@@ -246,6 +256,50 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error loading today meals:', error);
             todaysMealList.innerHTML = '<li class="mealItem">Error loading meals.</li>';
+        }
+    };
+
+    window.deleteMeal = async (logId, btn) => {
+        const isConfirming = btn.classList.contains('confirming');
+        
+        if (!isConfirming) {
+            // First tap: change state to confirm
+            btn.classList.add('confirming');
+            const span = btn.querySelector('span');
+            if (span) span.textContent = 'Confirm?';
+            
+            // Revert after 3 seconds if not clicked again
+            setTimeout(() => {
+                if (btn.classList.contains('confirming')) {
+                    btn.classList.remove('confirming');
+                    if (span) span.textContent = 'Delete Log';
+                }
+            }, 3000);
+            return;
+        }
+
+        // Second tap: perform delete
+        try {
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            const response = await fetch(`/api/logs/today/delete/${logId}`, {
+                method: 'DELETE'
+            });
+            
+            if (response.ok) {
+                // Refresh data
+                fetchTodayStats();
+                fetchAndRenderTodayMeals();
+                renderHomeMealList();
+            } else {
+                alert('Failed to delete log.');
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        } catch (error) {
+            console.error('Error deleting meal:', error);
+            btn.disabled = false;
+            btn.style.opacity = '1';
         }
     };
 
@@ -263,10 +317,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetchAndRenderTodayMeals();
             }
             if (modal === modalNutrients) {
-                // Fetch real daily stats
-                fetch('/api/logs/today/totalNutriConsumed')
-                    .then(res => res.json())
-                    .then(data => {
+                // Fetch user targets first to ensure they are up to date
+                fetchUserTargets().then(() => {
+                    // Fetch real daily stats
+                    fetch('/api/logs/today/totalNutriConsumed')
+                        .then(res => res.json())
+                        .then(data => {
                         const targets = {
                             'valCalories': Math.round(data.calories || 0),
                             'valProtein': Math.round(data.protein || 0),
@@ -275,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             'valFiber': Math.round(data.fiber || 0)
                         };
                         
-                        // Hardcoded goals matching HTML text (could be dynamic later)
+                        // Define goals from userTargets
                         const goals = {
                             'valCalories': userTargets.calories,
                             'valProtein': userTargets.protein,
@@ -283,6 +339,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             'valFat': userTargets.fat,
                             'valFiber': userTargets.fiber
                         };
+                        
+                        // Update Goal labels in HTML modal
+                        Object.keys(goals).forEach(id => {
+                            const goalId = id.replace('val', 'goal');
+                            const goalEl = document.getElementById(goalId);
+                            if (goalEl) {
+                                goalEl.textContent = goals[id];
+                            }
+                        });
 
                         // Reset bars first
                         Object.keys(targets).forEach(id => {
@@ -310,6 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }, 50);
                     })
                     .catch(err => console.error('Error fetching nutrients for modal:', err));
+                });
             }
         } else {
             modal.classList.add('hiddenView');
@@ -382,8 +448,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (avg[label] !== undefined) {
                         const countUp = item.querySelector('.countUp');
                         const fill = item.querySelector('.goalFill');
+                        const goalNumbers = item.querySelector('.goalNumbers');
                         
-                        animateValue(countUp, 0, Math.round(avg[label]), 1000);
+                        // Update the goal text (e.g., / 2500 or / 180g)
+                        const unit = label === 'calories' ? '' : 'g';
+                        goalNumbers.innerHTML = `<span class="countUp">0</span> / ${goals[label]}${unit}`;
+                        
+                        // Get the NEW countUp element
+                        const newCountUp = item.querySelector('.countUp');
+                        animateValue(newCountUp, 0, Math.round(avg[label]), 1000);
+                        
                         const pct = Math.min((avg[label] / goals[label]) * 100, 100);
                         fill.style.width = `${pct}%`;
                     }
