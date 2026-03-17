@@ -1100,3 +1100,64 @@ input:checked + .slider:before {
     border-color: #c0392b !important;
     font-weight: bold;
 }
+
+.stepperList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stepperItem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+}
+
+.stepperLabel {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-input);
+    border-radius: 12px;
+    padding: 5px;
+    gap: 5px;
+}
+
+.stepper input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 60px;
+    outline: none;
+}
+
+.stepBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    background: var(--bg-card);
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px var(--shadow-light);
+    transition: transform 0.1s;
+}
+
+.stepBtn:active {
+    transform: scale(0.9);
+}
