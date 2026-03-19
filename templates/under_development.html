@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Under Development - NutTracker</title>
+    <link rel="stylesheet" href="../static/css/style.css?v={{ version }}">
+    <style>
+        .devContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .devCard {
+            background-color: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-strong);
+            width: 100%;
+            max-width: 400px;
+        }
+        .devIcon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .devCard h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .devCard p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="devContainer">
+        <div class="devCard">
+            <span class="devIcon">🛠️</span>
+            <h2>Coming Soon!</h2>
+            <p>The <strong>{{ section }}</strong> section is currently under active development. <br>We're working hard to bring you the best experience!</p>
+            <a href="/" class="actionBtn" style="text-decoration: none; display: block;">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

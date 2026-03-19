@@ -59,8 +59,7 @@ def home():
 def workout():
     if "userId" not in session:
         return redirect(url_for("mealBp.onboarding"))
-    user = User.query.get(session["userId"])
-    return render_template("workout.html", user_name=user.fullName.split()[0], version=datetime.now().timestamp())
+    return render_template("under_development.html", section="Workout", version=datetime.now().timestamp())
 
 
 @mealBp.route("/hydration")
@@ -68,8 +67,7 @@ def workout():
 def hydration():
     if "userId" not in session:
         return redirect(url_for("mealBp.onboarding"))
-    user = User.query.get(session["userId"])
-    return render_template("hydration.html", user_name=user.fullName.split()[0], version=datetime.now().timestamp())
+    return render_template("under_development.html", section="Hydration", version=datetime.now().timestamp())
 
 
 @mealBp.route("/login")
