@@ -180,7 +180,7 @@ def generateTargets():
         f"Keys must be protein, calories, fat, carbs, fiber."
     )
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={apiKey}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key={apiKey}"
     headers = {'Content-Type': 'application/json'}
     payload = {
         "contents": [{
@@ -573,7 +573,7 @@ def getRecommendation():
         "Based on this, what's your advice for my next meal or my current progress?"
     )
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={apiKey}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key={apiKey}"
     headers = {'Content-Type': 'application/json'}
     payload = {
         "system_instruction": {
@@ -586,12 +586,18 @@ def getRecommendation():
 
     try:
         response = requests.post(url, headers=headers, json=payload)
+        
+        if response.status_code == 429:
+            return {"recommendation": "The AI assistant is currently resting. Please check back in a bit for more advice!", "status": "quota_exceeded"}
+            
         response.raise_for_status()
         result = response.json()
         
         advice = result.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text', "Keep going! You're doing great.")
         return {"recommendation": advice.strip()}
     except Exception as e:
+        import traceback
+        traceback.print_exc() # This will print to gunicorn logs/journal
         return {"error": str(e)}, 500
 
 
