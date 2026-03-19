@@ -1,4 +1,4 @@
-from datetime import datetime, timezone as timezoneUtc
+from datetime import datetime, timezone
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -18,6 +18,9 @@ class User(db.Model):
     dateOfBirth = db.Column(db.Date, nullable=True)
     gender = db.Column(db.String(20), nullable=True)
     heightCm = db.Column(db.Float, nullable=True)
+    weight = db.Column(db.Float, nullable=True)
+    bicepSize = db.Column(db.Float, nullable=True)
+    age = db.Column(db.Integer, nullable=True)
     
     # User Goals & Settings
     goalType = db.Column(db.String(50), nullable=True)
@@ -32,8 +35,8 @@ class User(db.Model):
     targetFiber = db.Column(db.Float, default=30.0)
     
     # System Data
-    createdAt = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
-    lastActive = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+    createdAt = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    lastActive = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
     # Relationships
     foodLogs = db.relationship("FoodLog", backref="user", lazy=True)
@@ -53,7 +56,7 @@ class ProgressLog(db.Model):
     chestSizeCm = db.Column(db.Float, nullable=True)
     waistSizeCm = db.Column(db.Float, nullable=True)
     thighSizeCm = db.Column(db.Float, nullable=True)
-    loggedAt = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+    loggedAt = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 class FoodDirectory(db.Model):
@@ -80,7 +83,7 @@ class FoodLog(db.Model):
     carbs = db.Column(db.Float, nullable=False)
     fat = db.Column(db.Float, nullable=False)
     fiber = db.Column(db.Float, nullable=False)
-    dateLogged = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+    dateLogged = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 class HydrationLog(db.Model):
@@ -90,7 +93,7 @@ class HydrationLog(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     amountMl = db.Column(db.Float, nullable=False)
     beverageType = db.Column(db.String(50), default="Water")
-    loggedAt = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+    loggedAt = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 class WorkoutSession(db.Model):
@@ -100,7 +103,7 @@ class WorkoutSession(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     sessionType = db.Column(db.String(100), nullable=True)
     notes = db.Column(db.Text, nullable=True)
-    loggedAt = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+    loggedAt = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
     exercises = db.relationship("ExerciseSet", backref="session", lazy=True)
 

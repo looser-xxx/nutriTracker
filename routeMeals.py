@@ -1,7 +1,7 @@
 import os
 import requests
 import json
-from datetime import datetime, timezone as timezoneUtc
+from datetime import datetime, timezone
 from functools import wraps
 
 from authlib.integrations.flask_client import OAuth
@@ -428,7 +428,7 @@ def nutritionConsumed(id):
 @mealBp.route("/api/logs/today/totalNutriConsumed", methods=["GET"])
 @loginRequired
 def totalNutriConsumed():
-    todayDate = datetime.now(timezoneUtc).date()
+    todayDate = datetime.now(timezone.utc).date()
 
     stats = (
         db.session.query(
@@ -455,7 +455,7 @@ def totalNutriConsumed():
 @mealBp.route("/api/logs/today/allLogs", methods=["GET"])
 @loginRequired
 def today():
-    todayDate = datetime.now(timezoneUtc).date()
+    todayDate = datetime.now(timezone.utc).date()
 
     logsForToday = FoodLog.query.filter(
         func.date(FoodLog.dateLogged) == todayDate,
@@ -521,7 +521,7 @@ def getLogsForAvg(days):
     daysPassedCount = 0
     targetCount = days
 
-    todayDate = datetime.now(timezoneUtc).date()
+    todayDate = datetime.now(timezone.utc).date()
     tempDate = todayDate
 
     batchSize = 20

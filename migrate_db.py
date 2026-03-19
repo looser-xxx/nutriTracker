@@ -7,12 +7,11 @@ if os.path.exists(db_path):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
+    # Correct columns as per current User model in models.py
     columns_to_add = [
-        ("target_calories", "REAL DEFAULT 2500.0"),
-        ("target_protein", "REAL DEFAULT 150.0"),
-        ("target_carbs", "REAL DEFAULT 300.0"),
-        ("target_fat", "REAL DEFAULT 80.0"),
-        ("target_fiber", "REAL DEFAULT 30.0")
+        ("weight", "REAL"),
+        ("bicepSize", "REAL"),
+        ("age", "INTEGER")
     ]
     
     for col_name, col_type in columns_to_add:
