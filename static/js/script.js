@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeAddMealBtn = document.getElementById('closeAddMeal');
     const addMealForm = document.getElementById('addMealForm');
 
-    // Stats Elements
-    const navStats = document.getElementById('navStats');
+    // Hydration Elements
+    const navHydration = document.getElementById('navHydration');
     const statsContainer = document.getElementById('statsContainer');
     const closeStatsBtn = document.getElementById('closeStats');
     const tabBtns = document.querySelectorAll('.tabBtn');
@@ -670,7 +670,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeAddMealBtn) closeAddMealBtn.addEventListener('click', () => toggleModal(addMealModal, false));
     if (addMealModal) addMealModal.addEventListener('click', (e) => { if (e.target === addMealModal) toggleModal(addMealModal, false); });
 
-    if (navStats) navStats.addEventListener('click', () => toggleModal(statsContainer, true));
     const action2Btn = document.getElementById('action2Btn');
     if (action2Btn) action2Btn.addEventListener('click', () => toggleModal(statsContainer, true));
     if (closeStatsBtn) closeStatsBtn.addEventListener('click', () => toggleModal(statsContainer, false));

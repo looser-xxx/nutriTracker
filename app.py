@@ -44,6 +44,14 @@ def createApp():
     def badRequest(error):
         return {"error": "Bad request. Please ensure you are sending valid JSON."}, 400
 
+    @app.after_request
+    def addHeader(response):
+        if response.content_type == 'text/html; charset=utf-8' or response.content_type == 'text/html':
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response.headers["Pragma"] = "no-cache"
+            response.headers["Expires"] = "0"
+        return response
+
     return app
 
 
