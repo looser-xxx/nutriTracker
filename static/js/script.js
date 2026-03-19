@@ -146,8 +146,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     p.textContent = `of ${dailyGoal.toLocaleString()} kcal goal`;
                 }
             }
+            return data;
         } catch (error) {
             console.error('Error loading today stats:', error);
+        }
+    };
+
+    const fetchGeminiAdvice = async () => {
+        if (!motivationQuote) return;
+
+        try {
+            const geminiRes = await fetch('/api/gemini/recommendation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (geminiRes.ok) {
+                const result = await geminiRes.json();
+                if (result.recommendation) {
+                    typeWriter(`"${result.recommendation}"`, motivationQuote, 40);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching Gemini advice:', error);
         }
     };
 
@@ -193,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchUserTargets().then(() => {
         fetchTodayStats();
         renderHomeMealList();
+        fetchGeminiAdvice();
     });
 
     const fetchAndRenderDb = async () => {
@@ -321,6 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetchTodayStats();
                 fetchAndRenderTodayMeals();
                 renderHomeMealList();
+                fetchGeminiAdvice();
             } else {
                 alert('Failed to delete log.');
                 btn.disabled = false;
@@ -528,6 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const typeWriter = (text, element, speed) => {
+        if (typingTimer) clearTimeout(typingTimer);
         element.innerHTML = '';
         let i = 0;
         const cursor = document.createElement('span');
@@ -539,6 +563,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 element.appendChild(cursor);
                 i++;
                 typingTimer = setTimeout(type, speed);
+            } else {
+                // Remove cursor after finishing
+                const c = element.querySelector('.cursor');
+                if (c) c.remove();
             }
         };
         type();
@@ -814,6 +842,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     toggleModal(addMealModal, false);
                     fetchTodayStats();
                     renderHomeMealList();
+                    fetchGeminiAdvice();
                     foodSearch.value = '';
                     selectedFoodInput.value = '';
                     selectedFoodInput.removeAttribute('data-id');

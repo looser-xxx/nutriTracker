@@ -510,6 +510,91 @@ def deleteFood(id):
     return {"id": id}, 200
 
 
+@mealBp.route("/api/gemini/recommendation", methods=["POST"])
+@loginRequired
+def getRecommendation():
+    todayDate = datetime.now(timezone.utc).date()
+    user = User.query.get(session["userId"])
+    
+    # Fetch today's totals
+    stats = (
+        db.session.query(
+            func.sum(FoodLog.calories).label("calories"),
+            func.sum(FoodLog.protein).label("protein"),
+            func.sum(FoodLog.carbs).label("carbs"),
+            func.sum(FoodLog.fat).label("fat"),
+            func.sum(FoodLog.fiber).label("fiber"),
+        )
+        .filter(func.date(FoodLog.dateLogged) == todayDate)
+        .filter(FoodLog.userId == session["userId"])
+        .first()
+    )
+
+    totalConsumed = {
+        "calories": round(stats.calories or 0, 1),
+        "protein": round(stats.protein or 0, 1),
+        "carbs": round(stats.carbs or 0, 1),
+        "fat": round(stats.fat or 0, 1),
+        "fiber": round(stats.fiber or 0, 1),
+    }
+
+    # Fetch today's logs
+    logsForToday = FoodLog.query.filter(
+        func.date(FoodLog.dateLogged) == todayDate,
+        FoodLog.userId == session["userId"],
+    ).all()
+    allLogs = [log.foodName for log in logsForToday]
+
+    userTargets = {
+        "calories": user.targetCalories,
+        "protein": user.targetProtein,
+        "carbs": user.targetCarbs,
+        "fat": user.targetFat,
+        "fiber": user.targetFiber
+    }
+
+    apiKey = os.getenv("GEMINI_API_KEY")
+    if not apiKey:
+        return {"error": "Gemini API key not configured"}, 500
+
+    systemPrompt = (
+        "You are a helpful nutrition assistant for the NutriTracker app. Your goal is to analyze the user's daily food logs and provide personalized advice tailored to an Indian diet. "
+        "Analyze the user's progress toward their daily goals (Calories, Protein, Carbs, Fat, Fiber) based on their consumed nutrients and targets. "
+        "Suggest common natural Indian food sources to help them reach their goals. "
+        "DO NOT recommend supplements or protein powders. If they have overeaten, suggest how to adjust. "
+        "Keep the response very short, encouraging, and actionable (max 1-2 sentences). "
+        "Use bullet points for the advice if possible. Do not use bold or italics formatting."
+    )
+
+    userPrompt = (
+        f"Today I have consumed: {totalConsumed}. "
+        f"My goals are: {userTargets}. "
+        f"The foods I logged today: {allLogs}. "
+        "Based on this, what's your advice for my next meal or my current progress?"
+    )
+
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={apiKey}"
+    headers = {'Content-Type': 'application/json'}
+    payload = {
+        "system_instruction": {
+            "parts": [{"text": systemPrompt}]
+        },
+        "contents": [{
+            "parts": [{"text": userPrompt}]
+        }]
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()
+        result = response.json()
+        
+        advice = result.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text', "Keep going! You're doing great.")
+        return {"recommendation": advice.strip()}
+    except Exception as e:
+        return {"error": str(e)}, 500
+
+
 @mealBp.route("/api/logs/checkAvailability/<int:days>", methods=["GET"])
 @loginRequired
 def checkAvailability(days):
