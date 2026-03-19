@@ -1191,3 +1191,28 @@ input:checked + .slider:before {
 .stepBtn:active {
     transform: scale(0.9);
 }
+
+.buttonGroup {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.actionBtnRed {
+    flex: 1;
+    padding: 15px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.2);
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.actionBtnRed:active {
+    transform: scale(0.97);
+    background-color: #c0392b;
+}

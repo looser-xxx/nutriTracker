@@ -671,12 +671,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addMealModal) addMealModal.addEventListener('click', (e) => { if (e.target === addMealModal) toggleModal(addMealModal, false); });
 
     if (navStats) navStats.addEventListener('click', () => toggleModal(statsContainer, true));
+    const action2Btn = document.getElementById('action2Btn');
+    if (action2Btn) action2Btn.addEventListener('click', () => toggleModal(statsContainer, true));
     if (closeStatsBtn) closeStatsBtn.addEventListener('click', () => toggleModal(statsContainer, false));
 
     if (navWorkout) navWorkout.addEventListener('click', () => toggleModal(workoutContainer, true));
     if (closeWorkoutBtn) closeWorkoutBtn.addEventListener('click', () => toggleModal(workoutContainer, false));
 
     if (viewAllMealsBtn) viewAllMealsBtn.addEventListener('click', () => toggleModal(todaysMealsContainer, true));
+    const action1Btn = document.getElementById('action1Btn');
+    if (action1Btn) action1Btn.addEventListener('click', () => toggleModal(todaysMealsContainer, true));
     if (closeTodaysMealsBtn) closeTodaysMealsBtn.addEventListener('click', () => toggleModal(todaysMealsContainer, false));
 
     const menuBtn = document.getElementById('menuBtn');
