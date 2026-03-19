@@ -1,0 +1,2187 @@
+[2026-03-20 01:05:50 +0530] [1528109] [INFO] Starting gunicorn 25.1.0
+[2026-03-20 01:05:50 +0530] [1528109] [INFO] Listening at: http://0.0.0.0:5050 (1528109)
+[2026-03-20 01:05:50 +0530] [1528109] [INFO] Using worker: gevent
+[2026-03-20 01:05:50 +0530] [1528109] [INFO] Control socket listening at /home/looser/nutriTracker/gunicorn.ctl
+[2026-03-20 01:05:50 +0530] [1528111] [INFO] Booting worker with pid: 1528111
+[2026-03-20 01:05:50 +0530] [1528112] [INFO] Booting worker with pid: 1528112
+[2026-03-20 01:05:50 +0530] [1528113] [INFO] Booting worker with pid: 1528113
+[2026-03-20 01:05:51 +0530] [1528114] [INFO] Booting worker with pid: 1528114
+[2026-03-20 01:06:04,014] ERROR in app: Exception on /auth/callback [GET]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 70, in authorize
+    token = google.authorize_access_token()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/authlib/integrations/flask_client/apps.py", line 105, in authorize_access_token
+    params = self._format_state_params(state_data, params)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/authlib/integrations/base_client/sync_app.py", line 260, in _format_state_params
+    raise MismatchingStateError()
+authlib.integrations.base_client.errors.MismatchingStateError: mismatching_state: CSRF Warning! State not equal in request and response.
+[2026-03-20 01:08:28,001] ERROR in app: Exception on /auth/callback [GET]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 70, in authorize
+    token = google.authorize_access_token()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/authlib/integrations/flask_client/apps.py", line 105, in authorize_access_token
+    params = self._format_state_params(state_data, params)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/authlib/integrations/base_client/sync_app.py", line 260, in _format_state_params
+    raise MismatchingStateError()
+authlib.integrations.base_client.errors.MismatchingStateError: mismatching_state: CSRF Warning! State not equal in request and response.
+[2026-03-20 01:09:28,078] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:34,638] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:45,939] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:46,593] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:46,763] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:46,939] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:47,121] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:47,302] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:47,841] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:48,114] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:48,283] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:48,625] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:48,866] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:49,149] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:49,600] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:49,794] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:49,990] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:50,153] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:50,466] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:50,659] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:51,321] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:51,526] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:51,878] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:52,341] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:52,527] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:52,782] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:54,161] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:55,260] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:09:56,265] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:33,313] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:33,398] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:33,437] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:33,603] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:45,182] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:46,370] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:46,592] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:46,783] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:46,975] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:47,185] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:47,369] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:47,561] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:47,750] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:59,058] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:59,232] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:59,674] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:10:59,846] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:11:03,543] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:11:03,956] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:11:04,127] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:11:04,298] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 205, in saveTargets
+    user = User(
+        googleId=u["googleId"],
+    ...<7 lines>...
+        bicepSize=u["bicepSize"]
+    )
+  File "<string>", line 4, in __init__
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 596, in _initialize_instance
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state.py", line 594, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/decl_base.py", line 2179, in _declarative_constructor
+    raise TypeError(
+        "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+    )
+TypeError: 'weight' is an invalid keyword argument for User
+[2026-03-20 01:12:30 +0530] [1528109] [INFO] Handling signal: hup
+[2026-03-20 01:12:30 +0530] [1528109] [INFO] Hang up: Master
+[2026-03-20 01:12:30 +0530] [1529346] [INFO] Booting worker with pid: 1529346
+[2026-03-20 01:12:30 +0530] [1529347] [INFO] Booting worker with pid: 1529347
+[2026-03-20 01:12:30 +0530] [1529348] [INFO] Booting worker with pid: 1529348
+[2026-03-20 01:12:30 +0530] [1529349] [INFO] Booting worker with pid: 1529349
+[2026-03-20 01:12:30 +0530] [1528111] [INFO] Worker exiting (pid: 1528111)
+[2026-03-20 01:12:30 +0530] [1528112] [INFO] Worker exiting (pid: 1528112)
+[2026-03-20 01:12:30 +0530] [1528113] [INFO] Worker exiting (pid: 1528113)
+[2026-03-20 01:12:30 +0530] [1528114] [INFO] Worker exiting (pid: 1528114)
+[2026-03-20 01:13:17,156] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1815, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 1441, in _init_compiled
+    self._process_execute_defaults()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 2385, in _process_execute_defaults
+    param[param_key] = arg(self)
+                       ~~~^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/sql/schema.py", line 3630, in <lambda>
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+                                          ~~^^
+  File "/home/looser/nutriTracker/models.py", line 38, in <lambda>
+    createdAt = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+                                                       ~~~~~~~~~~~~^^^^^^^^^^^^^
+TypeError: tzinfo argument must be None or of a tzinfo subclass, not type 'type'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 217, in saveTargets
+    db.session.commit()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1821, in _execute_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str(statement), parameters, None, None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1815, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 1441, in _init_compiled
+    self._process_execute_defaults()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 2385, in _process_execute_defaults
+    param[param_key] = arg(self)
+                       ~~~^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/sql/schema.py", line 3630, in <lambda>
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+                                          ~~^^
+  File "/home/looser/nutriTracker/models.py", line 38, in <lambda>
+    createdAt = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+                                                       ~~~~~~~~~~~~^^^^^^^^^^^^^
+sqlalchemy.exc.StatementError: (builtins.TypeError) tzinfo argument must be None or of a tzinfo subclass, not type 'type'
+[SQL: INSERT INTO user ("googleId", email, "displayName", picture, "fullName", "dateOfBirth", gender, "heightCm", weight, "bicepSize", age, "goalType", "activityLevel", timezone, "targetCalories", "targetProtein", "targetCarbs", "targetFat", "targetFiber", "createdAt", "lastActive") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: [{'email': 'itismaurya4769@gmail.com', 'bicepSize': 9, 'weight': 47, 'picture': 'https://lh3.googleusercontent.com/a/ACg8ocL2BdfWfV0Ozk6oM6dAV26yLrBr5H ... (92 characters truncated) ... ame': 'Suprabhat Maurya', 'gender': 'Male', 'fullName': 'Suprabhat Maurya', 'dateOfBirth': None, 'activityLevel': None, 'goalType': None, 'age': None}]]
+[2026-03-20 01:13:26,660] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1815, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 1441, in _init_compiled
+    self._process_execute_defaults()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 2385, in _process_execute_defaults
+    param[param_key] = arg(self)
+                       ~~~^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/sql/schema.py", line 3630, in <lambda>
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+                                          ~~^^
+  File "/home/looser/nutriTracker/models.py", line 38, in <lambda>
+    createdAt = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+                                                       ~~~~~~~~~~~~^^^^^^^^^^^^^
+TypeError: tzinfo argument must be None or of a tzinfo subclass, not type 'type'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 217, in saveTargets
+    db.session.commit()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1821, in _execute_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str(statement), parameters, None, None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1815, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 1441, in _init_compiled
+    self._process_execute_defaults()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 2385, in _process_execute_defaults
+    param[param_key] = arg(self)
+                       ~~~^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/sql/schema.py", line 3630, in <lambda>
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+                                          ~~^^
+  File "/home/looser/nutriTracker/models.py", line 38, in <lambda>
+    createdAt = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+                                                       ~~~~~~~~~~~~^^^^^^^^^^^^^
+sqlalchemy.exc.StatementError: (builtins.TypeError) tzinfo argument must be None or of a tzinfo subclass, not type 'type'
+[SQL: INSERT INTO user ("googleId", email, "displayName", picture, "fullName", "dateOfBirth", gender, "heightCm", weight, "bicepSize", age, "goalType", "activityLevel", timezone, "targetCalories", "targetProtein", "targetCarbs", "targetFat", "targetFiber", "createdAt", "lastActive") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: [{'email': 'itismaurya4769@gmail.com', 'bicepSize': 9, 'weight': 47, 'picture': 'https://lh3.googleusercontent.com/a/ACg8ocL2BdfWfV0Ozk6oM6dAV26yLrBr5H ... (92 characters truncated) ... ame': 'Suprabhat Maurya', 'gender': 'Male', 'fullName': 'Suprabhat Maurya', 'dateOfBirth': None, 'activityLevel': None, 'goalType': None, 'age': None}]]
+[2026-03-20 01:13:28,777] ERROR in app: Exception on /api/saveTargets [POST]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1815, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 1441, in _init_compiled
+    self._process_execute_defaults()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 2385, in _process_execute_defaults
+    param[param_key] = arg(self)
+                       ~~~^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/sql/schema.py", line 3630, in <lambda>
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+                                          ~~^^
+  File "/home/looser/nutriTracker/models.py", line 38, in <lambda>
+    createdAt = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+                                                       ~~~~~~~~~~~~^^^^^^^^^^^^^
+TypeError: tzinfo argument must be None or of a tzinfo subclass, not type 'type'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 38, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 217, in saveTargets
+    db.session.commit()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1821, in _execute_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str(statement), parameters, None, None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/base.py", line 1815, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 1441, in _init_compiled
+    self._process_execute_defaults()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/engine/default.py", line 2385, in _process_execute_defaults
+    param[param_key] = arg(self)
+                       ~~~^^^^^^
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/sqlalchemy/sql/schema.py", line 3630, in <lambda>
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+                                          ~~^^
+  File "/home/looser/nutriTracker/models.py", line 38, in <lambda>
+    createdAt = db.Column(db.DateTime, default=lambda: datetime.now(timezoneUtc))
+                                                       ~~~~~~~~~~~~^^^^^^^^^^^^^
+sqlalchemy.exc.StatementError: (builtins.TypeError) tzinfo argument must be None or of a tzinfo subclass, not type 'type'
+[SQL: INSERT INTO user ("googleId", email, "displayName", picture, "fullName", "dateOfBirth", gender, "heightCm", weight, "bicepSize", age, "goalType", "activityLevel", timezone, "targetCalories", "targetProtein", "targetCarbs", "targetFat", "targetFiber", "createdAt", "lastActive") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: [{'email': 'itismaurya4769@gmail.com', 'bicepSize': 9, 'weight': 47, 'picture': 'https://lh3.googleusercontent.com/a/ACg8ocL2BdfWfV0Ozk6oM6dAV26yLrBr5H ... (92 characters truncated) ... ame': 'Suprabhat Maurya', 'gender': 'Male', 'fullName': 'Suprabhat Maurya', 'dateOfBirth': None, 'activityLevel': None, 'goalType': None, 'age': None}]]
+[2026-03-20 01:14:10 +0530] [1528109] [INFO] Handling signal: hup
+[2026-03-20 01:14:10 +0530] [1528109] [INFO] Hang up: Master
+[2026-03-20 01:14:10 +0530] [1529647] [INFO] Booting worker with pid: 1529647
+[2026-03-20 01:14:10 +0530] [1529648] [INFO] Booting worker with pid: 1529648
+[2026-03-20 01:14:10 +0530] [1529649] [INFO] Booting worker with pid: 1529649
+[2026-03-20 01:14:10 +0530] [1529650] [INFO] Booting worker with pid: 1529650
+[2026-03-20 01:14:10 +0530] [1529346] [INFO] Worker exiting (pid: 1529346)
+[2026-03-20 01:14:10 +0530] [1529349] [INFO] Worker exiting (pid: 1529349)
+[2026-03-20 01:14:10 +0530] [1529347] [INFO] Worker exiting (pid: 1529347)
+[2026-03-20 01:14:10 +0530] [1529348] [INFO] Worker exiting (pid: 1529348)
+[2026-03-20 01:14:53,005] ERROR in app: Exception on /api/logs/today/allLogs [GET]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 34, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 458, in today
+    todayDate = datetime.now(timezoneUtc).date()
+                ~~~~~~~~~~~~^^^^^^^^^^^^^
+TypeError: tzinfo argument must be None or of a tzinfo subclass, not type 'type'
+[2026-03-20 01:14:53,023] ERROR in app: Exception on /api/logs/today/totalNutriConsumed [GET]
+Traceback (most recent call last):
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/looser/nutriTracker/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/looser/nutriTracker/routeMeals.py", line 34, in decoratedFunction
+    return f(*args, **kwargs)
+  File "/home/looser/nutriTracker/routeMeals.py", line 431, in totalNutriConsumed
+    todayDate = datetime.now(timezoneUtc).date()
+                ~~~~~~~~~~~~^^^^^^^^^^^^^
+TypeError: tzinfo argument must be None or of a tzinfo subclass, not type 'type'
+[2026-03-20 01:16:37 +0530] [1528109] [INFO] Handling signal: hup
+[2026-03-20 01:16:37 +0530] [1528109] [INFO] Hang up: Master
+[2026-03-20 01:16:37 +0530] [1530094] [INFO] Booting worker with pid: 1530094
+[2026-03-20 01:16:37 +0530] [1530095] [INFO] Booting worker with pid: 1530095
+[2026-03-20 01:16:37 +0530] [1530096] [INFO] Booting worker with pid: 1530096
+[2026-03-20 01:16:37 +0530] [1530097] [INFO] Booting worker with pid: 1530097
+[2026-03-20 01:16:38 +0530] [1529649] [INFO] Worker exiting (pid: 1529649)
+[2026-03-20 01:16:38 +0530] [1529650] [INFO] Worker exiting (pid: 1529650)
+[2026-03-20 01:16:38 +0530] [1529647] [INFO] Worker exiting (pid: 1529647)
+[2026-03-20 01:16:38 +0530] [1529648] [INFO] Worker exiting (pid: 1529648)

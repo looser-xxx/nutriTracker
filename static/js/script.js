@@ -692,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (action2Btn) action2Btn.addEventListener('click', () => toggleModal(statsContainer, true));
     if (closeStatsBtn) closeStatsBtn.addEventListener('click', () => toggleModal(statsContainer, false));
 
-    if (navWorkout) navWorkout.addEventListener('click', () => toggleModal(workoutContainer, true));
+    // if (navWorkout) navWorkout.addEventListener('click', () => toggleModal(workoutContainer, true));
     if (closeWorkoutBtn) closeWorkoutBtn.addEventListener('click', () => toggleModal(workoutContainer, false));
 
     const action1Btn = document.getElementById('action1Btn');

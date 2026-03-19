@@ -1,0 +1,1228 @@
+:root {
+    --bg-body: #f8ecec;
+    --bg-gradient: linear-gradient(135deg, #f8ecec 0%, #ffe8e8 100%);
+    --bg-card: #ffffff;
+    --bg-secondary: #fff5f5;
+    --bg-highlight: #ffebeb;
+    --bg-highlight-2: #fff0f0;
+    --bg-input: #fdf2f2;
+    --bg-hover: #ffeeee;
+    
+    --text-primary: #333333;
+    --text-secondary: #888888;
+    --text-muted: #aaaaaa;
+    --text-inverse: #ffffff;
+    
+    --primary-color: #e74c3c;
+    --primary-dark: #c0392b;
+    
+    --border-color: #f5e1e1;
+    --border-highlight: #ffcccc;
+    
+    --shadow-color: rgba(0,0,0,0.05);
+    --shadow-card: rgba(0,0,0,0.02);
+    --shadow-strong: rgba(0,0,0,0.2);
+    
+    --accent-yellow-bg: #fffdf0;
+    --accent-yellow-border: #f1c40f;
+    --accent-yellow-text: #856404;
+    
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+    
+    --chart-cal: #e74c3c;
+    --chart-pro: #3498db;
+    --chart-carb: #f39c12;
+    --chart-fat: #333333;
+    --chart-fiber: #27ae60;
+}
+
+[data-theme="dark"] {
+    --bg-body: #1a1515;
+    --bg-gradient: linear-gradient(135deg, #1a1515 0%, #100a0a 100%);
+    --bg-card: #1e1b1b;
+    --bg-secondary: #2c2424;
+    --bg-highlight: #3b2a2a;
+    --bg-highlight-2: #332525;
+    --bg-input: #2c2424;
+    --bg-hover: #3d2d2d;
+    
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --text-muted: #666666;
+    --text-inverse: #ffffff;
+    
+    --primary-color: #ff6b6b;
+    --primary-dark: #e74c3c;
+    
+    --border-color: #3d3333;
+    --border-highlight: #523a3a;
+    
+    --shadow-color: rgba(0,0,0,0.5);
+    --shadow-card: rgba(0,0,0,0.3);
+    --shadow-strong: rgba(0,0,0,0.5);
+    
+    --accent-yellow-bg: #2c2a1e;
+    --accent-yellow-border: #d4ac0d;
+    --accent-yellow-text: #f1c40f;
+    
+    --overlay-bg: rgba(0, 0, 0, 0.8);
+}
+
+* {
+    font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden; /* Prevent body scroll, use container */
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+}
+
+/* Header */
+.appHeader {
+    background-color: var(--bg-card);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px var(--shadow-card);
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.appHeader h2 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.dateDisplay {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Main Content Area */
+.contentArea {
+    flex: 1;
+    overflow-y: auto; /* Scrollable area */
+    padding: 20px;
+    padding-bottom: 100px; /* Space for the floating button/nav */
+}
+
+/* Summary Card */
+.summaryCard {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--text-inverse);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 20px rgba(63, 125, 105, 0.2);
+    transition: transform 0.1s ease, filter 0.1s ease;
+    cursor: pointer;
+}
+
+.summaryCard:active {
+    transform: scale(0.98);
+    filter: brightness(0.9);
+}
+
+.summaryCard h3 {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+.summaryCard h1 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.summaryCard p {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* Lists */
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 5px;
+}
+
+.sectionHeader h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.viewAll {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.mealList {
+    list-style: none;
+}
+
+.mealItem {
+    background-color: var(--bg-card);
+    padding: 15px 20px;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    transition: background-color 0.1s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.mealItem:active {
+    background-color: var(--bg-hover);
+}
+
+/* Expanded state for Today's Meals list */
+.mealItem.expanded {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: 0; /* Attach to details */
+    background-color: var(--bg-highlight); /* Light green highlight */
+}
+
+.mealDetails {
+    background-color: var(--bg-secondary);
+    margin-bottom: 12px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02), 0 2px 5px rgba(0,0,0,0.03);
+    overflow: hidden;
+    
+    /* Slide Down Effect */
+    max-height: 0;
+    padding: 0 20px;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out, background-color 0.3s ease;
+}
+
+.mealDetails:not(.hiddenView) {
+    max-height: 300px; /* Large enough to fit content */
+    padding: 15px 20px;
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from { 
+        opacity: 0; 
+        transform: translateY(-10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.animate-slide-down {
+    animation: slideDown 0.4s ease-out forwards;
+}
+
+.detailGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.detailItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dLabel {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.dVal {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.mealInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.mealName {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.mealTime {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+
+.mealCals {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Bottom Navigation */
+#bottomNav {
+    background-color: var(--bg-card);
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -5px 20px var(--shadow-color);
+    position: relative; /* Needed for absolute positioning of button if desired, but flex works too */
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.navItem {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    width: 60px;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+.navItem:active {
+    transform: scale(0.9);
+    opacity: 0.7;
+}
+
+.navItem.activeNav {
+    color: var(--primary-color);
+}
+
+.navIcon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+}
+
+.navItem .label {
+    font-size: 0.75rem;
+}
+
+/* Floating Add Button */
+.addBtn {
+    position: absolute;
+    top: -30px; /* Float above the bar */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 70px;
+    height: 70px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    color: var(--text-inverse);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    box-shadow: 0 5px 15px rgba(63, 125, 105, 0.4);
+    border: none;
+    transition: transform 0.1s ease, background-color 0.1s ease, border-color 0.3s ease;
+}
+
+.addBtn:active {
+    transform: translateX(-50%) scale(0.9);
+    background-color: var(--primary-dark);
+}
+
+.addBtn .icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* Nav spacer to prevent content from being hidden by the button if we used flex spacer, 
+   but since button is absolute, we just need space in the bar visually */
+.navSpacer {
+    width: 60px; 
+}
+
+/* Modal Styles */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background-color: var(--overlay-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.hiddenView {
+    display: none;
+}
+
+.nutrientModal {
+    background-color: var(--bg-card);
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px var(--shadow-strong);
+    animation: slideUp 0.3s ease-out;
+    max-height: 90vh; /* Prevent modal from exceeding screen height */
+    overflow-y: auto; /* Allow scrolling inside the modal itself if content is too long */
+    transition: background-color 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.nutrientModal h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+}
+
+.nutrientGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.nutrientItem {
+    background-color: var(--bg-secondary);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.nutrientItem:first-child {
+    grid-column: span 2; /* Make calories span full width */
+    background-color: var(--bg-highlight);
+    border: 1px solid var(--border-highlight);
+}
+
+.nutrientLabel {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nutrientValue {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.nutrientUnit {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Mini Progress Bar for Nutrients */
+.miniTrack {
+    width: 80%; /* Width within the card */
+    height: 6px;
+    background-color: var(--border-color);
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.miniFill {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0; /* Animated by JS */
+    transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: 3px;
+}
+
+/* Specific color tweaks if desired */
+#fillCalories { background-color: var(--chart-cal); }
+#fillProtein { background-color: var(--chart-pro); }
+#fillCarbs { background-color: var(--chart-carb); }
+#fillFat { background-color: var(--chart-fat); }
+#fillFiber { background-color: var(--chart-fiber); }
+
+
+.closeBtn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.closeBtn:active {
+    background-color: var(--primary-dark);
+}
+
+/* Add Meal Form Styles */
+.formGroup {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: bold;
+}
+
+.formControl {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-input);
+    font-size: 1rem;
+    transition: border-color 0.2s, background-color 0.3s, color 0.3s;
+    appearance: none; /* Removes default styling for select on some browsers */
+    color: var(--text-primary);
+}
+
+.formControl:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: var(--bg-card);
+}
+
+/* SEARCHABLE LIST STYLES */
+.searchWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.clearSearchBtn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.foodListContainer {
+    margin-top: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: var(--bg-card);
+    box-shadow: 0 2px 5px var(--shadow-card);
+    display: none; /* Hidden by default until populated/active */
+}
+
+.foodListContainer.active {
+    display: block;
+}
+
+.foodOption {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    transition: background-color 0.1s;
+    color: var(--text-primary);
+}
+
+.foodOption:last-child {
+    border-bottom: none;
+}
+
+.foodOption:hover {
+    background-color: var(--bg-hover);
+}
+
+.foodOption.selected {
+    background-color: var(--bg-highlight);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+/* END SEARCHABLE LIST STYLES */
+
+
+/* Quantity Stepper Styles */
+.qtyStepper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stepperBtn {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    background-color: var(--bg-card);
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.stepperBtn:active {
+    transform: scale(0.9);
+    background-color: var(--bg-highlight-2);
+    border-color: var(--primary-color);
+}
+
+.stepperInput {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 80px;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+}
+/* End Stepper Styles */
+
+
+/* Nutrition Info Box */
+.nutritionLogSection {
+    background-color: var(--bg-highlight-2);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px dashed var(--primary-color);
+    transition: background-color 0.3s ease;
+}
+
+.nutritionLogSection h4 {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.miniNutrientGrid {
+    display: flex;
+    justify-content: space-around;
+}
+
+.miniItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.miniItem .lbl {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.miniItem .val {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+/* Buttons */
+.submitBtn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.submitBtn:active {
+    transform: scale(0.97);
+    background-color: var(--primary-dark);
+}
+
+.secondaryBtn {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.secondaryBtn:active {
+    background-color: var(--text-muted);
+}
+
+/* STATS VIEW STYLES */
+.statsView {
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s ease;
+}
+
+.statsHeader {
+    background-color: var(--bg-card);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px var(--shadow-card);
+    transition: background-color 0.3s ease;
+}
+
+#todaysMealsHeader, #statsHeaderId {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+#todaysMealsHeader {
+    margin-bottom: 20px;
+}
+
+.statsHeader h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.iconBtn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.statsTabs {
+    display: flex;
+    padding: 15px 20px;
+    gap: 10px;
+}
+
+.tabBtn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--border-color);
+    color: var(--text-secondary);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tabBtn.active {
+    background-color: var(--primary-color);
+    color: var(--text-inverse);
+    box-shadow: 0 4px 10px rgba(63, 125, 105, 0.3);
+}
+
+.statsContent {
+    flex: 1;
+    padding: 0 20px 20px 20px;
+}
+
+.chartSection, .avgSection, .insightsSection {
+    background-color: var(--bg-card);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px var(--shadow-card);
+    transition: background-color 0.3s ease;
+}
+
+.insightsSection {
+    background-color: var(--accent-yellow-bg); 
+    border-left: 5px solid var(--accent-yellow-border); 
+}
+
+.insightsHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.insightsHeader h4 {
+    margin: 0;
+    color: var(--accent-yellow-text);
+    font-size: 0.95rem;
+}
+
+#insightText {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    font-style: italic;
+    display: inline;
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: var(--accent-yellow-border);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.chartSection h4, .avgSection h4 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+/* Simple CSS Bar Chart Placeholder */
+.chartPlaceholder {
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.bar {
+    width: 10%;
+    background-color: var(--primary-color);
+    border-radius: 5px 5px 0 0;
+    opacity: 0.8;
+    /* Animation setup */
+    transform-origin: bottom;
+    transform: scaleY(0); /* Start hidden */
+}
+
+.bar.animate {
+    animation: growBar 0.6s ease-out forwards;
+}
+
+@keyframes growBar {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+.stats-disabled {
+    filter: grayscale(1) opacity(0.5);
+    pointer-events: none;
+    position: relative;
+    user-select: none;
+}
+
+.not-enough-data-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    z-index: 1000;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    pointer-events: auto;
+    width: 80%;
+    max-width: 300px;
+}
+
+.stats-container-relative {
+    position: relative;
+    min-height: 400px;
+}
+
+/* Goals / Progress Bars */
+.goalList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.goalItem {
+    width: 100%;
+}
+
+.goalHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.goalLabel {
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+.goalNumbers {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.goalTrack {
+    width: 100%;
+    height: 12px;
+    background-color: var(--bg-highlight);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.goalFill {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    width: 0; /* JS will animate this */
+    transition: width 1s cubic-bezier(0.22, 1, 0.36, 1); /* Smooth easing */
+}
+
+/* SIDE MENU STYLES */
+.sideMenu {
+    background-color: var(--bg-card);
+    width: 70%; /* 70% of screen width */
+    height: 100%;
+    box-shadow: -5px 0 20px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    animation: slideInRight 0.3s ease-out forwards;
+    transition: background-color 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.menuHeader {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.menuHeader h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.menuList {
+    list-style: none;
+    padding: 20px;
+}
+
+.menuList .menuItem {
+    padding: 15px 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--bg-input);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.menuList .menuItem:active {
+    background-color: var(--bg-hover);
+}
+
+.menuIcon {
+    font-size: 1.2rem;
+}
+
+/* Ensure the overlay for menu is specifically right-aligned */
+#menuOverlay {
+    justify-content: flex-end;
+}
+
+/* Toggle Switch Styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 28px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+/* Skeleton Loading */
+.skeleton {
+    background: #e1e9ee;
+    background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-card) 50%, var(--bg-secondary) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+    color: transparent !important;
+    user-select: none;
+}
+
+.skeleton-text {
+    height: 1em;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.quoteCard {
+    background-color: var(--bg-card);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px var(--shadow-card);
+    text-align: center;
+    font-style: italic;
+    color: var(--text-secondary);
+    border-left: 4px solid var(--primary-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+
+
+
+
+
+
+.detailActions {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--bg-input);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.deleteMealBtn {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.deleteMealBtn:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.deleteMealBtn svg {
+    flex-shrink: 0;
+}
+
+.confirmBox {
+    max-width: 320px !important;
+    padding: 25px !important;
+    text-align: center;
+}
+
+.confirmActions {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.confirmActions .closeBtn {
+    flex: 1;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 12px;
+}
+
+.deleteMealBtn.confirming {
+    background-color: #e74c3c !important;
+    color: white !important;
+    border-color: #c0392b !important;
+    font-weight: bold;
+}
+
+.stepperList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stepperItem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+}
+
+.stepperLabel {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-input);
+    border-radius: 12px;
+    padding: 5px;
+    gap: 5px;
+}
+
+.stepper input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 60px;
+    outline: none;
+}
+
+.stepBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    background: var(--bg-card);
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px var(--shadow-light);
+    transition: transform 0.1s;
+}
+
+.stepBtn:active {
+    transform: scale(0.9);
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.actionBtn {
+    flex: 1;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(63, 125, 105, 0.2);
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.actionBtn:active {
+    transform: scale(0.97);
+    background-color: var(--primary-dark);
+}
+
