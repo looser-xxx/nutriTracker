@@ -553,11 +553,11 @@
     },
     {
         "foodName": "Dhokla",
-        "calories": 160.0,
-        "protein": 6.5,
-        "carbs": 25.0,
-        "fat": 5.0,
-        "fiber": 1.8
+        "calories": 216.49,
+        "protein": 13.45,
+        "carbs": 30.68,
+        "fat": 5.28,
+        "fiber": 4.95
     },
     {
         "foodName": "Khichdi (Moong Dal)",
@@ -1696,6 +1696,14 @@
         "fiber": 2.31
     },
     {
+        "foodName": "Masala dosa",
+        "calories": 164.58,
+        "protein": 3.29,
+        "carbs": 19.57,
+        "fat": 7.84,
+        "fiber": 2.52
+    },
+    {
         "foodName": "Semolina dosa (Suji/Rava dosa)",
         "calories": 227.05,
         "protein": 7.3,
@@ -2406,6 +2414,14 @@
         "carbs": 8.06,
         "fat": 8.88,
         "fiber": 1.05
+    },
+    {
+        "foodName": "Chicken curry",
+        "calories": 129.22,
+        "protein": 11.79,
+        "carbs": 3.38,
+        "fat": 7.57,
+        "fiber": 1.41
     },
     {
         "foodName": "Tandoori chicken",
@@ -8734,5 +8750,4277 @@
         "carbs": 20.0,
         "fat": 22.16,
         "fiber": 18.4
+    },
+    {
+        "foodName": "Millet House Malt (Millet House)",
+        "calories": 413.0,
+        "protein": 13.0,
+        "carbs": 67.86,
+        "fat": 6.36,
+        "fiber": 8.14
+    },
+    {
+        "foodName": "Sph\u00e8re plaisir (Alte\u00f1a's Nopales, Laugar)",
+        "calories": 340.0,
+        "protein": 8.0,
+        "carbs": 80.0,
+        "fat": 0.0,
+        "fiber": 3.0
+    },
+    {
+        "foodName": "Cinnamon Toast Crunch Cereal (General Mills)",
+        "calories": 419.0,
+        "protein": 3.23,
+        "carbs": 80.65,
+        "fat": 9.68,
+        "fiber": 6.5
+    },
+    {
+        "foodName": "Sea Salted Whole Cashews (Nut Harvest)",
+        "calories": 571.428571428572,
+        "protein": 14.2857142857143,
+        "carbs": 27.1428571428571,
+        "fat": 42.8571428571429,
+        "fiber": 2.85714285714286
+    },
+    {
+        "foodName": "Froot loops marshmallows (Kellogg's)",
+        "calories": 379.0,
+        "protein": 3.4,
+        "carbs": 89.7,
+        "fat": 3.4,
+        "fiber": 6.9
+    },
+    {
+        "foodName": "APPLE CIDER VINEGAR (BRAGG)",
+        "calories": 0.0,
+        "protein": 0.0,
+        "carbs": 0.465,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "PROTEIN POWDER DRINK MIX (ISOPURE)",
+        "calories": 354.838709677419,
+        "protein": 78.125,
+        "carbs": 0.0,
+        "fat": 1.5625,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Kolhapuri Cookies (Chakote)",
+        "calories": 507.0,
+        "protein": 6.27,
+        "carbs": 67.75,
+        "fat": 23.41,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Bournville Cranberry (Cadbury)",
+        "calories": 526.0,
+        "protein": 6.1,
+        "carbs": 58.0,
+        "fat": 31.6,
+        "fiber": 6.5673
+    },
+    {
+        "foodName": "LADDU (Daily Delight)",
+        "calories": 400.0,
+        "protein": 18.571428571429,
+        "carbs": 62.857142857143,
+        "fat": 7.1428571428571,
+        "fiber": 8.5714285714286
+    },
+    {
+        "foodName": "Cheddar Cheeze Style Seasoning (URBAN PLATTER)",
+        "calories": 310.0,
+        "protein": 1.3,
+        "carbs": 70.2,
+        "fat": 1.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Almond Drink (AltCo)",
+        "calories": 67.0,
+        "protein": 1.0,
+        "carbs": 3.0,
+        "fat": 5.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Greek Yogurt Natural (Ag\u00e0pi)",
+        "calories": 76.0,
+        "protein": 9.3,
+        "carbs": 5.15,
+        "fat": 2.01,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Buffalo Curd (Sids Farm)",
+        "calories": 80.6,
+        "protein": 3.5,
+        "carbs": 5.4,
+        "fat": 5.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Sweet Lassi (Sid's Farm)",
+        "calories": 93.0,
+        "protein": 2.1,
+        "carbs": 16.4,
+        "fat": 2.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Classic Pizza Sauce (The Gourmet Jar)",
+        "calories": 91.0,
+        "protein": 3.0,
+        "carbs": 19.0,
+        "fat": 1.7,
+        "fiber": 1.4375
+    },
+    {
+        "foodName": "Kerala Banana Chips (Byond Snack)",
+        "calories": 509.89,
+        "protein": 5.03,
+        "carbs": 66.17,
+        "fat": 25.01,
+        "fiber": 6.12
+    },
+    {
+        "foodName": "Dry Cake (Pran)",
+        "calories": 420.0,
+        "protein": 0.0,
+        "carbs": 60.0,
+        "fat": 21.0,
+        "fiber": 0.4
+    },
+    {
+        "foodName": "Yaourt nature sucres U",
+        "calories": 80.0,
+        "protein": 3.0,
+        "carbs": 9.6,
+        "fat": 3.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Active Energy (Active Energy)",
+        "calories": 75.0,
+        "protein": 8.7,
+        "carbs": 9.0,
+        "fat": 0.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Barramundi (The Better Fish)",
+        "calories": 88.4955752212389,
+        "protein": 18.5840707964602,
+        "carbs": 0.0,
+        "fat": 1.32743362831858,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Skyr High Protein Plain Yoghurt (Milky Mist)",
+        "calories": 95.0,
+        "protein": 11.0,
+        "carbs": 9.5,
+        "fat": 1.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Chocolat en poudre (Munch)",
+        "calories": 115.555555555556,
+        "protein": 11.1111111111111,
+        "carbs": 11.1111111111111,
+        "fat": 3.11111111111111,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Butter Chakli (Charliee)",
+        "calories": 100.0,
+        "protein": 0.0,
+        "carbs": 10.0,
+        "fat": 7.5,
+        "fiber": 5.0
+    },
+    {
+        "foodName": "Cheeku (Cheeku)",
+        "calories": 307.95,
+        "protein": 0.82,
+        "carbs": 76.0975,
+        "fat": 0.0475,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Nutella (Nutella)",
+        "calories": 539.0,
+        "protein": 6.3,
+        "carbs": 57.5,
+        "fat": 30.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Nutella (nutella)",
+        "calories": 539.0,
+        "protein": 6.3,
+        "carbs": 57.5,
+        "fat": 30.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Fine dark chocolate (Lindt)",
+        "calories": 566.0,
+        "protein": 9.5,
+        "carbs": 35.0,
+        "fat": 41.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "HERTA TARTE EN OR P\u00e2te Feuillet\u00e9e LOT 2+1 OFFERTE (HERTA, Tarte en or)",
+        "calories": 383.1,
+        "protein": 6.5,
+        "carbs": 42.0,
+        "fat": 20.0,
+        "fiber": 1.4
+    },
+    {
+        "foodName": "Chips barbecue (Lay's, Lays)",
+        "calories": 532.0,
+        "protein": 6.4,
+        "carbs": 52.0,
+        "fat": 32.0,
+        "fiber": 4.4
+    },
+    {
+        "foodName": "Huile D'olive  Vierge extra (Cauvin)",
+        "calories": 900.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Lijjat Papad (Lijjat)",
+        "calories": 326.0,
+        "protein": 20.94,
+        "carbs": 59.02,
+        "fat": 0.56,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Torti surimi (Menu Fra\u00eecheur)",
+        "calories": 207.0,
+        "protein": 3.3,
+        "carbs": 16.0,
+        "fat": 14.0,
+        "fiber": 1.8
+    },
+    {
+        "foodName": "Frites croustillant bistro express (Findus)",
+        "calories": 204.0,
+        "protein": 3.2,
+        "carbs": 29.0,
+        "fat": 7.8,
+        "fiber": 2.4
+    },
+    {
+        "foodName": "Taboul\u00e9 \u00e0 l'orientale",
+        "calories": 204.0,
+        "protein": 4.3000001907349,
+        "carbs": 25.0,
+        "fat": 9.3000001907349,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Malai Paneer (Amul)",
+        "calories": 312.0,
+        "protein": 20.0,
+        "carbs": 4.0,
+        "fat": 24.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "CocaCola (Coca Cola)",
+        "calories": 44.0,
+        "protein": 0.0,
+        "carbs": 10.9,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Cocacola zero (Cocacola)",
+        "calories": 44.0,
+        "protein": 0.0,
+        "carbs": 10.9,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Thumbs Up 750ml pet (Thumps up)",
+        "calories": 39.0,
+        "protein": 0.0,
+        "carbs": 9.7,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Thumbs Up",
+        "calories": 42.0,
+        "protein": 0.0,
+        "carbs": 10.6,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "maaza (coco-cola)",
+        "calories": 50.0,
+        "protein": 0.0,
+        "carbs": 12.5,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Ritter Sport Noir Noisettes Enti\u00e8res (Ritter Sport)",
+        "calories": 571.701720841299,
+        "protein": 8.2,
+        "carbs": 40.0,
+        "fat": 40.0,
+        "fiber": 1.24285714285714
+    },
+    {
+        "foodName": "Roasted Chana with skin (Schani)",
+        "calories": 210.0,
+        "protein": 14.0,
+        "carbs": 34.0,
+        "fat": 2.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Monster Energy Drink 350ml (Monster)",
+        "calories": 47.7142857142857,
+        "protein": 0.0,
+        "carbs": 12.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Monster Energy Ultra (Monster)",
+        "calories": 2.57142857142857,
+        "protein": 0.0,
+        "carbs": 1.37142857142857,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Sweet Chilli Supergrain Puffs (Klaw)",
+        "calories": 514.0,
+        "protein": 18.0,
+        "carbs": 52.0,
+        "fat": 26.0,
+        "fiber": 5.0
+    },
+    {
+        "foodName": "Wild Pacific Red Salmon (John West)",
+        "calories": 151.0,
+        "protein": 20.4,
+        "carbs": 0.0,
+        "fat": 7.8,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "FOOD (Princes)",
+        "calories": 217.0,
+        "protein": 19.7,
+        "carbs": 0.1,
+        "fat": 21.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Custard powder (Bird's)",
+        "calories": 82.9268292682927,
+        "protein": 3.10975609756098,
+        "carbs": 14.2073170731707,
+        "fat": 1.52439024390244,
+        "fiber": 0.304878048780488
+    },
+    {
+        "foodName": "Tom Yum Culinary Paste (Blue Dragon)",
+        "calories": 265.9,
+        "protein": 1.92,
+        "carbs": 22.8,
+        "fat": 18.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Butter Chicken (Cook)",
+        "calories": 128.064516129032,
+        "protein": 11.9032258064516,
+        "carbs": 6.0,
+        "fat": 5.90322580645161,
+        "fiber": 1.70967741935484
+    },
+    {
+        "foodName": "Impact Bar Fudge Brownie (MyProtein)",
+        "calories": 363.90625,
+        "protein": 31.25,
+        "carbs": 31.25,
+        "fat": 13.28125,
+        "fiber": 13.4375
+    },
+    {
+        "foodName": "Kabuto Noodles Chicken Ramen (Kabuto)",
+        "calories": 64.2,
+        "protein": 2.6,
+        "carbs": 13.1,
+        "fat": 0.0,
+        "fiber": 0.7
+    },
+    {
+        "foodName": "Creme fraiche (Delhaize)",
+        "calories": 215.0,
+        "protein": 2.3,
+        "carbs": 5.1,
+        "fat": 20.2,
+        "fiber": 0.3
+    },
+    {
+        "foodName": "Schalottes (Delhaize)",
+        "calories": 85.0,
+        "protein": 2.5,
+        "carbs": 17.0,
+        "fat": 0.1,
+        "fiber": 3.2
+    },
+    {
+        "foodName": "Royco Minutesoep X3 Groenten Supreme (Royco)",
+        "calories": 36.0,
+        "protein": 0.6,
+        "carbs": 4.4,
+        "fat": 1.6,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Passendale classic (Passendale, Savencia)",
+        "calories": 353.0,
+        "protein": 23.0,
+        "carbs": 0.0,
+        "fat": 29.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Caulier Tripel 33 CL Fles",
+        "calories": 1.0,
+        "protein": 0.01,
+        "carbs": 0.5,
+        "fat": 0.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Protein Spaghetti (Urban Platter)",
+        "calories": 336.0,
+        "protein": 21.4,
+        "carbs": 62.3,
+        "fat": 2.1,
+        "fiber": 9.1
+    },
+    {
+        "foodName": "Coca-Cola Original Taste (Coca-Cola)",
+        "calories": 42.0,
+        "protein": 0.0,
+        "carbs": 10.6,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Cocacola original taste (Coca Cola)",
+        "calories": 42.0,
+        "protein": 0.0,
+        "carbs": 10.6,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "diet coke 500ml (Coca-Cola, Diet Coke, The Coca-Cola Company, Tiffin Sandwiches)",
+        "calories": 0.4,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Maggi 2 Minute Noodles Beef 1 x 73G (Single) (Maggi)",
+        "calories": 436.0,
+        "protein": 10.1,
+        "carbs": 57.0,
+        "fat": 16.4,
+        "fiber": 3.8
+    },
+    {
+        "foodName": "Potato Chips Salted (Lay's)",
+        "calories": 527.777777777778,
+        "protein": 7.5,
+        "carbs": 47.2222222222222,
+        "fat": 35.0,
+        "fiber": 4.72222222222222
+    },
+    {
+        "foodName": "Perly (Jaouda)",
+        "calories": 97.0,
+        "protein": 8.0,
+        "carbs": 9.4,
+        "fat": 3.0,
+        "fiber": 1.247
+    },
+    {
+        "foodName": "Peanut Butter Creamy (GOODY)",
+        "calories": 574.8,
+        "protein": 20.304,
+        "carbs": 19.104,
+        "fat": 44.838,
+        "fiber": 6.956
+    },
+    {
+        "foodName": "Emirates Dates (Date Crown)",
+        "calories": 325.0,
+        "protein": 1.81,
+        "carbs": 76.0,
+        "fat": 0.4,
+        "fiber": 6.8
+    },
+    {
+        "foodName": "Hersheys syrup indulgent caramel flavor",
+        "calories": 291.0,
+        "protein": 2.1,
+        "carbs": 70.2,
+        "fat": 0.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Cantucci Toscani - Fine food (Fine Food)",
+        "calories": 471.0,
+        "protein": 12.0,
+        "carbs": 64.0,
+        "fat": 18.0,
+        "fiber": 3.0
+    },
+    {
+        "foodName": "Dairy Milk Silk Oreo (Mondelez International)",
+        "calories": 563.0,
+        "protein": 6.0,
+        "carbs": 56.9,
+        "fat": 34.8,
+        "fiber": 2.335
+    },
+    {
+        "foodName": "Dairy Milk Mini Treats (Cadbury)",
+        "calories": 532.0,
+        "protein": 7.8,
+        "carbs": 60.4,
+        "fat": 29.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Use By (Cadbury)",
+        "calories": 483.0,
+        "protein": 5.2,
+        "carbs": 71.9,
+        "fat": 19.6,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Oreo choco (Cadbuary)",
+        "calories": 0.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dairy Milk Silk Bubbly Chocolate (Cadbury)",
+        "calories": 545.0,
+        "protein": 7.5,
+        "carbs": 58.5,
+        "fat": 30.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Caramelized cookie (Lotus,Biscoff)",
+        "calories": 476.0,
+        "protein": 6.0,
+        "carbs": 73.0,
+        "fat": 18.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "5 Star Chocolate Bar (Cadbury)",
+        "calories": 444.0,
+        "protein": 3.3,
+        "carbs": 72.9,
+        "fat": 15.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dairy Milk Fruit & Nut (Cadbury)",
+        "calories": 520.0,
+        "protein": 8.4,
+        "carbs": 58.8,
+        "fat": 28.4,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Gadour Dairy milk chocolate fruit & nut (Cadbury)",
+        "calories": 520.0,
+        "protein": 8.5,
+        "carbs": 58.8,
+        "fat": 28.4,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dairy Milk Crackle (Dairy Milk)",
+        "calories": 516.0,
+        "protein": 7.7,
+        "carbs": 63.6,
+        "fat": 25.8,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Cadbury Bournville Cranberry (Cadbury)",
+        "calories": 254.563,
+        "protein": 5.69755,
+        "carbs": 37.695475,
+        "fat": 31.403525,
+        "fiber": 6.64425
+    },
+    {
+        "foodName": "Cadbury Dairy Milk Silk Roast Almond (Cadbury)",
+        "calories": 560.0,
+        "protein": 9.7,
+        "carbs": 52.7,
+        "fat": 35.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dairy Milk (Classic milk chocolate variant) (Cadbury)",
+        "calories": 531.0,
+        "protein": 7.9,
+        "carbs": 60.4,
+        "fat": 29.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "dairy milk (Dairy Milk,Cadbury)",
+        "calories": 525.0,
+        "protein": 6.8,
+        "carbs": 62.6,
+        "fat": 27.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dairy Milk Chocolate (Cadbury)",
+        "calories": 532.0,
+        "protein": 7.8,
+        "carbs": 60.4,
+        "fat": 29.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Tang Instant Drink Mix (Tang)",
+        "calories": 389.0,
+        "protein": 0.0,
+        "carbs": 93.9,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Kinder Joy (Ferrero)",
+        "calories": 550.0,
+        "protein": 8.2,
+        "carbs": 56.5,
+        "fat": 32.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "nutella (Ferrero)",
+        "calories": 533.333333333333,
+        "protein": 6.3,
+        "carbs": 57.5,
+        "fat": 30.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Nutella (Ferrero)",
+        "calories": 533.0,
+        "protein": 6.3,
+        "carbs": 57.5,
+        "fat": 30.9,
+        "fiber": 3.0
+    },
+    {
+        "foodName": "\u5065\u9054\u5947\u8da3\u86cb(\u5973\u5b69\u7248) (Kinder,Ferrero)",
+        "calories": 550.0,
+        "protein": 10.0,
+        "carbs": 55.0,
+        "fat": 30.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Barbecue-Sauce (Remia)",
+        "calories": 80.0,
+        "protein": 1.0,
+        "carbs": 18.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "NONGSP \u5e2d GOURMET SPICY SPICY & CREAMY FLAVOUR Toom (Nongshim)",
+        "calories": 411.0,
+        "protein": 13.0,
+        "carbs": 59.0,
+        "fat": 13.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "SHIN RAMYUN (NONGSHIM)",
+        "calories": 424.0,
+        "protein": 8.6,
+        "carbs": 66.0,
+        "fat": 14.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mogu litchi (Sappe Public Company Limited)",
+        "calories": 53.0,
+        "protein": 0.0,
+        "carbs": 13.0,
+        "fat": 0.0,
+        "fiber": 0.5
+    },
+    {
+        "foodName": "Real Almond Milk (137 Degrees, 137 \u0e14\u0e35\u0e01\u0e23\u0e35)",
+        "calories": 33.3333333333333,
+        "protein": 1.11111111111111,
+        "carbs": 0.555555555555556,
+        "fat": 2.77777777777778,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Roasted & Salted Cashews (Wonderland)",
+        "calories": 574.0,
+        "protein": 15.0,
+        "carbs": 33.0,
+        "fat": 46.0,
+        "fiber": 3.0
+    },
+    {
+        "foodName": "Cup noodles chili chili (Nissin)",
+        "calories": 444.49,
+        "protein": 10.2,
+        "carbs": 52.3,
+        "fat": 20.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "nissin noodels (Nissin)",
+        "calories": 493.4,
+        "protein": 5.38,
+        "carbs": 66.48,
+        "fat": 22.13,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Top Ramen (Nissin)",
+        "calories": 459.01,
+        "protein": 9.25,
+        "carbs": 66.85,
+        "fat": 16.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Choco Bar Mini",
+        "calories": 291.666666666667,
+        "protein": 3.33333333333333,
+        "carbs": 27.0833333333333,
+        "fat": 20.8333333333333,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Tomato Sauce (Kissan)",
+        "calories": 133.0,
+        "protein": 1.1,
+        "carbs": 30.9,
+        "fat": 0.4,
+        "fiber": 0.6
+    },
+    {
+        "foodName": "knorr Thick tomato soup (knorr)",
+        "calories": 27.649769585253,
+        "protein": 0.43010752688172,
+        "carbs": 5.5913978494624,
+        "fat": 0.43010752688172,
+        "fiber": 0.36866359447005
+    },
+    {
+        "foodName": "Hot and sour vegetable soup (Knorr)",
+        "calories": 341.0,
+        "protein": 4.8780487804878,
+        "carbs": 72.19512195122,
+        "fat": 2.9268292682927,
+        "fiber": 3.9024390243902
+    },
+    {
+        "foodName": "knorr (Knorr)",
+        "calories": 348.0,
+        "protein": 13.0,
+        "carbs": 61.4,
+        "fat": 5.9,
+        "fiber": 1.1
+    },
+    {
+        "foodName": "knorr hong kong manchow soup (Knorr)",
+        "calories": 360.0,
+        "protein": 5.2,
+        "carbs": 71.6,
+        "fat": 6.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "International Mexican Tomato Corn Soup (Knorr)",
+        "calories": 336.0,
+        "protein": 6.2,
+        "carbs": 73.0,
+        "fat": 2.9,
+        "fiber": 4.9
+    },
+    {
+        "foodName": "Gulab Jamun (MTR)",
+        "calories": 390.0,
+        "protein": 14.0,
+        "carbs": 60.0,
+        "fat": 10.4,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Tata Soulfull Mast misal (Tata)",
+        "calories": 383.0,
+        "protein": 8.7,
+        "carbs": 68.5,
+        "fat": 8.2,
+        "fiber": 14.4
+    },
+    {
+        "foodName": "Munch Max (Nestl\u00e9)",
+        "calories": 430.0,
+        "protein": 5.6,
+        "carbs": 49.8,
+        "fat": 23.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Kitkat mini chocolate coated wafer (KitKat, Nestle nutrition)",
+        "calories": 438.0,
+        "protein": 6.4,
+        "carbs": 47.4,
+        "fat": 24.8,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "2-Minutes Noodles (Nescaf\u00e9)",
+        "calories": 384.0,
+        "protein": 8.2,
+        "carbs": 59.6,
+        "fat": 12.5,
+        "fiber": 2.85714285714286
+    },
+    {
+        "foodName": "Hot and Sweet Tomato Chilli Sauce (Maggi)",
+        "calories": 135.0,
+        "protein": 0.4,
+        "carbs": 33.8,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Kitkat Double Choco (Nestl\u00e9)",
+        "calories": 446.0,
+        "protein": 6.3,
+        "carbs": 48.1,
+        "fat": 25.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Nestle KitKat (Nestl\u00e9)",
+        "calories": 438.0,
+        "protein": 6.4,
+        "carbs": 47.4,
+        "fat": 24.8,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dahi (Nestle)",
+        "calories": 53.0,
+        "protein": 2.9,
+        "carbs": 4.1,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "KitKat Delights Hazelnut (Nestle)",
+        "calories": 418.0,
+        "protein": 4.9,
+        "carbs": 48.0,
+        "fat": 22.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Maggi 2 Minutes Noodles Masala (Maggi)",
+        "calories": 437.14285714286,
+        "protein": 10.42857170105,
+        "carbs": 63.571428571429,
+        "fat": 15.714285714286,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "maggi (Maggi)",
+        "calories": 427.0,
+        "protein": 8.0,
+        "carbs": 63.5,
+        "fat": 15.7,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "milkmaid 100+ recipes (Nestl\u00e9)",
+        "calories": 303.0,
+        "protein": 8.5,
+        "carbs": 58.4,
+        "fat": 3.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Britannia vita meri (Britannia)",
+        "calories": 449.0,
+        "protein": 7.3,
+        "carbs": 79.3,
+        "fat": 11.4,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "B. waffy choco (Britannia)",
+        "calories": 514.0,
+        "protein": 6.5,
+        "carbs": 67.2,
+        "fat": 24.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Britannia Good Day Butter Jeera Biscuits (Britannia)",
+        "calories": 506.0,
+        "protein": 6.4,
+        "carbs": 68.2,
+        "fat": 23.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Good Day",
+        "calories": 250.719897727273,
+        "protein": 5.20672818181818,
+        "carbs": 54.5485340909091,
+        "fat": 26.1106818181818,
+        "fiber": 3.59169090909091
+    },
+    {
+        "foodName": "Nutri choice Arrowroot (Britannia)",
+        "calories": 452.0,
+        "protein": 8.0,
+        "carbs": 78.0,
+        "fat": 12.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Brit bourbon 150g (sys) (Britannia)",
+        "calories": 493.5,
+        "protein": 5.0,
+        "carbs": 72.7,
+        "fat": 20.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "BRITANNIA bourbon 500g (Britannia)",
+        "calories": 493.5,
+        "protein": 5.0,
+        "carbs": 72.7,
+        "fat": 20.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Winkin cow thick Lassi classic 180ml (Britannia)",
+        "calories": 62.0,
+        "protein": 1.2,
+        "carbs": 11.6,
+        "fat": 1.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Britannia Nutrichoice Oatmeal Cookies (Britannia)",
+        "calories": 483.0,
+        "protein": 8.0,
+        "carbs": 70.0,
+        "fat": 19.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Tiger Krunch (Britannia)",
+        "calories": 487.0,
+        "protein": 6.1,
+        "carbs": 72.8,
+        "fat": 19.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Britannia Tiger Krunch Chocochips (Britannia)",
+        "calories": 487.0,
+        "protein": 6.1,
+        "carbs": 72.8,
+        "fat": 19.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Gobbles fruity fun cake (Britannia)",
+        "calories": 431.0,
+        "protein": 5.9,
+        "carbs": 57.4,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "5050 Maska Chaska (Britannia)",
+        "calories": 525.0,
+        "protein": 7.7,
+        "carbs": 63.8,
+        "fat": 26.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Maska Chaska (Britannia)",
+        "calories": 525.0,
+        "protein": 7.7,
+        "carbs": 63.8,
+        "fat": 26.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Exotic dark (Hershey's)",
+        "calories": 453.0,
+        "protein": 1.74,
+        "carbs": 80.5,
+        "fat": 13.7,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Hershey's milk shake almond flavor (Hershey's)",
+        "calories": 88.3333333333333,
+        "protein": 1.66666666666667,
+        "carbs": 16.1111111111111,
+        "fat": 1.77777777777778,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Milkshake vanilla Ice cream flavor (Hershey's)",
+        "calories": 88.3333333333333,
+        "protein": 1.66666666666667,
+        "carbs": 16.1111111111111,
+        "fat": 1.77777777777778,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "HERSHEY'S (Hershey's)",
+        "calories": 88.3333333333333,
+        "protein": 1.66666666666667,
+        "carbs": 16.1111111111111,
+        "fat": 1.77777777777778,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Coconut oil (Parachute)",
+        "calories": 900.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Parachnute 100% Pure Coconut Oil (Parachute)",
+        "calories": 900.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Masala Oats (Saffola)",
+        "calories": 340.0,
+        "protein": 9.9,
+        "carbs": 71.8,
+        "fat": 7.2,
+        "fiber": 12.9
+    },
+    {
+        "foodName": "Classic masala (saffola)",
+        "calories": 362.0,
+        "protein": 11.9,
+        "carbs": 64.1,
+        "fat": 12.1,
+        "fiber": 12.7
+    },
+    {
+        "foodName": "LOTTE PIE (Lotte)",
+        "calories": 433.0,
+        "protein": 4.0,
+        "carbs": 66.0,
+        "fat": 17.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "activ 100% Coconut water (Real)",
+        "calories": 20.0,
+        "protein": 0.0,
+        "carbs": 5.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dabur honey",
+        "calories": 320.0,
+        "protein": 0.0,
+        "carbs": 80.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Butter School Pack (Amul)",
+        "calories": 724.0,
+        "protein": 1.0,
+        "carbs": 0.0,
+        "fat": 80.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul cheese (Amul)",
+        "calories": 320.0,
+        "protein": 20.0,
+        "carbs": 0.0,
+        "fat": 28.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Pure Milk Cheese Slices (Amul)",
+        "calories": 311.0,
+        "protein": 20.0,
+        "carbs": 1.5,
+        "fat": 25.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Diced Cheese (Amul)",
+        "calories": 289.0,
+        "protein": 23.0,
+        "carbs": 2.0,
+        "fat": 21.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Ghee 1ltr (Amul)",
+        "calories": 897.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 99.7,
+        "fiber": 1.39
+    },
+    {
+        "foodName": "Amul gee (Amul)",
+        "calories": 900.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Shrikhand (Amul)",
+        "calories": 234.0,
+        "protein": 5.0,
+        "carbs": 42.0,
+        "fat": 5.0,
+        "fiber": 2.947
+    },
+    {
+        "foodName": "Amulya dairy whitener (Amulya)",
+        "calories": 125.85,
+        "protein": 2.46,
+        "carbs": 28.6925,
+        "fat": 0.1425,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Whey Shake (Amul)",
+        "calories": 383.0,
+        "protein": 74.0,
+        "carbs": 10.6,
+        "fat": 5.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Taaza 1ltr (Amul)",
+        "calories": 58.2,
+        "protein": 3.0,
+        "carbs": 4.8,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Taaza milk 500ml (Amul)",
+        "calories": 58.2,
+        "protein": 3.0,
+        "carbs": 4.8,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "slim 'n' trim Skimmed Milk (Amul)",
+        "calories": 35.0,
+        "protein": 3.5,
+        "carbs": 5.0,
+        "fat": 0.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Lassi 250 ml (Amul)",
+        "calories": 87.0,
+        "protein": 2.0,
+        "carbs": 14.0,
+        "fat": 2.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Fresh Cream (Amul)",
+        "calories": 34.8,
+        "protein": 3.28,
+        "carbs": 4.99,
+        "fat": 0.19,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul kool elaichi 180ml (Amul)",
+        "calories": 90.5555555555556,
+        "protein": 3.11111111111111,
+        "carbs": 12.5,
+        "fat": 3.11111111111111,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Protein Lassi - Mango flavour (Amul)",
+        "calories": 60.0,
+        "protein": 6.0,
+        "carbs": 12.6,
+        "fat": 0.32,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Protein Buttermilk (Amul)",
+        "calories": 54.0,
+        "protein": 7.5,
+        "carbs": 4.0,
+        "fat": 0.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Protein Lassi - Rose Flavour (Amul)",
+        "calories": 53.5,
+        "protein": 7.5,
+        "carbs": 6.0,
+        "fat": 0.85,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Taaza Milk (Amul)",
+        "calories": 57.7777777777778,
+        "protein": 2.83333333333333,
+        "carbs": 4.77777777777778,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Duetz Raspberry (Amul)",
+        "calories": 174.0,
+        "protein": 2.2,
+        "carbs": 23.6,
+        "fat": 7.8,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Masti Dahi (Amul)",
+        "calories": 65.0,
+        "protein": 4.0,
+        "carbs": 4.6,
+        "fat": 3.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dahi (Amul)",
+        "calories": 61.5,
+        "protein": 4.0,
+        "carbs": 4.4,
+        "fat": 3.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Lassi 200ml (Amul)",
+        "calories": 88.5,
+        "protein": 2.1,
+        "carbs": 14.5,
+        "fat": 2.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Masti (Amul)",
+        "calories": 65.0,
+        "protein": 4.0,
+        "carbs": 4.6,
+        "fat": 3.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Spiced Buttermilk (Amul)",
+        "calories": 57.0,
+        "protein": 3.0,
+        "carbs": 3.6,
+        "fat": 3.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Masti Dahi (Amul)",
+        "calories": 61.5,
+        "protein": 4.0,
+        "carbs": 4.4,
+        "fat": 3.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Stirred Fruit Yogurt Strawberry (Amul)",
+        "calories": 137.0,
+        "protein": 5.5,
+        "carbs": 19.7,
+        "fat": 3.7,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Stirred Fruit Yoghurt Pineapple (Amul)",
+        "calories": 138.0,
+        "protein": 5.5,
+        "carbs": 20.0,
+        "fat": 3.7,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Lassi (Amul)",
+        "calories": 142.0,
+        "protein": 3.9,
+        "carbs": 0.0,
+        "fat": 4.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dahi Yogurt (Amul)",
+        "calories": 65.0,
+        "protein": 4.0,
+        "carbs": 4.6,
+        "fat": 3.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul High Protein (Amul)",
+        "calories": 68.0,
+        "protein": 6.3,
+        "carbs": 10.0,
+        "fat": 0.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Amul Curd (Amul)",
+        "calories": 53.0,
+        "protein": 3.0,
+        "carbs": 3.5,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Cacao Reserve Belgium Melt (Sos Save Our Souls)",
+        "calories": 100.7,
+        "protein": 3.5,
+        "carbs": 14.5,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "aloenliebe just zelly (Just Jelly)",
+        "calories": 345.0,
+        "protein": 0.0,
+        "carbs": 85.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "glucose (Glucovita)",
+        "calories": 360.0,
+        "protein": 0.0,
+        "carbs": 92.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Lays american onion 80gm (Lay's)",
+        "calories": 537.0,
+        "protein": 6.7,
+        "carbs": 53.0,
+        "fat": 33.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Lays India's magic masala (Lays)",
+        "calories": 537.0,
+        "protein": 6.9,
+        "carbs": 52.9,
+        "fat": 33.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Lays Spanish 50 (Lays)",
+        "calories": 525.0,
+        "protein": 6.4,
+        "carbs": 53.1,
+        "fat": 31.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Rolled Oats (Quaker)",
+        "calories": 407.0,
+        "protein": 11.8,
+        "carbs": 68.5,
+        "fat": 9.5,
+        "fiber": 10.0
+    },
+    {
+        "foodName": "Kurkure (Kurkure)",
+        "calories": 557.0,
+        "protein": 6.0,
+        "carbs": 57.7,
+        "fat": 33.7,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Chilli Chatka 20rs (Kurkure)",
+        "calories": 562.0,
+        "protein": 5.6,
+        "carbs": 55.8,
+        "fat": 35.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Flocon d'avoine pour poridg (Pepsico, Quaker)",
+        "calories": 407.0,
+        "protein": 11.8,
+        "carbs": 68.5,
+        "fat": 9.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Oats (Quaker)",
+        "calories": 407.0,
+        "protein": 11.8,
+        "carbs": 68.5,
+        "fat": 9.5,
+        "fiber": 10.0
+    },
+    {
+        "foodName": "Chilli Chatka (10)",
+        "calories": 558.0,
+        "protein": 5.6,
+        "carbs": 59.2,
+        "fat": 34.5,
+        "fiber": 12.0
+    },
+    {
+        "foodName": "Corn Flakes Original (Kellogg's)",
+        "calories": 380.0,
+        "protein": 6.6666666666667,
+        "carbs": 87.0,
+        "fat": 1.0,
+        "fiber": 2.6666666666667
+    },
+    {
+        "foodName": "Corn flakes (Kelloggs)",
+        "calories": 378.0,
+        "protein": 6.7,
+        "carbs": 86.9,
+        "fat": 1.0,
+        "fiber": 2.5
+    },
+    {
+        "foodName": "kelloggs chocos multigrain (Kellogg's)",
+        "calories": 373.0,
+        "protein": 9.0,
+        "carbs": 81.0,
+        "fat": 3.0,
+        "fiber": 7.0
+    },
+    {
+        "foodName": "chocos Fills (Kellogg's)",
+        "calories": 430.0,
+        "protein": 8.0,
+        "carbs": 71.0,
+        "fat": 14.0,
+        "fiber": 6.2
+    },
+    {
+        "foodName": "Kelloggs (kellogg's)",
+        "calories": 397.5,
+        "protein": 8.0,
+        "carbs": 80.0,
+        "fat": 6.0,
+        "fiber": 5.0
+    },
+    {
+        "foodName": "kellogs froot loops (Kellogs)",
+        "calories": 391.0,
+        "protein": 6.5,
+        "carbs": 0.0,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Kellogg's Muesli (Kellogg's)",
+        "calories": 382.0,
+        "protein": 9.3,
+        "carbs": 77.5,
+        "fat": 5.2,
+        "fiber": 6.4
+    },
+    {
+        "foodName": "Glucon-D Regular (Glucon-D)",
+        "calories": 360.0,
+        "protein": 0.0,
+        "carbs": 90.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "DoodhShakti (Nutralite)",
+        "calories": 632.0,
+        "protein": 0.5,
+        "carbs": 0.1,
+        "fat": 70.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Chana Pulao (Ashoka)",
+        "calories": 160.0,
+        "protein": 4.0,
+        "carbs": 26.4,
+        "fat": 4.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Madala Rice Popped Chips (PikNik Pops)",
+        "calories": 474.0,
+        "protein": 5.19,
+        "carbs": 58.1,
+        "fat": 24.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Malai paneer (Mother dairy)",
+        "calories": 324.0,
+        "protein": 15.5,
+        "carbs": 2.5,
+        "fat": 28.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Lassi",
+        "calories": 76.0,
+        "protein": 1.7999999523163,
+        "carbs": 13.5,
+        "fat": 1.7000000476837,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Fruit Yoghurt Mango (Mother Diary)",
+        "calories": 132.0,
+        "protein": 4.1,
+        "carbs": 18.5,
+        "fat": 4.6,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Ghee (Mother Dairy)",
+        "calories": 897.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 99.7,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Classic Curd (Mother Diary)",
+        "calories": 62.0,
+        "protein": 3.7,
+        "carbs": 5.0,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mother dairy classic dahi (Mother Dairy)",
+        "calories": 62.0,
+        "protein": 3.7,
+        "carbs": 5.0,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Classic Dahi (Mother Dairy)",
+        "calories": 62.0,
+        "protein": 3.7,
+        "carbs": 5.0,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mother Dairy Ultimate Dahi (Mother Dairy)",
+        "calories": 75.0,
+        "protein": 3.7,
+        "carbs": 5.0,
+        "fat": 4.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "CHICKEN BIRYANI MIX (suhana)",
+        "calories": 480.0,
+        "protein": 13.7,
+        "carbs": 45.0,
+        "fat": 27.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "MIXED FRUIT Jam (MALA'S)",
+        "calories": 262.2,
+        "protein": 0.21,
+        "carbs": 65.34,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Melody Chocolate (Parle)",
+        "calories": 451.0,
+        "protein": 2.5,
+        "carbs": 71.0,
+        "fat": 17.4,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Parle G biscuit (Parle)",
+        "calories": 3.4,
+        "protein": 6.9,
+        "carbs": 77.3,
+        "fat": 13.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Parle-G ROYALE (Parle)",
+        "calories": 469.0,
+        "protein": 6.4,
+        "carbs": 73.6,
+        "fat": 16.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "8901719135828",
+        "calories": 0.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 20.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Parle Hide&Seek (Hide & Seek)",
+        "calories": 499.0,
+        "protein": 4.8,
+        "carbs": 70.0,
+        "fat": 22.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "parle hide serk (Parle Platina)",
+        "calories": 521.0,
+        "protein": 5.3,
+        "carbs": 65.2,
+        "fat": 26.6,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mango bite (Parle)",
+        "calories": 391.0,
+        "protein": 0.0,
+        "carbs": 97.8,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Prabhuji khatta meetha 400g(22) (Prabhuji)",
+        "calories": 570.52,
+        "protein": 10.12,
+        "carbs": 46.08,
+        "fat": 38.4,
+        "fiber": 3.12
+    },
+    {
+        "foodName": "Multi -Millet Mix (Aashirvaad)",
+        "calories": 363.0,
+        "protein": 9.0,
+        "carbs": 76.7,
+        "fat": 4.2,
+        "fiber": 10.8
+    },
+    {
+        "foodName": "B Natural Mixed fruit 1ltr tpk (ITC Limied)",
+        "calories": 48.0,
+        "protein": 0.1,
+        "carbs": 12.36,
+        "fat": 0.0,
+        "fiber": 0.72
+    },
+    {
+        "foodName": "B Natural Orange Juice 1ltr tpk (B Natural,ITC)",
+        "calories": 32.5184475,
+        "protein": 0.1575,
+        "carbs": 7.4300395,
+        "fat": 0.0525,
+        "fiber": 0.567
+    },
+    {
+        "foodName": "Yippee tricolour pasta (Sunfeast)",
+        "calories": 346.0,
+        "protein": 10.7,
+        "carbs": 72.6,
+        "fat": 2.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mishti Doi (Aashirvaad)",
+        "calories": 175.0,
+        "protein": 4.3,
+        "carbs": 24.9,
+        "fat": 6.8,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "wai wai noodles (Wai Wai)",
+        "calories": 472.200012207031,
+        "protein": 9.0,
+        "carbs": 66.3000030517578,
+        "fat": 19.0,
+        "fiber": 3.0
+    },
+    {
+        "foodName": "Wai Wai instant noodles (Wai Wai)",
+        "calories": 495.0,
+        "protein": 10.7,
+        "carbs": 60.5,
+        "fat": 21.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Wagh Bakri tea (Wagh Bakri)",
+        "calories": 0.063,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.007,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Coca-Cola 1.25L (The Coca-Cola Company)",
+        "calories": 52.0,
+        "protein": 54.0,
+        "carbs": 0.0,
+        "fat": 44.0,
+        "fiber": 45.0
+    },
+    {
+        "foodName": "Sprite (Sprite)",
+        "calories": 49.0,
+        "protein": 0.0,
+        "carbs": 12.2,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Sprite (Sprite,Coca cola)",
+        "calories": 40.0,
+        "protein": 0.0,
+        "carbs": 10.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Maaza Original 600ml (Maaza)",
+        "calories": 63.0,
+        "protein": 0.0,
+        "carbs": 15.8,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Maaza (Coca-Cola)",
+        "calories": 60.0,
+        "protein": 0.0,
+        "carbs": 15.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Chicken masala Spice Mix (Everest)",
+        "calories": 400.0,
+        "protein": 18.0,
+        "carbs": 38.0,
+        "fat": 12.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Everest Kashmiri Lal / Red Mirch Powder (Everest)",
+        "calories": 20.0,
+        "protein": 1.0,
+        "carbs": 2.0,
+        "fat": 1.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "weikfield corn starch (Weikfield)",
+        "calories": 350.0,
+        "protein": 0.0,
+        "carbs": 87.2,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Plain Dahi (Verka)",
+        "calories": 58.0,
+        "protein": 3.7,
+        "carbs": 4.0,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dahi (Verka)",
+        "calories": 43.0,
+        "protein": 3.7,
+        "carbs": 4.0,
+        "fat": 1.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Apple Juice no added sugars+ no added preservatives",
+        "calories": 48.0,
+        "protein": 0.0,
+        "carbs": 12.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Real Masala Mixed Fruit Juice (Real)",
+        "calories": 49.0,
+        "protein": 0.0,
+        "carbs": 12.2,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Real fruit power mixed fruit 1ktr tpk",
+        "calories": 52.0,
+        "protein": 0.2,
+        "carbs": 13.4,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Sting Energy (Sting)",
+        "calories": 28.0,
+        "protein": 0.0,
+        "carbs": 7.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Unknown Product",
+        "calories": 57.0,
+        "protein": 0.0,
+        "carbs": 14.4,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Gatorade blue bolt flv 500ml (Gatorade)",
+        "calories": 1.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "nimbooz",
+        "calories": 42.0,
+        "protein": 0.0,
+        "carbs": 10.6,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Tropicana Mixed Fruit Delight 1ltr Juice (Tropicana)",
+        "calories": 49.0,
+        "protein": 0.0,
+        "carbs": 12.3,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mountain Dew (Pepsico)",
+        "calories": 49.0,
+        "protein": 0.0,
+        "carbs": 12.3,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mountain Dew (MEWATI \ud83d\udd14)",
+        "calories": 49.0,
+        "protein": 0.0,
+        "carbs": 12.3,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "slice (PEPSICO INDIA HOLDINGS PVT LTD.)",
+        "calories": 50.0,
+        "protein": 0.0,
+        "carbs": 12.5,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Sangam Curd (Sangam)",
+        "calories": 58.6,
+        "protein": 3.5,
+        "carbs": 4.4,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Enerzal Orange Flavour (Enerzal)",
+        "calories": 360.0,
+        "protein": 0.0,
+        "carbs": 90.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "galaxy milk chocolate smooth milk (mars International india pvt ltd)",
+        "calories": 539.0,
+        "protein": 6.8,
+        "carbs": 55.2,
+        "fat": 32.3,
+        "fiber": 0.36
+    },
+    {
+        "foodName": "Miniatures (Bounty)",
+        "calories": 490.0,
+        "protein": 3.9,
+        "carbs": 59.4,
+        "fat": 25.8,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Appy fizz (Parle Agro)",
+        "calories": 48.9,
+        "protein": 0.27,
+        "carbs": 10.7,
+        "fat": 0.13,
+        "fiber": 1.3
+    },
+    {
+        "foodName": "Appy Fizz (Appy Fuzz)",
+        "calories": 56.0,
+        "protein": 0.0,
+        "carbs": 14.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Smoodh Flavoured Milk (Smoodh)",
+        "calories": 81.8,
+        "protein": 2.2,
+        "carbs": 14.2,
+        "fat": 1.8,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Cheese Corn Nuggets (Godrej Yummiez)",
+        "calories": 279.54,
+        "protein": 9.86,
+        "carbs": 30.3,
+        "fat": 12.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Besan (Good Life)",
+        "calories": 330.0,
+        "protein": 21.9,
+        "carbs": 46.7,
+        "fat": 5.3,
+        "fiber": 5.45
+    },
+    {
+        "foodName": "besan (GoodLife)",
+        "calories": 330.0,
+        "protein": 21.9,
+        "carbs": 46.7,
+        "fat": 5.3,
+        "fiber": 5.45
+    },
+    {
+        "foodName": "Good Life W320 Cashew 200g (GoodLife)",
+        "calories": 616.0,
+        "protein": 17.4,
+        "carbs": 23.5,
+        "fat": 49.0,
+        "fiber": 5.7
+    },
+    {
+        "foodName": "Cavins kaju Butterscotch Milkshake 180ml (Cavin's)",
+        "calories": 108.65,
+        "protein": 3.0,
+        "carbs": 15.0,
+        "fat": 4.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Rose Lassi (Cavin's)",
+        "calories": 99.1666666666667,
+        "protein": 2.05555555555556,
+        "carbs": 18.1111111111111,
+        "fat": 2.05555555555556,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Raisins (Vedaka)",
+        "calories": 321.0,
+        "protein": 3.0,
+        "carbs": 73.2,
+        "fat": 0.9,
+        "fiber": 4.2
+    },
+    {
+        "foodName": "Refined Sunflower Oil (Dmart,Swaad)",
+        "calories": 900.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Foxtail millet (DMart)",
+        "calories": 356.09,
+        "protein": 11.0,
+        "carbs": 64.3,
+        "fat": 4.21,
+        "fiber": 8.5
+    },
+    {
+        "foodName": "Nutri Delite Crunchies (Nutri Delite)",
+        "calories": 386.0,
+        "protein": 6.6,
+        "carbs": 82.5,
+        "fat": 2.4,
+        "fiber": 7.59755729166667
+    },
+    {
+        "foodName": "Roasted Yellow Chana (Dmart Premia)",
+        "calories": 419.26,
+        "protein": 16.29,
+        "carbs": 72.19,
+        "fat": 7.26,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Gluco+ Strawberry Jelly Energy Drink (Tata)",
+        "calories": 41.0,
+        "protein": 0.0,
+        "carbs": 10.2,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Aloo Bhujia sev (Haldiram)",
+        "calories": 572.0,
+        "protein": 8.97,
+        "carbs": 46.1,
+        "fat": 37.4,
+        "fiber": 4.04
+    },
+    {
+        "foodName": "Haldirams Alu Bhujia (Haldiram's)",
+        "calories": 562.0,
+        "protein": 8.68,
+        "carbs": 46.1,
+        "fat": 38.12,
+        "fiber": 0.83
+    },
+    {
+        "foodName": "Haldiram's Aloo Bhujia (Haldiram's)",
+        "calories": 564.0,
+        "protein": 8.97,
+        "carbs": 47.71,
+        "fat": 37.48,
+        "fiber": 4.04
+    },
+    {
+        "foodName": "Haldiram's Khatta Meetha (Haldiram's)",
+        "calories": 540.0,
+        "protein": 10.0,
+        "carbs": 58.0,
+        "fat": 30.0,
+        "fiber": 4.0
+    },
+    {
+        "foodName": "salted peanuts (Haldiram's)",
+        "calories": 637.0,
+        "protein": 20.0,
+        "carbs": 21.85714,
+        "fat": 51.91429,
+        "fiber": 3.34286
+    },
+    {
+        "foodName": "Rusky (Haldiram's)",
+        "calories": 418.0,
+        "protein": 7.16,
+        "carbs": 81.86,
+        "fat": 6.93,
+        "fiber": 0.78
+    },
+    {
+        "foodName": "Thurbo DARJEELING TEA WHOLE LEAF (Goodricke)",
+        "calories": 0.063,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.007,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Baker's Loaf High Protein Bread (Bimbo,Modern)",
+        "calories": 241.64,
+        "protein": 15.19,
+        "carbs": 39.12,
+        "fat": 2.71,
+        "fiber": 6.2
+    },
+    {
+        "foodName": "Sunbake Rusk (Modern)",
+        "calories": 399.24,
+        "protein": 8.29,
+        "carbs": 69.83,
+        "fat": 9.64,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Baker's Loaf High Protein Bread (Modern,Baker's Loaf,Bimbo)",
+        "calories": 241.64,
+        "protein": 15.19,
+        "carbs": 39.12,
+        "fat": 2.71,
+        "fiber": 6.2
+    },
+    {
+        "foodName": "Whole Wheat Bread (Modern)",
+        "calories": 233.81,
+        "protein": 8.78,
+        "carbs": 43.54,
+        "fat": 2.73,
+        "fiber": 6.4
+    },
+    {
+        "foodName": "Chicken Burger Patty (Venky's)",
+        "calories": 221.9,
+        "protein": 11.0,
+        "carbs": 19.5,
+        "fat": 11.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Hatsun Curd (Hatsun)",
+        "calories": 76.0,
+        "protein": 4.0,
+        "carbs": 6.0,
+        "fat": 4.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Curd (HATSUN)",
+        "calories": 65.0,
+        "protein": 9.4,
+        "carbs": 5.1,
+        "fat": 5.4,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Hatsun Yoghurt Shake Strawberry (Hatsun)",
+        "calories": 112.571428571429,
+        "protein": 3.2,
+        "carbs": 20.5142857142857,
+        "fat": 2.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Hatsun Yoghurt Shake Mango (Hatsun)",
+        "calories": 186.0,
+        "protein": 5.3,
+        "carbs": 33.3,
+        "fat": 3.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Yogurt shake (Hatsun)",
+        "calories": 110.285714285714,
+        "protein": 3.02857153756278,
+        "carbs": 20.0,
+        "fat": 2.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Chips (Haldiram\u2019s)",
+        "calories": 546.4,
+        "protein": 7.1,
+        "carbs": 55.2,
+        "fat": 33.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Chips (Haldirams)",
+        "calories": 546.4,
+        "protein": 7.1,
+        "carbs": 55.2,
+        "fat": 33.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Aloo Bhujia (Haldiram's)",
+        "calories": 577.3,
+        "protein": 9.7,
+        "carbs": 44.1,
+        "fat": 40.1,
+        "fiber": 4.5
+    },
+    {
+        "foodName": "Namkeen (Haldiram's)",
+        "calories": 528.9,
+        "protein": 11.2,
+        "carbs": 57.8,
+        "fat": 28.1,
+        "fiber": 7.6
+    },
+    {
+        "foodName": "Jonson falari mix",
+        "calories": 600.0,
+        "protein": 6.66666666666667,
+        "carbs": 46.6666666666667,
+        "fat": 40.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "MilkyMist Fruit Yogurt (MilkyMist)",
+        "calories": 103.5,
+        "protein": 3.6,
+        "carbs": 15.3,
+        "fat": 3.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "milky mist yogurt peach (Milkymist)",
+        "calories": 103.5,
+        "protein": 3.6,
+        "carbs": 15.3,
+        "fat": 3.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Fruit Yogurt Blueberry (Milkymist)",
+        "calories": 103.5,
+        "protein": 3.6,
+        "carbs": 15.3,
+        "fat": 3.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Greek Yogurt (Milky Mist)",
+        "calories": 73.8,
+        "protein": 7.0,
+        "carbs": 6.5,
+        "fat": 2.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Greek yogurt (Milky Mist)",
+        "calories": 93.0,
+        "protein": 7.0,
+        "carbs": 11.3,
+        "fat": 2.2,
+        "fiber": 0.5
+    },
+    {
+        "foodName": "Greek Yoghurt (Milky Mist)",
+        "calories": 80.2,
+        "protein": 8.6,
+        "carbs": 6.5,
+        "fat": 2.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Skyr Yogurt (Milky Mist)",
+        "calories": 99.5,
+        "protein": 12.0,
+        "carbs": 9.5,
+        "fat": 1.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Farm Fresh Sahi Plain Yoghurt (Milky Mist)",
+        "calories": 61.8,
+        "protein": 3.5,
+        "carbs": 5.2,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Pro Biotic Curd (Milky Mist)",
+        "calories": 61.8,
+        "protein": 3.5,
+        "carbs": 5.2,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "MilkyMist Curd (MilkyMist)",
+        "calories": 61.0,
+        "protein": 3.5,
+        "carbs": 4.8,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Cream Cheese (Milky Mist)",
+        "calories": 334.4,
+        "protein": 7.5,
+        "carbs": 4.1,
+        "fat": 32.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Milky Mist Cheese Slice (Milky Mist)",
+        "calories": 309.0,
+        "protein": 17.0,
+        "carbs": 4.0,
+        "fat": 25.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Shrikand (Milky Mist)",
+        "calories": 260.6,
+        "protein": 6.7,
+        "carbs": 44.9,
+        "fat": 5.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Heritage Total Curd (heritage)",
+        "calories": 58.0,
+        "protein": 3.3,
+        "carbs": 4.3,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Heritage probiotic curd (Heritage)",
+        "calories": 58.0,
+        "protein": 3.3,
+        "carbs": 4.3,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Curd (Heritage)",
+        "calories": 46.3,
+        "protein": 3.3,
+        "carbs": 5.0,
+        "fat": 1.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Total Curd (Heritage)",
+        "calories": 58.0,
+        "protein": 3.3,
+        "carbs": 4.3,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Nourish+ High Protein Paneer (Heritage)",
+        "calories": 202.6,
+        "protein": 25.0,
+        "carbs": 5.4,
+        "fat": 9.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Campa Lemon (Campa Cola,Reliance Industries)",
+        "calories": 46.0,
+        "protein": 0.0,
+        "carbs": 11.5,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "PediaSure 7+ Vanilla flavour 400g Cbd (pediasure)",
+        "calories": 358.5,
+        "protein": 11.0,
+        "carbs": 77.5,
+        "fat": 0.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Ensure Diabetes Care Vanilla Delight flavour (Abbott)",
+        "calories": 435.0,
+        "protein": 20.19,
+        "carbs": 59.79,
+        "fat": 14.61,
+        "fiber": 5.19
+    },
+    {
+        "foodName": "Maiyas Moong Dal (maiyas)",
+        "calories": 476.0,
+        "protein": 20.2,
+        "carbs": 56.4,
+        "fat": 18.8,
+        "fiber": 1.0
+    },
+    {
+        "foodName": "Peanut Butter Chocolate (Atom)",
+        "calories": 609.375,
+        "protein": 25.0,
+        "carbs": 21.875,
+        "fat": 46.875,
+        "fiber": 6.25
+    },
+    {
+        "foodName": "Natural Peanut Butter, Creamy (asitis)",
+        "calories": 640.625,
+        "protein": 25.78125,
+        "carbs": 19.40625,
+        "fat": 50.9375,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Fuili Semolina Pasta (Happy Chef)",
+        "calories": 381.0,
+        "protein": 12.0,
+        "carbs": 80.0,
+        "fat": 0.65,
+        "fiber": 4.63
+    },
+    {
+        "foodName": "Goat Meat, Mince (fresho!)",
+        "calories": 134.0,
+        "protein": 21.9,
+        "carbs": 0.0,
+        "fat": 5.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Storia Tender Coconut Water (Storia)",
+        "calories": 20.0,
+        "protein": 0.1,
+        "carbs": 5.1,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Storia Pomegranate 750ml (storia)",
+        "calories": 46.0,
+        "protein": 0.0,
+        "carbs": 11.4,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dilicia Classic Curd (Dilicia)",
+        "calories": 63.0,
+        "protein": 4.0,
+        "carbs": 5.0,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Strawberry Jam (Tops)",
+        "calories": 283.0,
+        "protein": 0.22,
+        "carbs": 70.6,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Peanut butter (MYFITNESS)",
+        "calories": 206.0,
+        "protein": 25.0,
+        "carbs": 5.0,
+        "fat": 53.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Muesli+ (Yoga Bar)",
+        "calories": 417.5,
+        "protein": 13.0,
+        "carbs": 70.0,
+        "fat": 9.5,
+        "fiber": 7.5
+    },
+    {
+        "foodName": "Yoga bar 23G protein muesli + choco almond + cranberry (Yoga bar)",
+        "calories": 386.0,
+        "protein": 23.0,
+        "carbs": 53.1,
+        "fat": 10.7,
+        "fiber": 7.5
+    },
+    {
+        "foodName": "High Protein Muesli Fruits Nuts And Seeds (Yoga Bar)",
+        "calories": 383.0,
+        "protein": 23.2,
+        "carbs": 55.0,
+        "fat": 10.8,
+        "fiber": 7.0
+    },
+    {
+        "foodName": "Seeds Mix (Yoga Bar)",
+        "calories": 552.0,
+        "protein": 28.4,
+        "carbs": 21.2,
+        "fat": 42.0,
+        "fiber": 11.6
+    },
+    {
+        "foodName": "High Protein Oats (Yoga Bar)",
+        "calories": 370.0,
+        "protein": 26.0,
+        "carbs": 52.5,
+        "fat": 9.0,
+        "fiber": 12.5
+    },
+    {
+        "foodName": "PUSHTAHAR DALIA (PATANJALI)",
+        "calories": 368.0,
+        "protein": 12.87,
+        "carbs": 72.29,
+        "fat": 3.09,
+        "fiber": 4.23
+    },
+    {
+        "foodName": "Coconut Dry Fruit Gujia (Haldiram's)",
+        "calories": 521.08,
+        "protein": 5.09,
+        "carbs": 53.54,
+        "fat": 31.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Smiles (Mc Cain)",
+        "calories": 192.0,
+        "protein": 2.97,
+        "carbs": 27.58,
+        "fat": 7.73,
+        "fiber": 1.58943
+    },
+    {
+        "foodName": "Air Fryer French Fries (McCain)",
+        "calories": 149.0,
+        "protein": 2.66,
+        "carbs": 24.87,
+        "fat": 4.33,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Gowardhan Star Dahi (Gowardhan)",
+        "calories": 40.0,
+        "protein": 3.2,
+        "carbs": 5.0,
+        "fat": 0.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mother's APPALAM (Mother's Recipe)",
+        "calories": 335.0,
+        "protein": 19.0,
+        "carbs": 58.0,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "burger bun (English Oven)",
+        "calories": 274.0,
+        "protein": 8.94,
+        "carbs": 53.26,
+        "fat": 2.18,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Snickers (Mars)",
+        "calories": 481.0,
+        "protein": 7.63,
+        "carbs": 60.0,
+        "fat": 23.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Tana-bana (Bikaji)",
+        "calories": 534.0,
+        "protein": 11.0,
+        "carbs": 55.0,
+        "fat": 30.0,
+        "fiber": 8.0
+    },
+    {
+        "foodName": "Three Cheers Chocolate (Baskin Robbins)",
+        "calories": 229.384615384615,
+        "protein": 3.69230769230769,
+        "carbs": 29.2307692307692,
+        "fat": 10.7692307692308,
+        "fiber": 0.461538461538462
+    },
+    {
+        "foodName": "UNIBIC Cashew Cookies (UNIBIC)",
+        "calories": 496.0,
+        "protein": 7.5,
+        "carbs": 63.0,
+        "fat": 23.8,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Unibic oats digestive600g",
+        "calories": 484.0,
+        "protein": 8.3,
+        "carbs": 68.0,
+        "fat": 19.4,
+        "fiber": 9.2
+    },
+    {
+        "foodName": "Saras Chhach (Saras)",
+        "calories": 31.0,
+        "protein": 2.4,
+        "carbs": 2.1,
+        "fat": 1.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "RiteBite Max Protein 7 Grain Breakfast Cookie Oats & Raisins (RiteBite)",
+        "calories": 450.909090909091,
+        "protein": 18.1818181818182,
+        "carbs": 47.6363636363636,
+        "fat": 20.9090909090909,
+        "fiber": 7.27272727272727
+    },
+    {
+        "foodName": "7 Grain Breakfast Cookie Choco Almond (Max Protein)",
+        "calories": 463.333333333333,
+        "protein": 20.0,
+        "carbs": 36.8333333333333,
+        "fat": 27.1666666666667,
+        "fiber": 13.3333333333333
+    },
+    {
+        "foodName": "Max Protein - Coffee Mousse (RiteBite)",
+        "calories": 474.5,
+        "protein": 25.0,
+        "carbs": 41.0,
+        "fat": 27.5,
+        "fiber": 8.25
+    },
+    {
+        "foodName": "Cheese slices (D'lecta)",
+        "calories": 310.0,
+        "protein": 16.0,
+        "carbs": 4.0,
+        "fat": 25.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dlecta 100 % cheese (Dlecta)",
+        "calories": 282.5,
+        "protein": 24.0,
+        "carbs": 0.5,
+        "fat": 20.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Ghee (GRB)",
+        "calories": 900.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Balaji Farali Chivda (Balaji Namkeen)",
+        "calories": 589.0,
+        "protein": 15.2,
+        "carbs": 8.0,
+        "fat": 38.9,
+        "fiber": 7.6
+    },
+    {
+        "foodName": "Balaji Wafers Masala Sev Murmura (Balaji Wafers)",
+        "calories": 482.0,
+        "protein": 10.9,
+        "carbs": 53.8,
+        "fat": 23.2,
+        "fiber": 7.0
+    },
+    {
+        "foodName": "Shing Bhujiya - Nimbu Chatka (Balaji Wafers)",
+        "calories": 616.0,
+        "protein": 20.2,
+        "carbs": 28.1,
+        "fat": 44.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "wheelos masala flavour (BALAJI WAFERS)",
+        "calories": 483.99458246037,
+        "protein": 7.5,
+        "carbs": 62.6,
+        "fat": 21.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Balaji wafers (Balaji)",
+        "calories": 554.0,
+        "protein": 7.7,
+        "carbs": 53.4,
+        "fat": 32.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "CHRUNCHEM Masala Masti (Balaji)",
+        "calories": 539.0,
+        "protein": 7.4,
+        "carbs": 56.9,
+        "fat": 29.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "MMS Infant Formula (British Life Sciences)",
+        "calories": 510.7,
+        "protein": 12.5,
+        "carbs": 58.9,
+        "fat": 25.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Jeera udad papad (Ganesh)",
+        "calories": 314.0,
+        "protein": 19.9,
+        "carbs": 57.0,
+        "fat": 0.6,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "CUSTARD POWDER (BAKERS)",
+        "calories": 369.0,
+        "protein": 2.53,
+        "carbs": 89.72,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Peanut Oil (Filtered) (Gulab)",
+        "calories": 898.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Jersey Curd",
+        "calories": 60.6,
+        "protein": 3.2,
+        "carbs": 5.2,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Nutrulicious Curd (Lotus)",
+        "calories": 47.7,
+        "protein": 3.8,
+        "carbs": 5.2,
+        "fat": 1.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Yakult (Yakult)",
+        "calories": 50.0,
+        "protein": 0.8,
+        "carbs": 11.5,
+        "fat": 0.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dahi (Prabhat)",
+        "calories": 58.2,
+        "protein": 3.3,
+        "carbs": 4.5,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Malabar Parota (iD)",
+        "calories": 300.0,
+        "protein": 9.71,
+        "carbs": 36.7,
+        "fat": 14.35,
+        "fiber": 1.85
+    },
+    {
+        "foodName": "Creamy Thick Curd (ID)",
+        "calories": 65.51,
+        "protein": 3.89,
+        "carbs": 4.93,
+        "fat": 3.36,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Kulambu Chilli Masala (Aachi)",
+        "calories": 439.3,
+        "protein": 17.0,
+        "carbs": 55.7,
+        "fat": 16.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Aachi kashmiri chilli powder (Aachi)",
+        "calories": 44.3,
+        "protein": 1.87,
+        "carbs": 7.7,
+        "fat": 0.32,
+        "fiber": 1.65
+    },
+    {
+        "foodName": "Thirumala Curd (Thirumala)",
+        "calories": 55.8,
+        "protein": 3.0,
+        "carbs": 4.2,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Vijaya Curd (Vijaya)",
+        "calories": 71.7,
+        "protein": 3.1,
+        "carbs": 4.7,
+        "fat": 4.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dahi",
+        "calories": 60.0,
+        "protein": 3.6,
+        "carbs": 4.52,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Tora Tora Butterscotch Cone Icecream (Milma)",
+        "calories": 197.0,
+        "protein": 3.5,
+        "carbs": 24.0,
+        "fat": 9.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Garam Masala (Eagle)",
+        "calories": 418.7,
+        "protein": 12.23,
+        "carbs": 57.84,
+        "fat": 15.38,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "SNAPIN PIZZA MIX (SNAPIN)",
+        "calories": 71.3825892857143,
+        "protein": 2.92941964285714,
+        "carbs": 9.10178571428572,
+        "fat": 0.930803571428572,
+        "fiber": 7.28825892857143
+    },
+    {
+        "foodName": "McVities Tasties Cashew & Almond Cookies (McVities)",
+        "calories": 492.2,
+        "protein": 7.0,
+        "carbs": 68.3,
+        "fat": 21.2,
+        "fiber": 3.4
+    },
+    {
+        "foodName": "Mcvities Butter Cookie 68 GR. (McVities)",
+        "calories": 469.0,
+        "protein": 7.7,
+        "carbs": 68.9,
+        "fat": 18.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Freedom Kacchi Ghani Mustard Oil (Freedom)",
+        "calories": 884.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Banana Chips (Chipo)",
+        "calories": 530.0,
+        "protein": 2.6,
+        "carbs": 61.3,
+        "fat": 30.4,
+        "fiber": 6.2
+    },
+    {
+        "foodName": "Buttermilk (Nandini)",
+        "calories": 23.0,
+        "protein": 1.4,
+        "carbs": 1.8,
+        "fat": 1.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Ghee (Nandini)",
+        "calories": 897.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 99.7,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Slim UHT Sterilised Skimmed Milk (Nandini)",
+        "calories": 35.0,
+        "protein": 3.5,
+        "carbs": 5.1,
+        "fat": 0.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Danedar Ghee (Sonai)",
+        "calories": 898.92,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 99.88,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Natural Greek Yogurt (Epigamia)",
+        "calories": 69.4117647058823,
+        "protein": 7.64705882352941,
+        "carbs": 4.70588235294118,
+        "fat": 2.23529411764706,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Greek Yogurt Mango Flavour (Epigamia)",
+        "calories": 100.0,
+        "protein": 6.11764705882353,
+        "carbs": 14.1176470588235,
+        "fat": 1.64705882352941,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Epigamia Greek Yogurt Strawberry (epigamia)",
+        "calories": 110.66,
+        "protein": 6.25,
+        "carbs": 17.0,
+        "fat": 1.96,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Greek yogurt wild raspberry (Epigamia)",
+        "calories": 94.1176470588235,
+        "protein": 6.47058823529412,
+        "carbs": 12.9411764705882,
+        "fat": 1.88235294117647,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Greek yogurt (epigama)",
+        "calories": 94.1176470588235,
+        "protein": 6.47058823529412,
+        "carbs": 12.9411764705882,
+        "fat": 1.88235294117647,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Crunchy Cup Natural Greek Yogurt With Granola (Epigamia)",
+        "calories": 119.130434782609,
+        "protein": 7.82608695652174,
+        "carbs": 12.1739130434783,
+        "fat": 4.34782608695652,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Greek Yoghurt Zero Added Sugar Mixed Berries (Epigamia)",
+        "calories": 89.98,
+        "protein": 6.996,
+        "carbs": 11.0,
+        "fat": 2.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Protein Milkshake (Epigamia Turbo)",
+        "calories": 33.2391818181818,
+        "protein": 3.06250909090909,
+        "carbs": 4.54673181818182,
+        "fat": 0.273913636363636,
+        "fiber": 0.1475
+    },
+    {
+        "foodName": "alphonso mango protein greek yoghurt (epigamia)",
+        "calories": 70.0,
+        "protein": 10.7142857142857,
+        "carbs": 6.42857142857143,
+        "fat": 0.142857142857143,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Turbo 17g Greek Yogurt (Epigamia)",
+        "calories": 65.0,
+        "protein": 12.1428571428571,
+        "carbs": 4.0,
+        "fat": 0.0714285714285714,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "epigamia TURBO 50g protein yogurt (epigamia)",
+        "calories": 65.0,
+        "protein": 12.0,
+        "carbs": 4.0,
+        "fat": 0.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Everyday Yogurt (Epigamia)",
+        "calories": 94.6666666666667,
+        "protein": 4.0,
+        "carbs": 17.3333333333333,
+        "fat": 1.33333333333333,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Epigamia Everyday Yogurt Mango (Epigamia)",
+        "calories": 94.6666666666667,
+        "protein": 4.0,
+        "carbs": 17.3333333333333,
+        "fat": 1.33333333333333,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mishti Doi (Epigamia)",
+        "calories": 136.25,
+        "protein": 5.0,
+        "carbs": 17.5,
+        "fat": 5.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Dahi (Pragati)",
+        "calories": 65.0,
+        "protein": 3.7,
+        "carbs": 5.8,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Whole Wheat Bread (Theobroma)",
+        "calories": 206.0,
+        "protein": 6.8,
+        "carbs": 37.0,
+        "fat": 3.2,
+        "fiber": 6.1
+    },
+    {
+        "foodName": "olive hummus (wingreens)",
+        "calories": 252.257142857143,
+        "protein": 5.4,
+        "carbs": 10.1142857142857,
+        "fat": 21.1428571428571,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Chicken Breast Strips (ITC)",
+        "calories": 194.0,
+        "protein": 14.9047619047619,
+        "carbs": 14.3095238095238,
+        "fat": 8.59523809523809,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Itc master  chef (Itc)",
+        "calories": 157.0,
+        "protein": 3.5,
+        "carbs": 25.6,
+        "fat": 4.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Keya Piri Piri (Keyafood)",
+        "calories": 238.0,
+        "protein": 7.0,
+        "carbs": 49.0,
+        "fat": 6.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Kettle Studio Mature Cheddar qnd Red Onion (Kettle Studio)",
+        "calories": 564.285714285714,
+        "protein": 4.28571428571429,
+        "carbs": 62.8571428571429,
+        "fat": 30.0,
+        "fiber": 2.5
+    },
+    {
+        "foodName": "Air Fried Spicy Dill Pickle (Kettle Studio)",
+        "calories": 482.142857142857,
+        "protein": 7.14285714285714,
+        "carbs": 66.0714285714286,
+        "fat": 22.5,
+        "fiber": 3.57142857142857
+    },
+    {
+        "foodName": "Air Fried Potato Chips BBQ (Kettle)",
+        "calories": 471.428571428571,
+        "protein": 7.14285714285714,
+        "carbs": 65.0,
+        "fat": 22.1428571428571,
+        "fiber": 3.57142857142857
+    },
+    {
+        "foodName": "Proteni dar (Muscle Blaze)",
+        "calories": 422.785714285714,
+        "protein": 28.5714285714286,
+        "carbs": 39.2,
+        "fat": 19.1,
+        "fiber": 10.1
+    },
+    {
+        "foodName": "Salsa (Veeba)",
+        "calories": 138.4,
+        "protein": 1.0,
+        "carbs": 33.6,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Ketchup With Sugar (Veeba)",
+        "calories": 176.2,
+        "protein": 0.9,
+        "carbs": 43.15,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Wok Tok By Veena Instant Noodles Masala (Wok Tok By Veeba)",
+        "calories": 448.136363636364,
+        "protein": 9.51515151515152,
+        "carbs": 61.8181818181818,
+        "fat": 19.3181818181818,
+        "fiber": 5.53030303030303
+    },
+    {
+        "foodName": "Zero Maida Donut Cake (Baker's Dozen)",
+        "calories": 462.0,
+        "protein": 6.0,
+        "carbs": 57.0,
+        "fat": 23.0,
+        "fiber": 2.0
+    },
+    {
+        "foodName": "Malabar Parota (The Bakers Dozen)",
+        "calories": 335.0,
+        "protein": 10.0,
+        "carbs": 42.0,
+        "fat": 14.0,
+        "fiber": 2.0
+    },
+    {
+        "foodName": "Protein Chips (The Baker's Dozen)",
+        "calories": 431.11111,
+        "protein": 22.22222,
+        "carbs": 64.44444,
+        "fat": 8.88889,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Paper boat coconut water 200ml pet (Paper Boat)",
+        "calories": 17.9415,
+        "protein": 0.2079,
+        "carbs": 4.0452,
+        "fat": 0.1485,
+        "fiber": 0.2475
+    },
+    {
+        "foodName": "Salted Roasted Almonds (Happilo)",
+        "calories": 647.7,
+        "protein": 22.7,
+        "carbs": 19.3,
+        "fat": 53.3,
+        "fiber": 9.3
+    },
+    {
+        "foodName": "Katsu Sauce (Meishi)",
+        "calories": 120.0,
+        "protein": 0.0,
+        "carbs": 29.3333333333333,
+        "fat": 0.666666666666667,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Halkidiki Olives Greek Stuffed With Jalapenos (Kouzina)",
+        "calories": 103.0,
+        "protein": 0.8,
+        "carbs": 3.4,
+        "fat": 9.6,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Henfruit White (Henfruit Eggs)",
+        "calories": 157.02,
+        "protein": 12.98,
+        "carbs": 0.58,
+        "fat": 11.42,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "A2 Set Curd (Organic Mandya)",
+        "calories": 68.0,
+        "protein": 3.5,
+        "carbs": 4.5,
+        "fat": 4.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Bhujia (Too Yumm!)",
+        "calories": 604.0,
+        "protein": 11.3,
+        "carbs": 37.0,
+        "fat": 45.4,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Too Yumm! Namkeen - All In One (Too Yumm!)",
+        "calories": 570.0,
+        "protein": 9.0,
+        "carbs": 48.0,
+        "fat": 37.7,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Hot & Sweet (Too Yum)",
+        "calories": 548.0,
+        "protein": 8.1,
+        "carbs": 54.0,
+        "fat": 33.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Triple Tadka Chips (Too Yum)",
+        "calories": 539.0,
+        "protein": 8.9,
+        "carbs": 54.0,
+        "fat": 31.7,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "100% Soy Isolate (Nutrabox)",
+        "calories": 359.459459459459,
+        "protein": 81.0810810810811,
+        "carbs": 7.59459459459459,
+        "fat": 0.540540540540541,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Arabian Dates (Wonderland Foods)",
+        "calories": 277.0,
+        "protein": 3.0,
+        "carbs": 74.0,
+        "fat": 0.4,
+        "fiber": 8.0
+    },
+    {
+        "foodName": "Elite Beet 420 (Unived)",
+        "calories": 340.0,
+        "protein": 10.7692307692308,
+        "carbs": 73.8461538461538,
+        "fat": 0.246153846153846,
+        "fiber": 7.07692307692308
+    },
+    {
+        "foodName": "Energy Gel (Fast&Up)",
+        "calories": 102.22,
+        "protein": 0.36,
+        "carbs": 24.33,
+        "fat": 0.38,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Pork Ham (Prasuma)",
+        "calories": 147.1,
+        "protein": 21.96,
+        "carbs": 3.79,
+        "fat": 4.9,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Chunky Butter Chicken Spread (Licious)",
+        "calories": 352.0,
+        "protein": 14.8,
+        "carbs": 7.3,
+        "fat": 31.7,
+        "fiber": 1.1
+    },
+    {
+        "foodName": "Country Delight Curd (Country Delight)",
+        "calories": 63.0,
+        "protein": 3.7,
+        "carbs": 5.4,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Trail Mix (Farmley)",
+        "calories": 401.0,
+        "protein": 9.9,
+        "carbs": 54.2,
+        "fat": 16.0,
+        "fiber": 7.1
+    },
+    {
+        "foodName": "Farmley Date Bites (Farmley)",
+        "calories": 495.5,
+        "protein": 16.7,
+        "carbs": 50.5,
+        "fat": 25.2,
+        "fiber": 9.1
+    },
+    {
+        "foodName": "High Protein Eggs (EGGOZ)",
+        "calories": 151.02,
+        "protein": 13.0,
+        "carbs": 0.27,
+        "fat": 10.77,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Corn Chips (4700BC)",
+        "calories": 421.42857,
+        "protein": 7.14286,
+        "carbs": 71.42857,
+        "fat": 12.85714,
+        "fiber": 7.14286
+    },
+    {
+        "foodName": "Crunchy Corn (4700BC)",
+        "calories": 451.6,
+        "protein": 7.6,
+        "carbs": 72.1,
+        "fat": 14.8,
+        "fiber": 4.5
+    },
+    {
+        "foodName": "Cheese Popcorn (4700BC)",
+        "calories": 472.727272727273,
+        "protein": 9.54545454545454,
+        "carbs": 54.5454545454545,
+        "fat": 24.5454545454545,
+        "fiber": 4.09090909090909
+    },
+    {
+        "foodName": "Natural Peanut Butter (ALPINO)",
+        "calories": 625.0,
+        "protein": 30.0,
+        "carbs": 18.0,
+        "fat": 49.0,
+        "fiber": 6.0
+    },
+    {
+        "foodName": "Parmesan Cheese (Fiorella)",
+        "calories": 393.0,
+        "protein": 32.0,
+        "carbs": 0.0,
+        "fat": 29.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Penne Protein Pasta (Mille)",
+        "calories": 370.6,
+        "protein": 21.7,
+        "carbs": 61.1,
+        "fat": 4.3,
+        "fiber": 9.1
+    },
+    {
+        "foodName": "Mighty Puffs Cheddar Cheese (Slurrp Farm)",
+        "calories": 435.0,
+        "protein": 6.5,
+        "carbs": 60.0,
+        "fat": 18.0,
+        "fiber": 4.5
+    },
+    {
+        "foodName": "Plant Protein Coffee Hazelnut bar (Mille,Slurrp Farm)",
+        "calories": 368.421052631579,
+        "protein": 65.5263157894737,
+        "carbs": 23.1578947368421,
+        "fat": 1.31578947368421,
+        "fiber": 63.1578947368421
+    },
+    {
+        "foodName": "Impact Whey (Vannila) (Nakpro)",
+        "calories": 367.32,
+        "protein": 53.37,
+        "carbs": 32.44,
+        "fat": 2.85,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Plant Protein Powder (OWN)",
+        "calories": 360.82,
+        "protein": 72.73,
+        "carbs": 5.5,
+        "fat": 4.2,
+        "fiber": 4.98
+    },
+    {
+        "foodName": "Only What's Needed Coffee Edition (Food Pharmer)",
+        "calories": 383.823529411765,
+        "protein": 70.5882352941177,
+        "carbs": 14.9117647058824,
+        "fat": 4.64705882352941,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "High Protein Muesli (Pintola)",
+        "calories": 390.0,
+        "protein": 24.0,
+        "carbs": 56.0,
+        "fat": 8.0,
+        "fiber": 10.0
+    },
+    {
+        "foodName": "Peanut Butter Crunchy (Happy)",
+        "calories": 680.59375,
+        "protein": 25.4375,
+        "carbs": 10.03125,
+        "fat": 59.8125,
+        "fiber": 3.0625
+    },
+    {
+        "foodName": "Omani Seedless Dates (Nature's Choice)",
+        "calories": 325.0,
+        "protein": 4.4,
+        "carbs": 76.0,
+        "fat": 0.4,
+        "fiber": 7.3
+    },
+    {
+        "foodName": "Mango Lassi (Punjab Sind)",
+        "calories": 133.0,
+        "protein": 3.1,
+        "carbs": 19.8,
+        "fat": 4.6,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "High protein paneer (Punjab Sindh)",
+        "calories": 160.0,
+        "protein": 22.0,
+        "carbs": 4.5,
+        "fat": 6.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Pistachio (Bolas)",
+        "calories": 609.21,
+        "protein": 21.21,
+        "carbs": 22.62,
+        "fat": 48.21,
+        "fiber": 10.21
+    },
+    {
+        "foodName": "Prunes (Bolas)",
+        "calories": 250.0,
+        "protein": 2.5,
+        "carbs": 70.0,
+        "fat": 0.0,
+        "fiber": 7.5
+    },
+    {
+        "foodName": "Black Chia Seeds (Bolas)",
+        "calories": 486.0,
+        "protein": 16.54,
+        "carbs": 42.12,
+        "fat": 30.74,
+        "fiber": 35.9
+    },
+    {
+        "foodName": "Bolas cashews (Bolas)",
+        "calories": 570.0,
+        "protein": 18.27,
+        "carbs": 30.19,
+        "fat": 43.85,
+        "fiber": 3.3
+    },
+    {
+        "foodName": "whole wheat macaroni (yu)",
+        "calories": 330.0,
+        "protein": 12.1,
+        "carbs": 63.0,
+        "fat": 3.3,
+        "fiber": 9.0
+    },
+    {
+        "foodName": "Unsweetened Peanut Butter (The Whole Truth)",
+        "calories": 651.428571428571,
+        "protein": 25.1428571428571,
+        "carbs": 17.7142857142857,
+        "fat": 53.4285714285714,
+        "fiber": 8.57142857142857
+    },
+    {
+        "foodName": "Double Cocoa Protein Bar (The whole foods)",
+        "calories": 271.609375,
+        "protein": 14.71875,
+        "carbs": 14.9583333333333,
+        "fat": 36.7953125,
+        "fiber": 18.5234375
+    },
+    {
+        "foodName": "Protein Powder (The Whole Truth)",
+        "calories": 400.3,
+        "protein": 50.0,
+        "carbs": 35.6,
+        "fat": 6.3,
+        "fiber": 2.9
+    },
+    {
+        "foodName": "Protein Bar Almond Millet Cocoa (The Whole Truth)",
+        "calories": 512.727272727273,
+        "protein": 23.6363636363636,
+        "carbs": 40.0,
+        "fat": 28.5454545454545,
+        "fiber": 8.0
+    },
+    {
+        "foodName": "Cranberry Raisin Protein Bar (The While Truth)",
+        "calories": 489.230769230769,
+        "protein": 23.0769230769231,
+        "carbs": 41.5384615384615,
+        "fat": 25.9615384615385,
+        "fiber": 6.53846153846154
+    },
+    {
+        "foodName": "Turmeric powder (Charda Suraj)",
+        "calories": 291.0,
+        "protein": 9.68,
+        "carbs": 44.4,
+        "fat": 3.25,
+        "fiber": 22.7
+    },
+    {
+        "foodName": "Punch Farsan (Shree Mahalaxmi)",
+        "calories": 567.6,
+        "protein": 10.15,
+        "carbs": 42.2,
+        "fat": 39.8,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Peanut Chikki Bites (Sweet Kaaram Coffee)",
+        "calories": 530.0,
+        "protein": 21.3,
+        "carbs": 46.0,
+        "fat": 29.0,
+        "fiber": 4.8
+    },
+    {
+        "foodName": "High Protein Oats (Nutrabay)",
+        "calories": 427.22,
+        "protein": 30.0,
+        "carbs": 60.82,
+        "fat": 7.5,
+        "fiber": 5.9
+    },
+    {
+        "foodName": "Pea Protein Isolate Unflavoured (Nutrabay)",
+        "calories": 354.21,
+        "protein": 76.66,
+        "carbs": 8.48,
+        "fat": 1.52,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Hazelnut Mudslide Cone (Hocco)",
+        "calories": 256.0,
+        "protein": 3.33333333333333,
+        "carbs": 23.4074074074074,
+        "fat": 16.4444444444444,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Guava Chilli Medium Fat Ice Cream (Huber & Holly)",
+        "calories": 83.4,
+        "protein": 0.0,
+        "carbs": 10.0,
+        "fat": 4.2,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Nitra Isolate Protein (Big Muscles Nutrition)",
+        "calories": 408.695652173913,
+        "protein": 69.5652173913043,
+        "carbs": 19.5652173913043,
+        "fat": 6.52173913043478,
+        "fiber": 2.17391304347826
+    },
+    {
+        "foodName": "Organic Virgin Avocado Oil Spray (Pure Nutrition)",
+        "calories": 819.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 91.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Shiftlife Pea based protein powder belgian chocolate flavour (Modicare)",
+        "calories": 384.88,
+        "protein": 0.06389,
+        "carbs": 11.33,
+        "fat": 8.64,
+        "fiber": 5.56
+    },
+    {
+        "foodName": "8906188960162 (unibic)",
+        "calories": 486.0,
+        "protein": 7.1,
+        "carbs": 65.0,
+        "fat": 22.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Millet Wafer Var (Phabulous)",
+        "calories": 377.5,
+        "protein": 25.0,
+        "carbs": 17.825,
+        "fat": 23.5,
+        "fiber": 2.4
+    },
+    {
+        "foodName": "White Choco Club (Minus Thirty)",
+        "calories": 371.1375,
+        "protein": 4.3625,
+        "carbs": 31.75,
+        "fat": 25.1875,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "The Priority Whey (Exalt)",
+        "calories": 371.5,
+        "protein": 80.0,
+        "carbs": 7.1,
+        "fat": 2.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Vanilla Whey Protein Isolate (The Func. Lab)",
+        "calories": 370.285714285714,
+        "protein": 85.7142857142857,
+        "carbs": 5.42857142857143,
+        "fat": 1.14285714285714,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mukharochak chira bhaja (mukharochak)",
+        "calories": 607.0,
+        "protein": 11.0,
+        "carbs": 48.0,
+        "fat": 38.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Peri Peri Nacho Crisps (Cornitos)",
+        "calories": 478.571428571429,
+        "protein": 7.14285714285714,
+        "carbs": 67.8571428571429,
+        "fat": 21.4285714285714,
+        "fiber": 3.57142857142857
+    },
+    {
+        "foodName": "Wheat Chapati (Asal)",
+        "calories": 276.060606060606,
+        "protein": 8.48484848484848,
+        "carbs": 50.9090909090909,
+        "fat": 4.24242424242424,
+        "fiber": 19.0909090909091
+    },
+    {
+        "foodName": "Fresh Curd (Aroma)",
+        "calories": 47.0,
+        "protein": 3.0,
+        "carbs": 5.3,
+        "fat": 1.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mishti Doi (Red Cow Dairy)",
+        "calories": 155.0,
+        "protein": 4.2,
+        "carbs": 24.5,
+        "fat": 4.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "murli soyabean oil 1ltr",
+        "calories": 362.0,
+        "protein": 12.2,
+        "carbs": 74.0,
+        "fat": 1.9,
+        "fiber": 12.0
+    },
+    {
+        "foodName": "Organic Set Curd (Akshayakalpa)",
+        "calories": 71.73,
+        "protein": 3.9,
+        "carbs": 5.82,
+        "fat": 3.65,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Greek yogurt (Akshayakalpa)",
+        "calories": 92.6,
+        "protein": 6.1,
+        "carbs": 10.2,
+        "fat": 3.45,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Organic Slim Milk (Akshayakalpa)",
+        "calories": 33.9,
+        "protein": 3.3,
+        "carbs": 4.5,
+        "fat": 0.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "MARCO CRUNCHY PEANUT BUTTER (Marco)",
+        "calories": 209.0,
+        "protein": 8.0,
+        "carbs": 6.0,
+        "fat": 17.0,
+        "fiber": 1.0
+    },
+    {
+        "foodName": "Basmati Rice (Amritsar Land)",
+        "calories": 351.28,
+        "protein": 7.67,
+        "carbs": 77.8,
+        "fat": 0.84,
+        "fiber": 0.92
+    },
+    {
+        "foodName": "Yoga Bar Super Muesli 0% Added Sugar (Yoga Bar)",
+        "calories": 370.0,
+        "protein": 15.0,
+        "carbs": 60.0,
+        "fat": 10.5,
+        "fiber": 15.1
+    },
+    {
+        "foodName": "Honey Twigs (Himalayan Multi floral Honey)",
+        "calories": 325.375,
+        "protein": 0.0,
+        "carbs": 81.25,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Plain Dahi (Osam)",
+        "calories": 65.0,
+        "protein": 3.6,
+        "carbs": 5.2,
+        "fat": 3.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Soy - Coconut Curd (White Cub)",
+        "calories": 53.02,
+        "protein": 5.67,
+        "carbs": 0.85,
+        "fat": 3.02,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Ginger Garlic Paste (Kitchen Treasures)",
+        "calories": 43.17,
+        "protein": 1.923,
+        "carbs": 6.6,
+        "fat": 0.405,
+        "fiber": 2.55
+    },
+    {
+        "foodName": "Cow Milk Dahi Low Fat (SARDA Farms)",
+        "calories": 50.0,
+        "protein": 3.2,
+        "carbs": 4.75,
+        "fat": 2.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Millet Pancake (Slurrp farm)",
+        "calories": 383.200012207031,
+        "protein": 8.10000038146973,
+        "carbs": 79.6999969482422,
+        "fat": 3.59999990463257,
+        "fiber": 6.0
+    },
+    {
+        "foodName": "Amba Bhadang (AB)",
+        "calories": 553.0,
+        "protein": 8.0,
+        "carbs": 56.0,
+        "fat": 33.0,
+        "fiber": 2.22152777777778
+    },
+    {
+        "foodName": "Sour Cream (Nutoras)",
+        "calories": 492.7,
+        "protein": 2.1,
+        "carbs": 5.3,
+        "fat": 51.5,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Black Salt Roasted Makhana (Mr Makhana)",
+        "calories": 356.0,
+        "protein": 8.0,
+        "carbs": 40.0,
+        "fat": 20.0,
+        "fiber": 4.0
+    },
+    {
+        "foodName": "Hot Sauce (Habanero)",
+        "calories": 60.0,
+        "protein": 1.4,
+        "carbs": 8.7,
+        "fat": 2.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Wafer richeese (Nabati)",
+        "calories": 483.0,
+        "protein": 6.0,
+        "carbs": 71.0,
+        "fat": 20.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Zero Maida Pizza Base (The Health Factory)",
+        "calories": 239.7,
+        "protein": 13.4,
+        "carbs": 43.5142857142857,
+        "fat": 1.34285714285714,
+        "fiber": 6.38571428571429
+    },
+    {
+        "foodName": "Garlic Bread (The Health Factory)",
+        "calories": 246.22,
+        "protein": 12.72,
+        "carbs": 43.76,
+        "fat": 2.46,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Roasted muesli super seeds (The Rooted co)",
+        "calories": 488.0,
+        "protein": 13.3,
+        "carbs": 59.6,
+        "fat": 21.8,
+        "fiber": 16.4
+    },
+    {
+        "foodName": "Peanut Butter (Pintola)",
+        "calories": 639.0,
+        "protein": 30.0,
+        "carbs": 18.0,
+        "fat": 49.0,
+        "fiber": 9.0
+    },
+    {
+        "foodName": "Pintola Peanut Butter (Pintola)",
+        "calories": 605.0,
+        "protein": 26.0,
+        "carbs": 22.0,
+        "fat": 44.6,
+        "fiber": 7.2
+    },
+    {
+        "foodName": "Crunchy Granola (Fit & Flex)",
+        "calories": 457.14285714286,
+        "protein": 5.7142857142857,
+        "carbs": 76.285714285714,
+        "fat": 14.571428571429,
+        "fiber": 7.1428571428571
+    },
+    {
+        "foodName": "Bovonto (NL KALIS SPARKLING WATER)",
+        "calories": 68.0,
+        "protein": 0.0,
+        "carbs": 17.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Bovonto (Kali Mark)",
+        "calories": 44.0,
+        "protein": 0.0,
+        "carbs": 11.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "French Yogurt Blueberry (Mamie Yova)",
+        "calories": 86.7,
+        "protein": 2.9,
+        "carbs": 16.91,
+        "fat": 1.06,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "French Yogurt Strawberry (Mamie Yova)",
+        "calories": 102.7,
+        "protein": 3.0,
+        "carbs": 15.7,
+        "fat": 3.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "French Yogurt (Mamie Yova)",
+        "calories": 52.4,
+        "protein": 3.44,
+        "carbs": 6.33,
+        "fat": 1.08,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Pumpkin Seeds (Amayu)",
+        "calories": 617.5,
+        "protein": 14.9,
+        "carbs": 27.3,
+        "fat": 49.8,
+        "fiber": 16.2
+    },
+    {
+        "foodName": "Fruit Jus Pomegranate (Juicewale)",
+        "calories": 60.0,
+        "protein": 0.0,
+        "carbs": 15.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Tangy Chickpea with Chilli & Lime (IKEA)",
+        "calories": 478.45,
+        "protein": 18.56,
+        "carbs": 55.51,
+        "fat": 18.49,
+        "fiber": 7.88
+    },
+    {
+        "foodName": "Ragi Crispies (The Healthy Binge)",
+        "calories": 463.0,
+        "protein": 13.2,
+        "carbs": 60.9,
+        "fat": 18.55,
+        "fiber": 8.55
+    },
+    {
+        "foodName": "Plant Protein- Chocolate (Happy Cultures)",
+        "calories": 369.444444444444,
+        "protein": 72.7777777777778,
+        "carbs": 7.5,
+        "fat": 5.83333333333333,
+        "fiber": 3.05555555555556
+    },
+    {
+        "foodName": "Plant Protein - Strawberry (Happy Culture)",
+        "calories": 355.555555555556,
+        "protein": 67.9722222222222,
+        "carbs": 14.4444444444444,
+        "fat": 3.33333333333333,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Protein Fusilli Pasta (Shaka Harry)",
+        "calories": 362.0,
+        "protein": 16.0,
+        "carbs": 73.0,
+        "fat": 1.0,
+        "fiber": 10.0
+    },
+    {
+        "foodName": "Dark Chocolate Oats (Health Ninja)",
+        "calories": 452.0,
+        "protein": 24.0,
+        "carbs": 57.0,
+        "fat": 15.0,
+        "fiber": 11.0
+    },
+    {
+        "foodName": "Wicked Gud Noodles (Wicked Gud)",
+        "calories": 466.782608695652,
+        "protein": 10.0434782608696,
+        "carbs": 67.5942028985507,
+        "fat": 18.2753623188406,
+        "fiber": 7.63768115942029
+    },
+    {
+        "foodName": "Clear whey (Protyze)",
+        "calories": 312.5,
+        "protein": 75.0,
+        "carbs": 3.125,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Yummy Tomato Potato Chips (Chakote)",
+        "calories": 534.0,
+        "protein": 6.89,
+        "carbs": 54.21,
+        "fat": 32.46,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Belgian Dark Chocolate Guilt Free Ice Cream Tub (Go Zero)",
+        "calories": 97.0,
+        "protein": 2.7,
+        "carbs": 16.8,
+        "fat": 5.3,
+        "fiber": 3.0
+    },
+    {
+        "foodName": "Wholy Fudgy Cakes Belgian Chocolate (Wholy)",
+        "calories": 384.0,
+        "protein": 6.0,
+        "carbs": 63.4285714285714,
+        "fat": 11.7142857142857,
+        "fiber": 14.5714285714286
+    },
+    {
+        "foodName": "Whey Concentrate Unflavored (Wellbeing Nutrition)",
+        "calories": 376.901408450704,
+        "protein": 76.3380281690141,
+        "carbs": 6.47887323943662,
+        "fat": 5.07042253521127,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Shanti mustatd oil (Shanti)",
+        "calories": 900.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Plant Protein Shake (Maiva)",
+        "calories": 59.3333333333333,
+        "protein": 6.73333333333333,
+        "carbs": 4.53333333333333,
+        "fat": 1.9,
+        "fiber": 1.23333333333333
+    },
+    {
+        "foodName": "Nature's Harvest Mix (Tong Garden)",
+        "calories": 400.0,
+        "protein": 6.66666666666667,
+        "carbs": 66.6666666666667,
+        "fat": 10.0,
+        "fiber": 6.66666666666667
+    },
+    {
+        "foodName": "20g Protein Blueberry Greek Yogurt (Athena)",
+        "calories": 89.0,
+        "protein": 10.0,
+        "carbs": 4.94,
+        "fat": 3.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Peri Peri Super Bhujia (Total Snacc)",
+        "calories": 443.870967741935,
+        "protein": 19.3548387096774,
+        "carbs": 60.0,
+        "fat": 13.8709677419355,
+        "fiber": 11.9354838709677
+    },
+    {
+        "foodName": "Tofu (Mothers Nature)",
+        "calories": 91.0,
+        "protein": 16.73,
+        "carbs": 2.69,
+        "fat": 1.48,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Tiramisu Minis (Fabelle)",
+        "calories": 529.0,
+        "protein": 9.3,
+        "carbs": 56.3,
+        "fat": 30.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Yippee noodles (Sunfeast)",
+        "calories": 457.0,
+        "protein": 9.0,
+        "carbs": 64.5,
+        "fat": 19.1,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "SUPERKAKI (WHEAT FLOUR)",
+        "calories": 340.0,
+        "protein": 9.61,
+        "carbs": 68.6,
+        "fat": 1.5,
+        "fiber": 6.8
+    },
+    {
+        "foodName": "Golden Hill Curd (Golden Hill)",
+        "calories": 35.0,
+        "protein": 3.5,
+        "carbs": 5.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Mawa Cake (Awsum)",
+        "calories": 374.0,
+        "protein": 8.56,
+        "carbs": 31.86,
+        "fat": 21.53,
+        "fiber": 3.815173203125
+    },
+    {
+        "foodName": "Whey Iso Boost Chocolate (Naturaltein)",
+        "calories": 386.0,
+        "protein": 76.0,
+        "carbs": 14.01,
+        "fat": 3.6,
+        "fiber": 2.8
+    },
+    {
+        "foodName": "Pure Peanut Butter Powder (MYPB)",
+        "calories": 475.0,
+        "protein": 50.0,
+        "carbs": 31.875,
+        "fat": 16.25,
+        "fiber": 11.875
+    },
+    {
+        "foodName": "frisian flag uht coconut DELIGHT ktk 225ml (Frisian Flag)",
+        "calories": 66.6666666666667,
+        "protein": 2.22222222222222,
+        "carbs": 9.33333333333333,
+        "fat": 2.22222222222222,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Oreo Original (Vanilla) (BABYMONSTER OREO)",
+        "calories": 471.014492753623,
+        "protein": 3.6231884057971,
+        "carbs": 72.463768115942,
+        "fat": 21.7391304347826,
+        "fiber": 3.6231884057971
+    },
+    {
+        "foodName": "Mayora Malkist Chocolate Flavored Sandwich Cracker Biscuits (Mayora)",
+        "calories": 488.0,
+        "protein": 7.6,
+        "carbs": 66.4,
+        "fat": 21.3,
+        "fiber": 16.8
+    },
+    {
+        "foodName": "Choki choki (Mayora)",
+        "calories": 574.0,
+        "protein": 0.0,
+        "carbs": 58.6,
+        "fat": 36.3,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Kris Bee krunchy jagung bakar mentega bks 75gr (Calbee Wings)",
+        "calories": 466.666666666667,
+        "protein": 6.66666666666667,
+        "carbs": 80.0,
+        "fat": 10.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Red bull energy drink (Red Bull)",
+        "calories": 45.0,
+        "protein": 0.0,
+        "carbs": 11.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "Red bull sugar free (Red Bull)",
+        "calories": 2.4,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.0,
+        "fiber": 0.0
+    },
+    {
+        "foodName": "A good product for you (Open Food Facts)",
+        "calories": 239.0,
+        "protein": 1.0,
+        "carbs": 4.0,
+        "fat": 0.5,
+        "fiber": 3.0
+    },
+    {
+        "foodName": "Ghee (Durga)",
+        "calories": 898.7,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 99.78,
+        "fiber": 0.0
     }
 ]
