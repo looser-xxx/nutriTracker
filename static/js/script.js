@@ -374,7 +374,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             modal.classList.add('hiddenView');
-            if (statsContainer && modal === statsContainer) resetStatsAnimation();
+            if (statsContainer && modal === statsContainer) {
+                resetStatsAnimation();
+                const chartSection = statsContainer.querySelector('.chartSection');
+                const avgSection = statsContainer.querySelector('.avgSection');
+                const insightText = document.getElementById('insightText');
+                if (chartSection) chartSection.classList.remove('stats-disabled');
+                if (avgSection) avgSection.classList.remove('stats-disabled');
+                if (insightText) insightText.innerHTML = 'Analyzing your patterns...';
+            }
         }
     };
 
@@ -399,28 +407,61 @@ document.addEventListener('DOMContentLoaded', () => {
         resetStatsAnimation();
         
         const activeTab = document.querySelector('.tabBtn.active').getAttribute('data-tab');
-        const apiUrl = activeTab === 'monthly' ? '/api/logs/avg/30' : '/api/logs/avg/7';
-        const chartPlaceholder = document.querySelector('.chartPlaceholder');
+        const days = activeTab === 'monthly' ? 30 : 7;
+        const apiUrl = `/api/logs/avg/${days}`;
+        const availabilityUrl = `/api/logs/checkAvailability/${days}`;
+        
+        const statsModal = document.getElementById('statsContainer');
+        if (!statsModal) return;
+
+        const chartSection = statsModal.querySelector('.chartSection');
+        const avgSection = statsModal.querySelector('.avgSection');
+        const insightText = document.getElementById('insightText');
+        const chartPlaceholder = statsModal.querySelector('.chartPlaceholder');
+
+        // Reset states
+        if (chartSection) chartSection.classList.remove('stats-disabled');
+        if (avgSection) avgSection.classList.remove('stats-disabled');
+        if (insightText) insightText.innerHTML = 'Analyzing your patterns...';
 
         try {
+            // Check availability
+            const availabilityRes = await fetch(availabilityUrl);
+            const availabilityData = await availabilityRes.json();
+            console.log("Availability Debug:", availabilityData);
+
+            if (!availabilityData.available) {
+                if (chartSection) chartSection.classList.add('stats-disabled');
+                if (avgSection) avgSection.classList.add('stats-disabled');
+                
+                const logged = availabilityData.daysLogged !== undefined ? availabilityData.daysLogged : 0;
+                const required = availabilityData.requiredDays !== undefined ? availabilityData.requiredDays : days;
+                
+                const msg = `<strong>Not enough data yet.</strong><br>You have logged food for ${logged} out of the ${required} days needed to generate ${activeTab} statistics. Keep logging!`;
+                if (insightText) insightText.innerHTML = msg;
+                return;
+            }
+
             const response = await fetch(apiUrl);
             const data = await response.json();
             const avg = data.average;
             const graph = data.graphData;
 
             setTimeout(() => {
-                chartPlaceholder.innerHTML = '';
-                const maxCal = Math.max(...graph, userTargets.calories);
-                
-                graph.forEach((val) => {
-                    const bar = document.createElement('div');
-                    bar.className = 'bar';
-                    const height = (val / maxCal) * 100;
-                    bar.style.height = `${Math.max(height, 5)}%`;
-                    bar.style.width = activeTab === 'monthly' ? '2%' : '10%';
-                    chartPlaceholder.appendChild(bar);
-                    setTimeout(() => bar.classList.add('animate'), 10);
-                });
+                if (chartPlaceholder) {
+                    chartPlaceholder.innerHTML = '';
+                    const maxCal = Math.max(...graph, userTargets.calories);
+                    
+                    graph.forEach((val) => {
+                        const bar = document.createElement('div');
+                        bar.className = 'bar';
+                        const height = (val / maxCal) * 100;
+                        bar.style.height = `${Math.max(height, 5)}%`;
+                        bar.style.width = activeTab === 'monthly' ? '2%' : '10%';
+                        chartPlaceholder.appendChild(bar);
+                        setTimeout(() => bar.classList.add('animate'), 10);
+                    });
+                }
 
                 const goals = { 
                     calories: userTargets.calories, 

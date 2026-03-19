@@ -494,6 +494,23 @@ def deleteFood(id):
     return {"id": id}, 200
 
 
+@mealBp.route("/api/logs/checkAvailability/<int:days>", methods=["GET"])
+@loginRequired
+def checkAvailability(days):
+    # Count distinct dates in FoodLog for this user
+    distinctDaysCount = (
+        db.session.query(func.count(func.distinct(func.date(FoodLog.dateLogged))))
+        .filter(FoodLog.userId == session["userId"])
+        .scalar()
+    )
+    
+    return {
+        "available": distinctDaysCount >= days,
+        "daysLogged": distinctDaysCount,
+        "requiredDays": days
+    }
+
+
 @mealBp.route("/api/logs/avg/<int:days>", methods=["GET"])
 @loginRequired
 def sendAvg(days):

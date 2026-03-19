@@ -861,6 +861,36 @@ body {
     to { transform: scaleY(1); }
 }
 
+.stats-disabled {
+    filter: grayscale(1) opacity(0.5);
+    pointer-events: none;
+    position: relative;
+    user-select: none;
+}
+
+.not-enough-data-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    z-index: 1000;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    pointer-events: auto;
+    width: 80%;
+    max-width: 300px;
+}
+
+.stats-container-relative {
+    position: relative;
+    min-height: 400px;
+}
+
 /* Goals / Progress Bars */
 .goalList {
     display: flex;
