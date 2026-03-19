@@ -29,10 +29,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const workoutForm = document.getElementById('workoutForm');
 
     // Today's Meals Elements
-    const viewAllMealsBtn = document.getElementById('viewAllMealsBtn');
+    const motivationQuote = document.getElementById('motivationQuote');
     const todaysMealsContainer = document.getElementById('todaysMealsContainer');
     const closeTodaysMealsBtn = document.getElementById('closeTodaysMeals');
     const todaysMealList = document.getElementById('todaysMealList');
+
+    const quotes = [
+        "Believe you can and you're halfway there.",
+        "Your only limit is you.",
+        "Don't stop until you're proud.",
+        "Healthy is a way of life.",
+        "Everything you need is already inside you.",
+        "The only bad workout is the one that didn't happen.",
+        "Fitness is not about being better than someone else. It's about being better than you were yesterday.",
+        "Take care of your body. It's the only place you have to live.",
+        "Fuel your body, feed your soul.",
+        "Success starts with self-discipline."
+    ];
+
+    if (motivationQuote) {
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        motivationQuote.textContent = `"${randomQuote}"`;
+    }
 
 
     // Search Elements
@@ -677,7 +695,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navWorkout) navWorkout.addEventListener('click', () => toggleModal(workoutContainer, true));
     if (closeWorkoutBtn) closeWorkoutBtn.addEventListener('click', () => toggleModal(workoutContainer, false));
 
-    if (viewAllMealsBtn) viewAllMealsBtn.addEventListener('click', () => toggleModal(todaysMealsContainer, true));
     const action1Btn = document.getElementById('action1Btn');
     if (action1Btn) action1Btn.addEventListener('click', () => toggleModal(todaysMealsContainer, true));
     if (closeTodaysMealsBtn) closeTodaysMealsBtn.addEventListener('click', () => toggleModal(todaysMealsContainer, false));

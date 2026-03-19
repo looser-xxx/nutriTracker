@@ -1062,9 +1062,18 @@ input:checked + .slider:before {
     margin-bottom: 5px;
 }
 
-@keyframes loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+.quoteCard {
+    background-color: var(--bg-card);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px var(--shadow-card);
+    text-align: center;
+    font-style: italic;
+    color: var(--text-secondary);
+    border-left: 4px solid var(--primary-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 
@@ -1216,3 +1225,4 @@ input:checked + .slider:before {
     transform: scale(0.97);
     background-color: var(--primary-dark);
 }
+
