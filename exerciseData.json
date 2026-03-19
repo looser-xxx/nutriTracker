@@ -1,0 +1,219 @@
+[
+    {
+        "exerciseName": "Barbell Squat",
+        "targetMuscleGroup": "Quads",
+        "movementType": "Compound",
+        "equipmentNeeded": "Barbell",
+        "caloriesPerRep": 0.5
+    },
+    {
+        "exerciseName": "Bench Press",
+        "targetMuscleGroup": "Chest",
+        "movementType": "Compound",
+        "equipmentNeeded": "Barbell",
+        "caloriesPerRep": 0.4
+    },
+    {
+        "exerciseName": "Deadlift",
+        "targetMuscleGroup": "Back/Glutes",
+        "movementType": "Compound",
+        "equipmentNeeded": "Barbell",
+        "caloriesPerRep": 0.6
+    },
+    {
+        "exerciseName": "Overhead Press",
+        "targetMuscleGroup": "Shoulders",
+        "movementType": "Compound",
+        "equipmentNeeded": "Barbell",
+        "caloriesPerRep": 0.35
+    },
+    {
+        "exerciseName": "Pull-up",
+        "targetMuscleGroup": "Back/Biceps",
+        "movementType": "Compound",
+        "equipmentNeeded": "Bodyweight",
+        "caloriesPerRep": 0.3
+    },
+    {
+        "exerciseName": "Bicep Curl",
+        "targetMuscleGroup": "Biceps",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Dumbbells",
+        "caloriesPerRep": 0.1
+    },
+    {
+        "exerciseName": "Tricep Pushdown",
+        "targetMuscleGroup": "Triceps",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Cable",
+        "caloriesPerRep": 0.1
+    },
+    {
+        "exerciseName": "Incline Dumbbell Press",
+        "targetMuscleGroup": "Upper Chest",
+        "movementType": "Compound",
+        "equipmentNeeded": "Dumbbells",
+        "caloriesPerRep": 0.35
+    },
+    {
+        "exerciseName": "Dumbbell Flyes",
+        "targetMuscleGroup": "Chest",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Dumbbells",
+        "caloriesPerRep": 0.15
+    },
+    {
+        "exerciseName": "Push-up",
+        "targetMuscleGroup": "Chest/Triceps",
+        "movementType": "Compound",
+        "equipmentNeeded": "Bodyweight",
+        "caloriesPerRep": 0.25
+    },
+    {
+        "exerciseName": "Lat Pulldown",
+        "targetMuscleGroup": "Lats",
+        "movementType": "Compound",
+        "equipmentNeeded": "Cable",
+        "caloriesPerRep": 0.3
+    },
+    {
+        "exerciseName": "Seated Cable Row",
+        "targetMuscleGroup": "Back",
+        "movementType": "Compound",
+        "equipmentNeeded": "Cable",
+        "caloriesPerRep": 0.3
+    },
+    {
+        "exerciseName": "Bent Over Barbell Row",
+        "targetMuscleGroup": "Back",
+        "movementType": "Compound",
+        "equipmentNeeded": "Barbell",
+        "caloriesPerRep": 0.45
+    },
+    {
+        "exerciseName": "Face Pull",
+        "targetMuscleGroup": "Rear Delts",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Cable",
+        "caloriesPerRep": 0.1
+    },
+    {
+        "exerciseName": "Leg Press",
+        "targetMuscleGroup": "Quads/Glutes",
+        "movementType": "Compound",
+        "equipmentNeeded": "Machine",
+        "caloriesPerRep": 0.4
+    },
+    {
+        "exerciseName": "Walking Lunge",
+        "targetMuscleGroup": "Legs",
+        "movementType": "Compound",
+        "equipmentNeeded": "Dumbbells",
+        "caloriesPerRep": 0.3
+    },
+    {
+        "exerciseName": "Leg Extension",
+        "targetMuscleGroup": "Quads",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Machine",
+        "caloriesPerRep": 0.15
+    },
+    {
+        "exerciseName": "Seated Leg Curl",
+        "targetMuscleGroup": "Hamstrings",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Machine",
+        "caloriesPerRep": 0.15
+    },
+    {
+        "exerciseName": "Calf Raise",
+        "targetMuscleGroup": "Calves",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Machine",
+        "caloriesPerRep": 0.05
+    },
+    {
+        "exerciseName": "Lateral Raise",
+        "targetMuscleGroup": "Side Delts",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Dumbbells",
+        "caloriesPerRep": 0.1
+    },
+    {
+        "exerciseName": "Hammer Curl",
+        "targetMuscleGroup": "Biceps/Forearms",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Dumbbells",
+        "caloriesPerRep": 0.1
+    },
+    {
+        "exerciseName": "Preacher Curl",
+        "targetMuscleGroup": "Biceps",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Machine",
+        "caloriesPerRep": 0.1
+    },
+    {
+        "exerciseName": "Skull Crusher",
+        "targetMuscleGroup": "Triceps",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Barbell",
+        "caloriesPerRep": 0.15
+    },
+    {
+        "exerciseName": "Dip",
+        "targetMuscleGroup": "Triceps/Chest",
+        "movementType": "Compound",
+        "equipmentNeeded": "Bodyweight",
+        "caloriesPerRep": 0.3
+    },
+    {
+        "exerciseName": "Crunches",
+        "targetMuscleGroup": "Abs",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Bodyweight",
+        "caloriesPerRep": 0.1
+    },
+    {
+        "exerciseName": "Hanging Leg Raise",
+        "targetMuscleGroup": "Abs",
+        "movementType": "Isolation",
+        "equipmentNeeded": "Bodyweight",
+        "caloriesPerRep": 0.2
+    },
+    {
+        "exerciseName": "Burpee",
+        "targetMuscleGroup": "Full Body",
+        "movementType": "Compound",
+        "equipmentNeeded": "Bodyweight",
+        "caloriesPerRep": 1.0
+    },
+    {
+        "exerciseName": "Jumping Jack",
+        "targetMuscleGroup": "Full Body",
+        "movementType": "Compound",
+        "equipmentNeeded": "Bodyweight",
+        "caloriesPerRep": 0.2
+    },
+    {
+        "exerciseName": "Mountain Climber",
+        "targetMuscleGroup": "Core/Cardio",
+        "movementType": "Compound",
+        "equipmentNeeded": "Bodyweight",
+        "caloriesPerRep": 0.15
+    },
+    {
+        "exerciseName": "Romanian Deadlift",
+        "targetMuscleGroup": "Hamstrings",
+        "movementType": "Compound",
+        "equipmentNeeded": "Barbell",
+        "caloriesPerRep": 0.4
+    },
+    {
+        "exerciseName": "Bulgarian Split Squat",
+        "targetMuscleGroup": "Quads/Glutes",
+        "movementType": "Compound",
+        "equipmentNeeded": "Dumbbells",
+        "caloriesPerRep": 0.4
+    }
+]

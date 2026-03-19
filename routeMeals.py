@@ -1,5 +1,8 @@
 import os
-from datetime import datetime, timezone
+import requests
+import json
+from datetime import datetime, timezone as timezoneUtc
+from functools import wraps
 
 from authlib.integrations.flask_client import OAuth
 from dotenv import load_dotenv
@@ -23,35 +26,32 @@ google = oauth.register(
 
 
 def loginRequired(f):
-    from functools import wraps
-
     @wraps(f)
-    def decorated_function(*args, **kwargs):
-        # Allow access if user is logged in OR if they are in the onboarding process
-        if "user_id" in session:
-            user = User.query.get(session["user_id"])
+    def decoratedFunction(*args, **kwargs):
+        if "userId" in session:
+            user = User.query.get(session["userId"])
             if user:
                 return f(*args, **kwargs)
-            session.pop("user_id", None)
+            session.pop("userId", None)
             
-        if "temp_user" in session:
+        if "tempUser" in session:
             return f(*args, **kwargs)
             
         return redirect(url_for("mealBp.login"))
 
-    return decorated_function
+    return decoratedFunction
 
 
 @mealBp.route("/")
 @loginRequired
 def home():
-    if "user_id" not in session:
+    if "userId" not in session:
         return redirect(url_for("mealBp.onboarding"))
     
-    user = User.query.get(session["user_id"])
-    if not user.full_name:
+    user = User.query.get(session["userId"])
+    if not user.fullName:
         return redirect(url_for("mealBp.onboarding"))
-    return render_template("index.html", user_name=user.full_name.split()[0], version=datetime.now().timestamp())
+    return render_template("index.html", user_name=user.fullName.split()[0], version=datetime.now().timestamp())
 
 
 @mealBp.route("/login")
@@ -61,39 +61,38 @@ def login():
 
 @mealBp.route("/google-login")
 def googleLogin():
-    redirect_uri = url_for("mealBp.authorize", _external=True)
-    return google.authorize_redirect(redirect_uri)
+    redirectUri = url_for("mealBp.authorize", _external=True)
+    return google.authorize_redirect(redirectUri)
 
 
 @mealBp.route("/auth/callback")
 def authorize():
     token = google.authorize_access_token()
-    user_info = token.get("userinfo")
-    if not user_info:
+    userInfo = token.get("userinfo")
+    if not userInfo:
         resp = google.get("https://www.googleapis.com/oauth2/v3/userinfo")
-        user_info = resp.json()
+        userInfo = resp.json()
 
-    user = User.query.filter_by(google_id=user_info["sub"]).first()
+    user = User.query.filter_by(googleId=userInfo["sub"]).first()
     if not user:
-        # DO NOT CREATE USER YET. Store info in session for onboarding.
         session.permanent = True
-        session["temp_user"] = {
-            "google_id": user_info["sub"],
-            "email": user_info["email"],
-            "name": user_info["name"],
-            "picture": user_info.get("picture")
+        session["tempUser"] = {
+            "googleId": userInfo["sub"],
+            "email": userInfo["email"],
+            "displayName": userInfo["name"],
+            "picture": userInfo.get("picture")
         }
         return redirect(url_for("mealBp.onboarding"))
 
     session.permanent = True
-    session["user_id"] = user.id
+    session["userId"] = user.id
     return redirect(url_for("mealBp.home"))
 
 
 @mealBp.route("/api/logout")
 def logout():
-    session.pop("user_id", None)
-    session.pop("temp_user", None)
+    session.pop("userId", None)
+    session.pop("tempUser", None)
     return {"success": True, "redirect": url_for("mealBp.login")}
 
 
@@ -108,24 +107,22 @@ def onboarding():
 def saveProfile():
     data = request.get_json()
     
-    if "user_id" in session:
-        user = User.query.get(session["user_id"])
-        user.full_name = data.get("fullName")
-        user.age = data.get("age")
-        user.sex = data.get("sex")
-        user.height = data.get("height")
+    if "userId" in session:
+        user = User.query.get(session["userId"])
+        user.fullName = data.get("fullName")
+        user.gender = data.get("sex") # Map 'sex' from UI to 'gender' in DB
+        user.heightCm = data.get("height") # Map 'height' from UI to 'heightCm' in DB
         user.weight = data.get("weight")
-        user.bicep_size = data.get("bicepSize")
+        user.bicepSize = data.get("bicepSize")
+        # Handle dateOfBirth if age is provided (approximate for now or update UI later)
         db.session.commit()
-    elif "temp_user" in session:
-        # Update session data
-        session["temp_user"].update({
-            "full_name": data.get("fullName"),
-            "age": data.get("age"),
-            "sex": data.get("sex"),
-            "height": data.get("height"),
+    elif "tempUser" in session:
+        session["tempUser"].update({
+            "fullName": data.get("fullName"),
+            "gender": data.get("sex"),
+            "heightCm": data.get("height"),
             "weight": data.get("weight"),
-            "bicep_size": data.get("bicepSize")
+            "bicepSize": data.get("bicepSize")
         })
         session.modified = True
     else:
@@ -137,29 +134,29 @@ def saveProfile():
 @mealBp.route("/api/generateTargets", methods=["POST"])
 @loginRequired
 def generateTargets():
-    import requests
-    import json
-
     data = request.get_json()
     
-    if "user_id" in session:
-        user = User.query.get(session["user_id"])
-        weight, height, age = user.weight, user.height, user.age
-    elif "temp_user" in session:
-        u = session["temp_user"]
-        weight, height, age = u["weight"], u["height"], u["age"]
+    if "userId" in session:
+        user = User.query.get(session["userId"])
+        weight, height, gender = user.weight, user.heightCm, user.gender
+        # age calculation logic can be added here using dateOfBirth
+        age = 25 # Placeholder for now
+    elif "tempUser" in session:
+        u = session["tempUser"]
+        weight, height, gender = u["weight"], u["heightCm"], u["gender"]
+        age = 25 # Placeholder
     else:
         return {"error": "Not authorized"}, 401
 
     goal = data.get("goal")
     frequency = data.get("frequency")
 
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
+    apiKey = os.getenv("GEMINI_API_KEY")
+    if not apiKey:
         return {"error": "Gemini API key not configured"}, 500
 
     prompt = (
-        f"my weight is {weight} kg, My height is {height} cm and my age is {age}. "
+        f"my weight is {weight} kg, My height is {height} cm and my gender is {gender}. "
         f"I want {goal}. What should be my target calories, protein, fat, carbs and fiber. "
         f"I workout {frequency} times a week please give the output in json format. "
         f"in the json just write the nutritient name as key and amount in values. "
@@ -167,8 +164,7 @@ def generateTargets():
         f"Keys must be protein, calories, fat, carbs, fiber."
     )
 
-    # Fixed URL: using v1beta and gemini-flash-latest alias
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={apiKey}"
     headers = {'Content-Type': 'application/json'}
     payload = {
         "contents": [{
@@ -178,20 +174,14 @@ def generateTargets():
 
     try:
         response = requests.post(url, headers=headers, json=payload)
-        print(f"Gemini Response Status: {response.status_code}")
-        if response.status_code != 200:
-            print(f"Gemini Error Body: {response.text}")
         response.raise_for_status()
         result = response.json()
         
-        # Extract JSON from Gemini response
         parts = result.get('candidates', [{}])[0].get('content', {}).get('parts', [])
         if not parts:
-            print(f"Gemini unexpected result structure: {result}")
             return {"error": "Unexpected AI response format"}, 500
             
         content = parts[0]['text']
-        # Remove markdown code blocks if present
         if "```json" in content:
             content = content.split("```json")[1].split("```")[0]
         elif "```" in content:
@@ -200,7 +190,6 @@ def generateTargets():
         targets = json.loads(content.strip())
         return {"success": True, "targets": targets}
     except Exception as e:
-        print(f"Gemini API error: {e}")
         return {"error": str(e)}, 500
 
 
@@ -209,36 +198,34 @@ def generateTargets():
 def saveTargets():
     data = request.get_json()
     
-    if "user_id" in session:
-        user = User.query.get(session["user_id"])
-    elif "temp_user" in session:
-        # FINAL STEP: Create user in database now
-        u = session["temp_user"]
+    if "userId" in session:
+        user = User.query.get(session["userId"])
+    elif "tempUser" in session:
+        u = session["tempUser"]
         user = User(
-            google_id=u["google_id"],
+            googleId=u["googleId"],
             email=u["email"],
-            name=u["name"],
+            displayName=u["displayName"],
             picture=u["picture"],
-            full_name=u["full_name"],
-            age=u["age"],
-            sex=u["sex"],
-            height=u["height"],
+            fullName=u["fullName"],
+            gender=u["gender"],
+            heightCm=u["heightCm"],
             weight=u["weight"],
-            bicep_size=u["bicep_size"]
+            bicepSize=u["bicepSize"]
         )
         db.session.add(user)
         db.session.commit()
         session.permanent = True
-        session["user_id"] = user.id
-        session.pop("temp_user", None)
+        session["userId"] = user.id
+        session.pop("tempUser", None)
     else:
         return {"error": "Not authorized"}, 401
 
-    user.target_calories = data.get("calories")
-    user.target_protein = data.get("protein")
-    user.target_carbs = data.get("carbs")
-    user.target_fat = data.get("fat")
-    user.target_fiber = data.get("fiber")
+    user.targetCalories = data.get("calories")
+    user.targetProtein = data.get("protein")
+    user.targetCarbs = data.get("carbs")
+    user.targetFat = data.get("fat")
+    user.targetFiber = data.get("fiber")
 
     db.session.commit()
     return {"success": True}
@@ -247,22 +234,21 @@ def saveTargets():
 @mealBp.route("/api/profile")
 @loginRequired
 def getProfile():
-    user = User.query.get(session["user_id"])
+    user = User.query.get(session["userId"])
     return {
-        "fullName": user.full_name,
+        "fullName": user.fullName,
         "username": user.email,
         "serialNumber": f"NUT-{user.id:04d}",
-        "age": user.age,
-        "sex": user.sex,
-        "height": user.height,
+        "gender": user.gender,
+        "height": user.heightCm,
         "weight": user.weight,
-        "bicepSize": user.bicep_size,
+        "bicepSize": user.bicepSize,
         "targets": {
-            "calories": user.target_calories,
-            "protein": user.target_protein,
-            "carbs": user.target_carbs,
-            "fat": user.target_fat,
-            "fiber": user.target_fiber
+            "calories": user.targetCalories,
+            "protein": user.targetProtein,
+            "carbs": user.targetCarbs,
+            "fat": user.targetFat,
+            "fiber": user.targetFiber
         }
     }
 
@@ -270,13 +256,13 @@ def getProfile():
 @mealBp.route("/api/user/targets")
 @loginRequired
 def getUserTargets():
-    user = User.query.get(session["user_id"])
+    user = User.query.get(session["userId"])
     return {
-        "calories": user.target_calories,
-        "protein": user.target_protein,
-        "carbs": user.target_carbs,
-        "fat": user.target_fat,
-        "fiber": user.target_fiber
+        "calories": user.targetCalories,
+        "protein": user.targetProtein,
+        "carbs": user.targetCarbs,
+        "fat": user.targetFat,
+        "fiber": user.targetFiber
     }
 
 
@@ -284,16 +270,16 @@ def getUserTargets():
 @loginRequired
 def updateUserTargets():
     data = request.json
-    user = User.query.get(session["user_id"])
+    user = User.query.get(session["userId"])
     
     if not user:
         return {"error": "User not found"}, 404
         
-    user.target_calories = float(data.get("calories", user.target_calories))
-    user.target_protein = float(data.get("protein", user.target_protein))
-    user.target_carbs = float(data.get("carbs", user.target_carbs))
-    user.target_fat = float(data.get("fat", user.target_fat))
-    user.target_fiber = float(data.get("fiber", user.target_fiber))
+    user.targetCalories = float(data.get("calories", user.targetCalories))
+    user.targetProtein = float(data.get("protein", user.targetProtein))
+    user.targetCarbs = float(data.get("carbs", user.targetCarbs))
+    user.targetFat = float(data.get("fat", user.targetFat))
+    user.targetFiber = float(data.get("fiber", user.targetFiber))
     
     db.session.commit()
     return {"message": "Targets updated successfully"}, 200
@@ -303,7 +289,6 @@ def updateUserTargets():
 @loginRequired
 def getFoodDirectory():
     query = request.args.get("q", "").strip()
-    print(f"DEBUG: Directory search requested. Query: '{query}'")
     
     if not query:
         return {"count": 0, "directory": []}, 200
@@ -313,10 +298,7 @@ def getFoodDirectory():
     elif len(query) < 3:
         return {"count": 0, "directory": [], "message": "Search query too short"}, 200
     else:
-        # Match items STARTING with the query (case-insensitive)
         allFood = FoodDirectory.query.filter(FoodDirectory.foodName.ilike(f"{query}%")).all()
-    
-    print(f"DEBUG: Found {len(allFood)} results for '{query}'")
     
     output = []
     for food in allFood:
@@ -341,12 +323,10 @@ def getFoodDirectory():
 def addFood():
     data = request.get_json()
     
-    # Basic validation
     required = ["name", "calories", "protein", "carbs", "fat", "fiber"]
     if not all(k in data for k in required):
         return {"error": f"Missing required fields: {required}"}, 400
 
-    # Check if already exists
     existing = FoodDirectory.query.filter_by(foodName=data['name']).first()
     if existing:
         return {"error": "Food already exists in directory"}, 400
@@ -369,7 +349,6 @@ def addFood():
 @mealBp.route("/api/logs/logMeal", methods=["POST"])
 @loginRequired
 def logMeal():
-
     data = request.get_json()
 
     targetId = data.get("foodId")
@@ -383,7 +362,7 @@ def logMeal():
     macros = calculateSnapshotMacros(foodItem, gramsEaten)
 
     newLog = FoodLog(
-        user_id=session["user_id"],
+        userId=session["userId"],
         foodName=foodItem.foodName,
         amountInG=gramsEaten,
         calories=macros["calories"],
@@ -424,8 +403,7 @@ def calculateSnapshotMacros(foodItem, grams):
 @mealBp.route("/api/logs/nutritionConsumed/<int:id>", methods=["GET"])
 @loginRequired
 def nutritionConsumed(id):
-
-    mealData = FoodLog.query.filter_by(id=id, user_id=session["user_id"]).first()
+    mealData = FoodLog.query.filter_by(id=id, userId=session["userId"]).first()
 
     if not mealData:
         return {"error": "meal log not found"}, 404
@@ -450,7 +428,7 @@ def nutritionConsumed(id):
 @mealBp.route("/api/logs/today/totalNutriConsumed", methods=["GET"])
 @loginRequired
 def totalNutriConsumed():
-    todayDate = datetime.now(timezone.utc).date()
+    todayDate = datetime.now(timezoneUtc).date()
 
     stats = (
         db.session.query(
@@ -461,7 +439,7 @@ def totalNutriConsumed():
             func.sum(FoodLog.fiber).label("fiber"),
         )
         .filter(func.date(FoodLog.dateLogged) == todayDate)
-        .filter(FoodLog.user_id == session["user_id"])
+        .filter(FoodLog.userId == session["userId"])
         .first()
     )
 
@@ -477,11 +455,11 @@ def totalNutriConsumed():
 @mealBp.route("/api/logs/today/allLogs", methods=["GET"])
 @loginRequired
 def today():
-    todayDate = datetime.now(timezone.utc).date()
+    todayDate = datetime.now(timezoneUtc).date()
 
     logsForToday = FoodLog.query.filter(
         func.date(FoodLog.dateLogged) == todayDate,
-        FoodLog.user_id == session["user_id"],
+        FoodLog.userId == session["userId"],
     ).all()
 
     dailyMeals = []
@@ -505,7 +483,7 @@ def today():
 @mealBp.route("/api/logs/today/delete/<int:id>", methods=["DELETE"])
 @loginRequired
 def deleteFood(id):
-    logToDelete = FoodLog.query.filter_by(id=id, user_id=session["user_id"]).first()
+    logToDelete = FoodLog.query.filter_by(id=id, userId=session["userId"]).first()
 
     if not logToDelete:
         return {"error": "Log not found"}, 404
@@ -526,7 +504,7 @@ def getLogsForAvg(days):
     daysPassedCount = 0
     targetCount = days
 
-    todayDate = datetime.now(timezone.utc).date()
+    todayDate = datetime.now(timezoneUtc).date()
     tempDate = todayDate
 
     batchSize = 20
@@ -536,7 +514,7 @@ def getLogsForAvg(days):
 
     while True:
         logsChunk = (
-            FoodLog.query.filter_by(user_id=session["user_id"])
+            FoodLog.query.filter_by(userId=session["userId"])
             .order_by(FoodLog.dateLogged.desc())
             .limit(batchSize)
             .offset(offsetAmount)
@@ -547,7 +525,6 @@ def getLogsForAvg(days):
             break
 
         for log in logsChunk:
-
             if log.dateLogged:
                 logDate = log.dateLogged.date()
             else:

@@ -3,9 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let serverFoodDatabase = [];
     let userTargets = { calories: 2500, protein: 150, carbs: 300, fat: 80, fiber: 30 };
     
-    // Define these in a way that toggleModal can see them if they are in the same scope
-    // Actually they are already in the same scope (DOMContentLoaded)
-    
     const todayMain = document.getElementById('todayMain');
     const modalNutrients = document.getElementById('modalNutrients');
     const closeNutrientsBtn = document.getElementById('closeNutrients');
@@ -63,14 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileMenuItem = document.getElementById('menuProfile') || document.querySelector('.menuList .menuItem:first-child');
     const menuGoals = document.getElementById('menuGoals') || document.querySelector('.menuList .menuItem:nth-child(2)');
     
-    console.log('Profile Menu Item found:', !!profileMenuItem);
-    console.log('Goals Menu Item found:', !!menuGoals);
-
     const profileContainer = document.getElementById('profileContainer');
     const closeProfileBtn = document.getElementById('closeProfile');
 
     const userGoalsModal = document.getElementById('userGoalsModal');
-    console.log('userGoalsModal element:', userGoalsModal);
     const saveGoalsBtn = document.getElementById('saveGoals');
     const closeGoalsBtn = document.getElementById('closeGoals');
     const goalInputs = {
@@ -80,20 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fat: document.getElementById('goalEditFat'),
         fiber: document.getElementById('goalEditFib')
     };
-
-    // --- Mock Data ---
-    const foodDatabase = [
-        { name: "Apple", id: 101, macros: { cal: 52, p: 0.3, c: 14, f: 0.2, fib: 2.4 } },
-        { name: "Banana", id: 102, macros: { cal: 89, p: 1.1, c: 23, f: 0.3, fib: 2.6 } },
-        { name: "Chicken Breast", id: 103, macros: { cal: 165, p: 31, c: 0, f: 3.6, fib: 0 } },
-        { name: "Egg (Boiled)", id: 104, macros: { cal: 155, p: 13, c: 1.1, f: 11, fib: 0 } },
-        { name: "Oats", id: 105, macros: { cal: 389, p: 16.9, c: 66.3, f: 6.9, fib: 10.6 } },
-        { name: "Rice (White)", id: 106, macros: { cal: 130, p: 2.7, c: 28, f: 0.3, fib: 0.4 } },
-        { name: "Broccoli", id: 107, macros: { cal: 34, p: 2.8, c: 7, f: 0.4, fib: 2.6 } },
-        { name: "Almonds", id: 108, macros: { cal: 579, p: 21, c: 22, f: 50, fib: 12.5 } },
-        { name: "Salmon", id: 109, macros: { cal: 208, p: 20, c: 0, f: 13, fib: 0 } },
-        { name: "Greek Yogurt", id: 110, macros: { cal: 59, p: 10, c: 3.6, f: 0.4, fib: 0 } }
-    ];
 
     let typingTimer = null;
 
@@ -132,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Failed to fetch today stats');
             const data = await response.json();
             
-            // Update todayMain card (showing Calories Left)
             if (todayMain) {
                 const h1 = todayMain.querySelector('h1');
                 const p = todayMain.querySelector('p');
@@ -144,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const consumed = Math.round(data.calories);
                     const left = Math.max(0, dailyGoal - consumed);
                     
-                    // Animate to the 'Left' value
                     animateValue(h1, 0, left, 1000);
                 }
                 if (p) {
@@ -173,14 +150,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Show only last 4 meals
             const recentMeals = meals.slice(-4).reverse();
 
             recentMeals.forEach((meal, index) => {
                 const li = document.createElement('li');
                 li.className = 'mealItem animate-slide-down';
-                li.style.animationDelay = `${index * 0.1}s`; // Stagger effect
-                li.style.opacity = '0'; // Start invisible so animation handles fade-in
+                li.style.animationDelay = `${index * 0.1}s`;
+                li.style.opacity = '0';
                 
                 li.innerHTML = `
                     <div class="mealInfo">
@@ -196,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Call immediately on load
     fetchUserTargets().then(() => {
         fetchTodayStats();
         renderHomeMealList();
@@ -304,12 +279,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const isConfirming = btn.classList.contains('confirming');
         
         if (!isConfirming) {
-            // First tap: change state to confirm
             btn.classList.add('confirming');
             const span = btn.querySelector('span');
             if (span) span.textContent = 'Confirm?';
             
-            // Revert after 3 seconds if not clicked again
             setTimeout(() => {
                 if (btn.classList.contains('confirming')) {
                     btn.classList.remove('confirming');
@@ -319,7 +292,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Second tap: perform delete
         try {
             btn.disabled = true;
             btn.style.opacity = '0.5';
@@ -328,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             if (response.ok) {
-                // Refresh data
                 fetchTodayStats();
                 fetchAndRenderTodayMeals();
                 renderHomeMealList();
@@ -345,27 +316,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const toggleModal = (modal, show) => {
-        if (!modal) {
-            console.error('toggleModal called with null modal');
-            return;
-        }
-        console.log('toggleModal called for:', modal.id, 'show:', show);
+        if (!modal) return;
         if (show) {
             modal.classList.remove('hiddenView');
-            // Trigger specific actions when opening
-            if (statsContainer && modal === statsContainer) {
-                playStatsAnimation();
-            }
-            if (dbViewContainer && modal === dbViewContainer) {
-                fetchAndRenderDb();
-            }
-            if (todaysMealsContainer && modal === todaysMealsContainer) {
-                fetchAndRenderTodayMeals();
-            }
+            if (statsContainer && modal === statsContainer) playStatsAnimation();
+            if (dbViewContainer && modal === dbViewContainer) fetchAndRenderDb();
+            if (todaysMealsContainer && modal === todaysMealsContainer) fetchAndRenderTodayMeals();
             if (modalNutrients && modal === modalNutrients) {
-                // Fetch user targets first to ensure they are up to date
                 fetchUserTargets().then(() => {
-                    // Fetch real daily stats
                     fetch('/api/logs/today/totalNutriConsumed')
                         .then(res => res.json())
                         .then(data => {
@@ -377,7 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             'valFiber': Math.round(data.fiber || 0)
                         };
                         
-                        // Define goals from userTargets
                         const goals = {
                             'valCalories': userTargets.calories,
                             'valProtein': userTargets.protein,
@@ -386,16 +343,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             'valFiber': userTargets.fiber
                         };
                         
-                        // Update Goal labels in HTML modal
                         Object.keys(goals).forEach(id => {
                             const goalId = id.replace('val', 'goal');
                             const goalEl = document.getElementById(goalId);
-                            if (goalEl) {
-                                goalEl.textContent = goals[id];
-                            }
+                            if (goalEl) goalEl.textContent = goals[id];
                         });
 
-                        // Reset bars first
                         Object.keys(targets).forEach(id => {
                             const fillId = id.replace('val', 'fill');
                             const fillEl = document.getElementById(fillId);
@@ -404,13 +357,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         setTimeout(() => {
                             Object.keys(targets).forEach(id => {
-                                // Animate Number
                                 const el = document.getElementById(id);
-                                if (el) {
-                                    animateValue(el, 0, targets[id], 1000);
-                                }
+                                if (el) animateValue(el, 0, targets[id], 1000);
                                 
-                                // Animate Bar
                                 const fillId = id.replace('val', 'fill');
                                 const fillEl = document.getElementById(fillId);
                                 if (fillEl) {
@@ -425,10 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             modal.classList.add('hiddenView');
-            // Reset animations when closing to allow re-play
-            if (statsContainer && modal === statsContainer) {
-                resetStatsAnimation();
-            }
+            if (statsContainer && modal === statsContainer) resetStatsAnimation();
         }
     };
 
@@ -452,7 +398,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const playStatsAnimation = async () => {
         resetStatsAnimation();
         
-        // Find active tab
         const activeTab = document.querySelector('.tabBtn.active').getAttribute('data-tab');
         const apiUrl = activeTab === 'monthly' ? '/api/logs/avg/30' : '/api/logs/avg/7';
         const chartPlaceholder = document.querySelector('.chartPlaceholder');
@@ -464,7 +409,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const graph = data.graphData;
 
             setTimeout(() => {
-                // Clear and Update Graph Bars
                 chartPlaceholder.innerHTML = '';
                 const maxCal = Math.max(...graph, userTargets.calories);
                 
@@ -473,15 +417,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     bar.className = 'bar';
                     const height = (val / maxCal) * 100;
                     bar.style.height = `${Math.max(height, 5)}%`;
-                    // Adjust width based on number of bars
                     bar.style.width = activeTab === 'monthly' ? '2%' : '10%';
                     chartPlaceholder.appendChild(bar);
-                    
-                    // Trigger animation
                     setTimeout(() => bar.classList.add('animate'), 10);
                 });
 
-                // Update Progress Bars & Numbers in Avg Section
                 const goals = { 
                     calories: userTargets.calories, 
                     protein: userTargets.protein, 
@@ -492,19 +432,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 goalItems.forEach(item => {
                     const label = item.querySelector('.goalLabel').textContent.toLowerCase();
                     if (avg[label] !== undefined) {
-                        const countUp = item.querySelector('.countUp');
-                        const fill = item.querySelector('.goalFill');
                         const goalNumbers = item.querySelector('.goalNumbers');
-                        
-                        // Update the goal text (e.g., / 2500 or / 180g)
                         const unit = label === 'calories' ? '' : 'g';
                         goalNumbers.innerHTML = `<span class="countUp">0</span> / ${goals[label]}${unit}`;
                         
-                        // Get the NEW countUp element
                         const newCountUp = item.querySelector('.countUp');
                         animateValue(newCountUp, 0, Math.round(avg[label]), 1000);
                         
                         const pct = Math.min((avg[label] / goals[label]) * 100, 100);
+                        const fill = item.querySelector('.goalFill');
                         fill.style.width = `${pct}%`;
                     }
                 });
@@ -535,21 +471,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const typeWriter = (text, element, speed) => {
         element.innerHTML = '';
         let i = 0;
-        
-        // Add cursor
         const cursor = document.createElement('span');
         cursor.className = 'cursor';
         
         const type = () => {
             if (i < text.length) {
-                // Insert text before the cursor
                 element.innerHTML = text.substring(0, i + 1);
                 element.appendChild(cursor);
                 i++;
                 typingTimer = setTimeout(type, speed);
             }
         };
-        
         type();
     };
 
@@ -588,7 +520,6 @@ document.addEventListener('DOMContentLoaded', () => {
             div.addEventListener('click', () => {
                 selectedFoodInput.value = food.name;
                 selectedFoodInput.setAttribute('data-id', food.id);
-                // Store full macros for display
                 selectedFoodInput.setAttribute('data-nutrients', JSON.stringify(food.macros));
                 
                 foodSearch.value = food.name;
@@ -603,7 +534,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Event Listeners ---
     
-    // Accordion Logic for Today's Meals
     if (todaysMealList) {
         todaysMealList.addEventListener('click', (e) => {
             const item = e.target.closest('.expandable');
@@ -612,18 +542,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = item.getAttribute('data-details');
             const targetDetails = document.getElementById(targetId);
 
-            // Close all others
             const allItems = todaysMealList.querySelectorAll('.expandable');
             const allDetails = todaysMealList.querySelectorAll('.mealDetails');
 
-            allItems.forEach(i => {
-                if (i !== item) i.classList.remove('expanded');
-            });
-            allDetails.forEach(d => {
-                if (d !== targetDetails) d.classList.add('hiddenView');
-            });
+            allItems.forEach(i => { if (i !== item) i.classList.remove('expanded'); });
+            allDetails.forEach(d => { if (d !== targetDetails) d.classList.add('hiddenView'); });
 
-            // Toggle current
             item.classList.toggle('expanded');
             targetDetails.classList.toggle('hiddenView');
         });
@@ -632,9 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (foodSearch) {
         const fetchAndFilter = async () => {
-            console.log("FETCH TRIGGERED");
             const query = foodSearch.value.trim();
-            
             if (query.length < 3) {
                 foodListContainer.innerHTML = '';
                 foodListContainer.classList.remove('active');
@@ -643,21 +565,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             clearSearchBtn.classList.remove('hiddenView');
-
-            // Debounce the search
             if (typingTimer) clearTimeout(typingTimer);
             
             typingTimer = setTimeout(async () => {
-                console.log("Fetching results for:", query);
                 try {
                     const res = await fetch(`/api/dataBase/directory?q=${encodeURIComponent(query)}`);
                     const data = await res.json();
-                    console.log("Results found:", data.count);
                     renderFoodList(data.directory || []);
                 } catch (e) {
                     console.error("Failed to fetch food list", e);
                 }
-            }, 300); // 300ms debounce
+            }, 300);
         };
         foodSearch.addEventListener('input', fetchAndFilter);
         foodSearch.addEventListener('focus', fetchAndFilter);
@@ -717,11 +635,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navWorkout) navWorkout.addEventListener('click', () => toggleModal(workoutContainer, true));
     if (closeWorkoutBtn) closeWorkoutBtn.addEventListener('click', () => toggleModal(workoutContainer, false));
 
-    // Today's Meals Toggle
     if (viewAllMealsBtn) viewAllMealsBtn.addEventListener('click', () => toggleModal(todaysMealsContainer, true));
     if (closeTodaysMealsBtn) closeTodaysMealsBtn.addEventListener('click', () => toggleModal(todaysMealsContainer, false));
 
-    // Side Menu Toggle
     const menuBtn = document.getElementById('menuBtn');
     const menuOverlay = document.getElementById('menuOverlay');
     const closeMenuBtn = document.getElementById('closeMenu');
@@ -735,7 +651,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('profUser').textContent = data.username || '-';
                 document.getElementById('profSerial').textContent = data.serialNumber || '-';
                 document.getElementById('profAge').textContent = data.age || '-';
-                document.getElementById('profSex').textContent = data.sex || '-';
+                document.getElementById('profSex').textContent = data.gender || '-';
                 document.getElementById('profHeight').textContent = data.height ? data.height + ' cm' : '-';
                 document.getElementById('profWeight').textContent = data.weight ? data.weight + ' kg' : '-';
                 document.getElementById('profBicep').textContent = data.bicepSize ? data.bicepSize + ' in' : '-';
@@ -757,12 +673,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuGoals) {
         menuGoals.addEventListener('click', (e) => {
             e.stopPropagation();
-            console.log('Goals menu clicked');
             toggleModal(menuOverlay, false);
             populateGoalInputs();
-            const goalsModal = document.getElementById('userGoalsModal');
-            console.log('Opening goalsModal:', goalsModal);
-            toggleModal(goalsModal, true);
+            toggleModal(userGoalsModal, true);
         });
     }
 
@@ -784,8 +697,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 
                 if (res.ok) {
-                    await fetchUserTargets(); // Refresh local userTargets
-                    fetchTodayStats(); // Refresh main card
+                    await fetchUserTargets();
+                    fetchTodayStats();
                     toggleModal(userGoalsModal, false);
                 } else {
                     alert('Failed to save goals.');
@@ -796,53 +709,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (closeGoalsBtn) {
-        closeGoalsBtn.addEventListener('click', () => toggleModal(userGoalsModal, false));
-    }
+    if (closeGoalsBtn) closeGoalsBtn.addEventListener('click', () => toggleModal(userGoalsModal, false));
+    if (userGoalsModal) userGoalsModal.addEventListener('click', (e) => { if (e.target === userGoalsModal) toggleModal(userGoalsModal, false); });
+    if (closeProfileBtn) closeProfileBtn.addEventListener('click', () => toggleModal(profileContainer, false));
+    if (profileContainer) profileContainer.addEventListener('click', (e) => { if (e.target === profileContainer) toggleModal(profileContainer, false); });
 
-    if (userGoalsModal) {
-        userGoalsModal.addEventListener('click', (e) => {
-            if (e.target === userGoalsModal) toggleModal(userGoalsModal, false);
-        });
-    }
-
-    if (closeProfileBtn) {
-        closeProfileBtn.addEventListener('click', () => toggleModal(profileContainer, false));
-    }
-
-    if (profileContainer) {
-        profileContainer.addEventListener('click', (e) => {
-            if (e.target === profileContainer) toggleModal(profileContainer, false);
-        });
-    }
-
-    if (menuBtn) {
-        menuBtn.addEventListener('click', () => {
-            console.log('Menu button clicked');
-            toggleModal(menuOverlay, true);
-        });
-    }
-
-    if (closeMenuBtn) {
-        closeMenuBtn.addEventListener('click', () => toggleModal(menuOverlay, false));
-    }
-
-
-    if (closeDbViewBtn) {
-        closeDbViewBtn.addEventListener('click', () => toggleModal(dbViewContainer, false));
-    }
-
-    if (dbViewContainer) {
-        dbViewContainer.addEventListener('click', (e) => {
-            if (e.target === dbViewContainer) toggleModal(dbViewContainer, false);
-        });
-    }
+    if (menuBtn) menuBtn.addEventListener('click', () => toggleModal(menuOverlay, true));
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', () => toggleModal(menuOverlay, false));
+    if (closeDbViewBtn) closeDbViewBtn.addEventListener('click', () => toggleModal(dbViewContainer, false));
+    if (dbViewContainer) dbViewContainer.addEventListener('click', (e) => { if (e.target === dbViewContainer) toggleModal(dbViewContainer, false); });
 
     if (menuOverlay) {
         menuOverlay.addEventListener('mousedown', (e) => {
-            if (e.target === menuOverlay) {
-                toggleModal(menuOverlay, false);
-            }
+            if (e.target === menuOverlay) toggleModal(menuOverlay, false);
         });
     }
 
@@ -850,8 +729,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (addMealForm) {
         addMealForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            const foodName = selectedFoodInput.value;
             const foodId = selectedFoodInput.getAttribute('data-id');
             const amount = parseFloat(foodQuantity.value);
             
@@ -872,14 +749,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(payload)
                 });
                 
-                const result = await response.json();
-                
-                if (response.status === 201 || result.message) {
+                if (response.status === 201) {
                     toggleModal(addMealModal, false);
-                    // Refresh data
                     fetchTodayStats();
                     renderHomeMealList();
-                    // Reset form
                     foodSearch.value = '';
                     selectedFoodInput.value = '';
                     selectedFoodInput.removeAttribute('data-id');
@@ -887,31 +760,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     updateNutritionDisplay(null);
                     clearSearchBtn.classList.add('hiddenView');
                 } else {
+                    const result = await response.json();
                     alert("Error adding meal: " + (result.error || result.message));
                 }
             } catch (error) {
                 console.error("Error submitting meal:", error);
-                alert("Failed to add meal. See console.");
             }
         });
     }
 
-    if (workoutForm) {
-        workoutForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-        });
-    }
+    if (workoutForm) workoutForm.addEventListener('submit', (e) => e.preventDefault());
 
     // Theme Toggle
     const themeSwitch = document.getElementById('themeSwitch');
-    
-    // Check saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         document.documentElement.removeAttribute('data-theme');
         if (themeSwitch) themeSwitch.checked = false;
     } else {
-        // Default to dark or use saved dark
         document.documentElement.setAttribute('data-theme', 'dark');
         if (themeSwitch) themeSwitch.checked = true;
     }
@@ -928,16 +794,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Logout Handler
     const logoutItem = document.getElementById('logoutItem');
     if (logoutItem) {
         logoutItem.addEventListener('click', async () => {
             try {
                 const res = await fetch('/api/logout');
                 const data = await res.json();
-                if (data.success) {
-                    window.location.href = data.redirect;
-                }
+                if (data.success) window.location.href = data.redirect;
             } catch (err) {
                 console.error("Logout failed", err);
             }
