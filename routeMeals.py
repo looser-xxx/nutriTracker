@@ -151,36 +151,33 @@ def saveProfile():
 @loginRequired
 def generateTargets():
     data = request.get_json()
-    
-    if "userId" in session:
-        user = User.query.get(session["userId"])
-        weight, height, gender = user.weight, user.heightCm, user.gender
-        # age calculation logic can be added here using dateOfBirth
-        age = 25 # Placeholder for now
-    elif "tempUser" in session:
-        u = session["tempUser"]
-        weight, height, gender = u["weight"], u["heightCm"], u["gender"]
-        age = 25 # Placeholder
-    else:
-        return {"error": "Not authorized"}, 401
 
+    # Extract all user data from request
     goal = data.get("goal")
     frequency = data.get("frequency")
+    age = data.get("age")
+    sex = data.get("sex")
+    height = data.get("height")
+    weight = data.get("weight")
+    bicepSize = data.get("bicepSize")
 
     apiKey = os.getenv("GEMINI_API_KEY")
     if not apiKey:
         return {"error": "Gemini API key not configured"}, 500
 
     prompt = (
-        f"my weight is {weight} kg, My height is {height} cm and my gender is {gender}. "
-        f"I want {goal}. What should be my target calories, protein, fat, carbs and fiber. "
-        f"I workout {frequency} times a week please give the output in json format. "
-        f"in the json just write the nutritient name as key and amount in values. "
-        f"Do not add any message or unit. Just amount needed as key. "
-        f"Keys must be protein, calories, fat, carbs, fiber."
+        f"my weight is {weight} kg, my height is {height} cm, my age is {age} and my sex is {sex}. "
+        f"My current bicep size is {bicepSize} inches. "
+        f"My fitness goal is '{goal}'. "
+        f"I workout {frequency} times a week. "
+        f"Please calculate what should be my daily target for calories (kcal), protein (g), fat (g), carbs (g), and fiber (g). "
+        f"Provide the output ONLY in JSON format. "
+        f"In the JSON, use the nutrient name as the key and the numeric amount as the value. "
+        f"Do not add any message, explanation, or units. "
+        f"Keys MUST be: protein, calories, fat, carbs, fiber."
     )
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key={apiKey}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={apiKey}"
     headers = {'Content-Type': 'application/json'}
     payload = {
         "contents": [{
@@ -192,21 +189,25 @@ def generateTargets():
         response = requests.post(url, headers=headers, json=payload)
         response.raise_for_status()
         result = response.json()
-        
+
         parts = result.get('candidates', [{}])[0].get('content', {}).get('parts', [])
         if not parts:
             return {"error": "Unexpected AI response format"}, 500
-            
+
         content = parts[0]['text']
-        if "```json" in content:
-            content = content.split("```json")[1].split("```")[0]
-        elif "```" in content:
-            content = content.split("```")[1].split("```")[0]
-            
+        
+        # Extract JSON if it's wrapped in markdown
+        import re
+        import json
+        json_match = re.search(r'\{.*\}', content, re.DOTALL)
+        if json_match:
+            content = json_match.group(0)
+        
         targets = json.loads(content.strip())
         return {"success": True, "targets": targets}
     except Exception as e:
-        return {"error": str(e)}, 500
+        print(f"Error generating targets: {str(e)}")
+        return {"error": f"Failed to generate targets: {str(e)}"}, 500
 
 
 @mealBp.route("/api/saveTargets", methods=["POST"])
@@ -369,6 +370,7 @@ def logMeal():
 
     targetId = data.get("foodId")
     gramsEaten = data.get("amountInG")
+    localDateStr = data.get("date")  # New: client can pass their local date
 
     foodItem = FoodDirectory.query.get(targetId)
 
@@ -376,6 +378,19 @@ def logMeal():
         return {"error": "Food ID not found in directory. Please add it first."}, 404
 
     macros = calculateSnapshotMacros(foodItem, gramsEaten)
+
+    # Determine dateLogged
+    if localDateStr:
+        try:
+            # Combine provided date with current UTC time to keep time precision
+            # but ensure it falls on the correct day for the user
+            clientDate = datetime.strptime(localDateStr, "%Y-%m-%d").date()
+            currentTime = datetime.now(timezone.utc).time()
+            dateLogged = datetime.combine(clientDate, currentTime)
+        except Exception as e:
+            dateLogged = datetime.now(timezone.utc)
+    else:
+        dateLogged = datetime.now(timezone.utc)
 
     newLog = FoodLog(
         userId=session["userId"],
@@ -386,6 +401,7 @@ def logMeal():
         carbs=macros["carbs"],
         fat=macros["fat"],
         fiber=macros["fiber"],
+        dateLogged=dateLogged
     )
 
     db.session.add(newLog)
@@ -441,10 +457,59 @@ def nutritionConsumed(id):
     return fetchedNutrition
 
 
+@mealBp.route("/api/checkNewDay", methods=["GET"])
+@loginRequired
+def checkNewDay():
+    # User sends their current local date (YYYY-MM-DD)
+    localDateStr = request.args.get("date")
+    if not localDateStr:
+        return {"error": "Missing 'date' parameter"}, 400
+    
+    # Get the last logged meal for this user
+    lastLog = (
+        FoodLog.query.filter_by(userId=session["userId"])
+        .order_by(FoodLog.dateLogged.desc())
+        .first()
+    )
+    
+    if not lastLog:
+        # No logs ever, so we can treat it as same day/ready to log
+        return {"newDay": False, "today": localDateStr}
+    
+    # Convert lastLog.dateLogged (UTC) to a date string for comparison
+    # Ideally, we'd want to know the local date of that log, 
+    # but for a "reset" check, simple UTC date works if the user is 
+    # consistent. Better: just compare with the last known local date.
+    
+    # Let's get the date part of the last log
+    lastLogDateStr = lastLog.dateLogged.date().isoformat()
+    
+    # If the provided current date is different from the last log date (UTC)
+    # we can say it's a new day. This is a bit rough due to timezones,
+    # but it fulfills the user's request for "diff from last meal date".
+    isNewDay = localDateStr != lastLogDateStr
+    
+    return {
+        "newDay": isNewDay,
+        "lastLogDate": lastLogDateStr,
+        "today": localDateStr
+    }
+
+
 @mealBp.route("/api/logs/today/totalNutriConsumed", methods=["GET"])
 @loginRequired
 def totalNutriConsumed():
-    todayDate = datetime.now(timezone.utc).date()
+    # Allow client to specify their local date
+    localDateStr = request.args.get("date")
+    
+    if localDateStr:
+        try:
+            # localDateStr is expected in YYYY-MM-DD format
+            todayDate = datetime.strptime(localDateStr, "%Y-%m-%d").date()
+        except Exception as e:
+            todayDate = datetime.now(timezone.utc).date()
+    else:
+        todayDate = datetime.now(timezone.utc).date()
 
     stats = (
         db.session.query(
@@ -471,7 +536,16 @@ def totalNutriConsumed():
 @mealBp.route("/api/logs/today/allLogs", methods=["GET"])
 @loginRequired
 def today():
-    todayDate = datetime.now(timezone.utc).date()
+    # Allow client to specify their local date
+    localDateStr = request.args.get("date")
+    
+    if localDateStr:
+        try:
+            todayDate = datetime.strptime(localDateStr, "%Y-%m-%d").date()
+        except Exception as e:
+            todayDate = datetime.now(timezone.utc).date()
+    else:
+        todayDate = datetime.now(timezone.utc).date()
 
     logsForToday = FoodLog.query.filter(
         func.date(FoodLog.dateLogged) == todayDate,
@@ -513,9 +587,19 @@ def deleteFood(id):
 @mealBp.route("/api/gemini/recommendation", methods=["POST"])
 @loginRequired
 def getRecommendation():
-    todayDate = datetime.now(timezone.utc).date()
-    user = User.query.get(session["userId"])
+    # Allow client to specify their local date
+    localDateStr = request.args.get("date")
     
+    if localDateStr:
+        try:
+            todayDate = datetime.strptime(localDateStr, "%Y-%m-%d").date()
+        except Exception as e:
+            todayDate = datetime.now(timezone.utc).date()
+    else:
+        todayDate = datetime.now(timezone.utc).date()
+
+    user = User.query.get(session["userId"])
+
     # Fetch today's totals
     stats = (
         db.session.query(
@@ -529,7 +613,6 @@ def getRecommendation():
         .filter(FoodLog.userId == session["userId"])
         .first()
     )
-
     totalConsumed = {
         "calories": round(stats.calories or 0, 1),
         "protein": round(stats.protein or 0, 1),
@@ -573,7 +656,7 @@ def getRecommendation():
         "Based on this, what's your advice for my next meal or my current progress?"
     )
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key={apiKey}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={apiKey}"
     headers = {'Content-Type': 'application/json'}
     payload = {
         "system_instruction": {

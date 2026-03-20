@@ -2185,3 +2185,21 @@ TypeError: tzinfo argument must be None or of a tzinfo subclass, not type 'type'
 [2026-03-20 01:16:38 +0530] [1529650] [INFO] Worker exiting (pid: 1529650)
 [2026-03-20 01:16:38 +0530] [1529647] [INFO] Worker exiting (pid: 1529647)
 [2026-03-20 01:16:38 +0530] [1529648] [INFO] Worker exiting (pid: 1529648)
+[2026-03-20 02:50:34 +0530] [1528109] [INFO] Handling signal: term
+[2026-03-20 02:50:34 +0530] [1530095] [INFO] Worker exiting (pid: 1530095)
+[2026-03-20 02:50:34 +0530] [1530097] [INFO] Worker exiting (pid: 1530097)
+[2026-03-20 02:50:34 +0530] [1530094] [INFO] Worker exiting (pid: 1530094)
+[2026-03-20 02:50:34 +0530] [1530096] [INFO] Worker exiting (pid: 1530096)
+[2026-03-20 02:50:35 +0530] [1528109] [INFO] Shutting down: Master
+[2026-03-20 03:47:05 +0530] [1557354] [INFO] Starting gunicorn 25.1.0
+[2026-03-20 03:47:05 +0530] [1557354] [ERROR] Connection in use: ('0.0.0.0', 5050)
+[2026-03-20 03:47:05 +0530] [1557354] [ERROR] connection to ('0.0.0.0', 5050) failed: [Errno 98] Address already in use
+[2026-03-20 03:47:06 +0530] [1557354] [ERROR] Connection in use: ('0.0.0.0', 5050)
+[2026-03-20 03:47:06 +0530] [1557354] [ERROR] connection to ('0.0.0.0', 5050) failed: [Errno 98] Address already in use
+[2026-03-20 03:47:07 +0530] [1557354] [ERROR] Connection in use: ('0.0.0.0', 5050)
+[2026-03-20 03:47:07 +0530] [1557354] [ERROR] connection to ('0.0.0.0', 5050) failed: [Errno 98] Address already in use
+[2026-03-20 03:47:08 +0530] [1557354] [ERROR] Connection in use: ('0.0.0.0', 5050)
+[2026-03-20 03:47:08 +0530] [1557354] [ERROR] connection to ('0.0.0.0', 5050) failed: [Errno 98] Address already in use
+[2026-03-20 03:47:09 +0530] [1557354] [ERROR] Connection in use: ('0.0.0.0', 5050)
+[2026-03-20 03:47:09 +0530] [1557354] [ERROR] connection to ('0.0.0.0', 5050) failed: [Errno 98] Address already in use
+[2026-03-20 03:47:10 +0530] [1557354] [ERROR] Can't connect to ('0.0.0.0', 5050)

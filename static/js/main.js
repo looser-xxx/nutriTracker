@@ -93,8 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     let typingTimer = null;
+    let lastFetchedDate = null;
 
     // --- Helper Functions ---
+
+    const getLocalDate = () => {
+        const d = new Date();
+        const date = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        return date;
+    };
 
     const fetchUserTargets = async () => {
         try {
@@ -105,6 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error fetching user targets:', error);
         }
+    };
+
+    const refreshDashboard = async () => {
+        await fetchUserTargets();
+        await fetchTodayStats();
+        await renderHomeMealList();
+        await fetchGeminiAdvice();
     };
 
     window.changeVal = (id, delta) => {
@@ -125,7 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchTodayStats = async () => {
         try {
-            const response = await fetch('/api/logs/today/totalNutriConsumed');
+            const date = getLocalDate();
+            const response = await fetch(`/api/logs/today/totalNutriConsumed?date=${date}`);
             if (!response.ok) throw new Error('Failed to fetch today stats');
             const data = await response.json();
             
@@ -156,7 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!motivationQuote) return;
 
         try {
-            const geminiRes = await fetch('/api/gemini/recommendation', {
+            const date = getLocalDate();
+            const geminiRes = await fetch(`/api/gemini/recommendation?date=${date}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -177,11 +193,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!homeMealList) return;
 
         try {
-            const response = await fetch('/api/logs/today/allLogs');
+            const date = getLocalDate();
+            const response = await fetch(`/api/logs/today/allLogs?date=${date}`);
             if (!response.ok) throw new Error('Failed to fetch today meals');
             const data = await response.json();
             const meals = data.mealsConsumed || [];
             
+            // If server confirms a different date than what we last had, it's a new day
+            if (lastFetchedDate && data.date !== lastFetchedDate) {
+                fetchTodayStats();
+                fetchGeminiAdvice();
+            }
+            lastFetchedDate = data.date;
+
             homeMealList.innerHTML = '';
             
             if (meals.length === 0) {
@@ -210,6 +234,24 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error loading home meal list:', error);
         }
     };
+
+    const checkNewDay = async () => {
+        try {
+            const date = getLocalDate();
+            const response = await fetch(`/api/checkNewDay?date=${date}`);
+            if (response.ok) {
+                const data = await response.json();
+                if (data.newDay) {
+                    refreshDashboard();
+                }
+            }
+        } catch (error) {
+            console.error('Error checking for new day:', error);
+        }
+    };
+
+    // Heartbeat to check for date changes/refresh UI every 5 minutes
+    setInterval(checkNewDay, 5 * 60 * 1000);
 
     fetchUserTargets().then(() => {
         fetchTodayStats();
@@ -265,7 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchAndRenderTodayMeals = async () => {
         try {
-            const response = await fetch('/api/logs/today/allLogs');
+            const date = getLocalDate();
+            const response = await fetch(`/api/logs/today/allLogs?date=${date}`);
             if (!response.ok) throw new Error('Failed to fetch today meals');
             const data = await response.json();
             const meals = data.mealsConsumed || [];
@@ -365,7 +408,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (todaysMealsContainer && modal === todaysMealsContainer) fetchAndRenderTodayMeals();
             if (modalNutrients && modal === modalNutrients) {
                 fetchUserTargets().then(() => {
-                    fetch('/api/logs/today/totalNutriConsumed')
+                    const date = getLocalDate();
+                    fetch(`/api/logs/today/totalNutriConsumed?date=${date}`)
                         .then(res => res.json())
                         .then(data => {
                         const targets = {
@@ -469,7 +513,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check availability
             const availabilityRes = await fetch(availabilityUrl);
             const availabilityData = await availabilityRes.json();
-            console.log("Availability Debug:", availabilityData);
 
             if (!availabilityData.available) {
                 if (chartSection) chartSection.classList.add('stats-disabled');
@@ -497,7 +540,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const bar = document.createElement('div');
                         bar.className = 'bar';
                         const height = (val / maxCal) * 100;
-                        bar.style.height = `${Math.max(height, 5)}%`;
+                        bar.style.height = `${height}%`;
                         bar.style.width = activeTab === 'monthly' ? '2%' : '10%';
                         chartPlaceholder.appendChild(bar);
                         setTimeout(() => bar.classList.add('animate'), 10);
@@ -828,7 +871,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const payload = {
                 foodId: parseInt(foodId),
-                amountInG: amount
+                amountInG: amount,
+                date: getLocalDate()
             };
 
             try {

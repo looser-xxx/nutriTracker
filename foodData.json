@@ -1,5 +1,21 @@
 [
     {
+        "foodName": "Kakdi(Snake Cucumber)",
+        "calories": 15.0,
+        "protein": 0.65,
+        "carbs": 3.6,
+        "fat": 0.1,
+        "fiber": 0.5
+    },
+    {
+        "foodName": "Whole eggs",
+        "calories": 155.0,
+        "protein": 13.0,
+        "carbs": 1.1,
+        "fat": 11.0,
+        "fiber": 0.0
+    },
+    {
         "foodName": "Chicken Breast",
         "calories": 165.0,
         "protein": 31.0,

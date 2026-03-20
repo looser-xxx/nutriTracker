@@ -15,6 +15,23 @@
     <title>NutTracker</title>
 
     <script>
+        // Force unregister old service workers and reload if on an old version
+        const APP_VERSION = 'v6'; 
+        if (localStorage.getItem('app_version') !== APP_VERSION) {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    for (let registration of registrations) {
+                        registration.unregister();
+                    }
+                    localStorage.setItem('app_version', APP_VERSION);
+                    console.log('Old Service Worker cleared. Reloading...');
+                    window.location.reload(true);
+                });
+            } else {
+                localStorage.setItem('app_version', APP_VERSION);
+            }
+        }
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/static/sw.js')
@@ -550,6 +567,6 @@
     </div>
 </div>
 
-<script src="../static/js/script.js?v={{ version }}"></script>
+<script src="../static/js/main.js?v={{ version }}"></script>
 </body>
 </html>

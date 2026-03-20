@@ -1,46 +1,49 @@
-const CACHE_NAME = 'nuttracker-v3';
+const CACHE_NAME = 'nuttracker-v6';
 const urlsToCache = [
   '/',
   '/static/css/style.css',
-  '/static/js/script.js',
   '/static/manifest.json'
 ];
 
 self.addEventListener('install', event => {
-  self.skipWaiting(); // Force the waiting service worker to become the active service worker
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
   );
 });
 
 self.addEventListener('activate', event => {
-    const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cacheName => {
-                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                    if (cacheName !== CACHE_NAME) {
                         return caches.delete(cacheName);
                     }
                 })
             );
-        }).then(() => self.clients.claim()) // Immediately take control of all clients
+        }).then(() => self.clients.claim())
     );
 });
 
 self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
 
-    // Network-First for everything on our origin to ensure updates are seen
+    // If it's a JS file, especially main.js, we want to bypass cache if there's a version string
+    // or just generally try to get the latest.
     if (url.origin === location.origin) {
+        if (url.pathname.endsWith('.js')) {
+            // Network-only for JS to ensure we get the latest versioned file
+            event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+            return;
+        }
+
         event.respondWith(
             fetch(event.request)
                 .then(response => {
-                    // Update cache with new version if successful
                     if (response.ok && urlsToCache.includes(url.pathname)) {
                         const responseClone = response.clone();
                         caches.open(CACHE_NAME).then(cache => {
@@ -51,11 +54,9 @@ self.addEventListener('fetch', event => {
                 })
                 .catch(() => caches.match(event.request))
         );
-        return;
+    } else {
+        event.respondWith(
+            caches.match(event.request).then(response => response || fetch(event.request))
+        );
     }
-
-    // Default strategy for external assets
-    event.respondWith(
-        caches.match(event.request).then(response => response || fetch(event.request))
-    );
 });

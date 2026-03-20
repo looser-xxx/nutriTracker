@@ -234,6 +234,13 @@
         const goal = document.getElementById('fitnessGoal').value;
         const frequency = document.getElementById('workoutFrequency').value;
         
+        // Additional user data to send
+        const age = parseInt(document.getElementById('age').value);
+        const sex = document.getElementById('sex').value;
+        const height = parseFloat(document.getElementById('height').value);
+        const weight = parseFloat(document.getElementById('weight').value);
+        const bicepSize = parseFloat(document.getElementById('bicep').value) || 0;
+
         if (!frequency) {
             alert("Please enter workout frequency.");
             return;
@@ -245,7 +252,15 @@
             const res = await fetch('/api/generateTargets', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ goal, frequency })
+                body: JSON.stringify({ 
+                    goal, 
+                    frequency,
+                    age,
+                    sex,
+                    height,
+                    weight,
+                    bicepSize
+                })
             });
             const data = await res.json();
             
