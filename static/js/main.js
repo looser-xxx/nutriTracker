@@ -118,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         await fetchUserTargets();
         await fetchTodayStats();
         await renderHomeMealList();
-        await fetchGeminiAdvice();
     };
 
     window.changeVal = (id, delta) => {
@@ -182,6 +181,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (result.recommendation) {
                     typeWriter(`"${result.recommendation}"`, motivationQuote, 40);
                 }
+            } else if (geminiRes.status === 429) {
+                const result = await geminiRes.json();
+                if (result.recommendation) {
+                    typeWriter(`"${result.recommendation}"`, motivationQuote, 40);
+                }
             }
         } catch (error) {
             console.error('Error fetching Gemini advice:', error);
@@ -200,8 +204,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const meals = data.mealsConsumed || [];
             
             // If server confirms a different date than what we last had, it's a new day
+            // Or if lastFetchedDate was null (initial load)
             if (lastFetchedDate && data.date !== lastFetchedDate) {
+                console.log("Date changed, refreshing stats and advice...");
                 fetchTodayStats();
+                fetchGeminiAdvice();
+            } else if (!lastFetchedDate) {
+                // Initial load: fetch advice once
                 fetchGeminiAdvice();
             }
             lastFetchedDate = data.date;
@@ -235,28 +244,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const checkNewDay = async () => {
-        try {
-            const date = getLocalDate();
-            const response = await fetch(`/api/checkNewDay?date=${date}`);
-            if (response.ok) {
-                const data = await response.json();
-                if (data.newDay) {
-                    refreshDashboard();
-                }
-            }
-        } catch (error) {
-            console.error('Error checking for new day:', error);
+    const checkNewDay = () => {
+        const currentDate = getLocalDate();
+        // If lastFetchedDate is set and doesn't match current local date, it's a new day
+        if (lastFetchedDate && currentDate !== lastFetchedDate) {
+            console.log("New day detected by heartbeat. Refreshing...");
+            refreshDashboard();
         }
     };
 
-    // Heartbeat to check for date changes/refresh UI every 5 minutes
+    // Heartbeat to check for date changes every 5 minutes
     setInterval(checkNewDay, 5 * 60 * 1000);
 
     fetchUserTargets().then(() => {
         fetchTodayStats();
         renderHomeMealList();
-        fetchGeminiAdvice();
     });
 
     const fetchAndRenderDb = async () => {
