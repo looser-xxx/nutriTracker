@@ -161,10 +161,6 @@ def generateTargets():
     weight = data.get("weight")
     bicepSize = data.get("bicepSize")
 
-    apiKey = os.getenv("GEMINI_API_KEY")
-    if not apiKey:
-        return {"error": "Gemini API key not configured"}, 500
-
     prompt = (
         f"my weight is {weight} kg, my height is {height} cm, my age is {age} and my sex is {sex}. "
         f"My current bicep size is {bicepSize} inches. "
@@ -177,26 +173,29 @@ def generateTargets():
         f"Keys MUST be: protein, calories, fat, carbs, fiber."
     )
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={apiKey}"
-    headers = {'Content-Type': 'application/json'}
+    # Call local Ollama instead of Gemini
+    url = "http://localhost:11434/api/generate"
     payload = {
-        "contents": [{
-            "parts": [{"text": prompt}]
-        }]
+        "model": "llama3.2:3b",
+        "prompt": prompt,
+        "format": "json",
+        "stream": False
     }
 
+    print(f"DEBUG: Ollama generateTargets Prompt: {prompt}")
+
     try:
-        response = requests.post(url, headers=headers, json=payload)
+        response = requests.post(url, json=payload)
+        print(f"DEBUG: Ollama generateTargets Status: {response.status_code}")
         response.raise_for_status()
         result = response.json()
 
-        parts = result.get('candidates', [{}])[0].get('content', {}).get('parts', [])
-        if not parts:
+        content = result.get('response', '')
+        print(f"DEBUG: Ollama generateTargets Content: {content}")
+        if not content:
             return {"error": "Unexpected AI response format"}, 500
 
-        content = parts[0]['text']
-        
-        # Extract JSON if it's wrapped in markdown
+        # Extract JSON if it's wrapped in markdown or contains extra text
         import re
         import json
         json_match = re.search(r'\{.*\}', content, re.DOTALL)
@@ -361,6 +360,77 @@ def addFood():
     db.session.commit()
 
     return {"success": True, "id": newFood.id}, 201
+
+
+@mealBp.route("/admin.html")
+def adminPage():
+    return render_template("admin.html")
+
+
+@mealBp.route("/api/admin/addFood", methods=["POST"])
+def adminAddFood():
+    data = request.get_json()
+    password = data.get("password")
+    admin_password = os.getenv("ADMIN_PASSWORD")
+
+    if not password or password != admin_password:
+        return {"error": "wrong password"}, 401
+
+    food_name = data.get("foodName")
+    calories = data.get("calories")
+    protein = data.get("protein")
+    carbs = data.get("carbs")
+    fat = data.get("fat")
+    fiber = data.get("fiber")
+
+    if not food_name:
+        return {"error": "Food Name is required"}, 400
+
+    # Check if food already exists in DB
+    existing = FoodDirectory.query.filter_by(foodName=food_name).first()
+    if existing:
+        return {"error": "Food already exists in directory"}, 400
+
+    # Add to Database
+    new_food = FoodDirectory(
+        foodName=food_name,
+        calories=calories,
+        protein=protein,
+        carbs=carbs,
+        fat=fat,
+        fiber=fiber
+    )
+    db.session.add(new_food)
+    db.session.commit()
+
+    # Add to foodData.json
+    json_path = "foodData.json"
+    new_item = {
+        "foodName": food_name,
+        "calories": calories,
+        "protein": protein,
+        "carbs": carbs,
+        "fat": fat,
+        "fiber": fiber
+    }
+
+    try:
+        if os.path.exists(json_path):
+            with open(json_path, "r") as f:
+                food_list = json.load(f)
+        else:
+            food_list = []
+        
+        food_list.append(new_item)
+        
+        with open(json_path, "w") as f:
+            json.dump(food_list, f, indent=4)
+    except Exception as e:
+        print(f"Error updating foodData.json: {str(e)}")
+        # We don't fail the whole request if JSON update fails, but we should log it
+        return {"success": True, "message": "Food added to DB, but failed to update JSON file.", "id": new_food.id}, 201
+
+    return {"success": True, "message": "Food added to DB and JSON file successfully!", "id": new_food.id}, 201
 
 
 @mealBp.route("/api/logs/logMeal", methods=["POST"])
@@ -584,7 +654,7 @@ def deleteFood(id):
     return {"id": id}, 200
 
 
-@mealBp.route("/api/gemini/recommendation", methods=["POST"])
+@mealBp.route("/api/ai/recommendation", methods=["POST"])
 @loginRequired
 def getRecommendation():
     # Allow client to specify their local date
@@ -598,90 +668,94 @@ def getRecommendation():
     else:
         todayDate = datetime.now(timezone.utc).date()
 
-    user = User.query.get(session["userId"])
-
-    # Fetch today's totals
-    stats = (
-        db.session.query(
-            func.sum(FoodLog.calories).label("calories"),
-            func.sum(FoodLog.protein).label("protein"),
-            func.sum(FoodLog.carbs).label("carbs"),
-            func.sum(FoodLog.fat).label("fat"),
-            func.sum(FoodLog.fiber).label("fiber"),
-        )
-        .filter(func.date(FoodLog.dateLogged) == todayDate)
-        .filter(FoodLog.userId == session["userId"])
-        .first()
-    )
-    totalConsumed = {
-        "calories": round(stats.calories or 0, 1),
-        "protein": round(stats.protein or 0, 1),
-        "carbs": round(stats.carbs or 0, 1),
-        "fat": round(stats.fat or 0, 1),
-        "fiber": round(stats.fiber or 0, 1),
-    }
-
-    # Fetch today's logs
-    logsForToday = FoodLog.query.filter(
-        func.date(FoodLog.dateLogged) == todayDate,
-        FoodLog.userId == session["userId"],
-    ).all()
-    allLogs = [log.foodName for log in logsForToday]
-
-    userTargets = {
-        "calories": user.targetCalories,
-        "protein": user.targetProtein,
-        "carbs": user.targetCarbs,
-        "fat": user.targetFat,
-        "fiber": user.targetFiber
-    }
-
-    apiKey = os.getenv("GEMINI_API_KEY")
-    if not apiKey:
-        return {"error": "Gemini API key not configured"}, 500
-
-    systemPrompt = (
-        "You are a helpful nutrition assistant for the NutriTracker app. Your goal is to analyze the user's daily food logs and provide personalized advice tailored to an Indian diet. "
-        "Analyze the user's progress toward their daily goals (Calories, Protein, Carbs, Fat, Fiber) based on their consumed nutrients and targets. "
-        "Suggest common natural Indian food sources to help them reach their goals. "
-        "DO NOT recommend supplements or protein powders. If they have overeaten, suggest how to adjust. "
-        "Keep the response very short, encouraging, and actionable (max 1-2 sentences). "
-        "Use bullet points for the advice if possible. Do not use bold or italics formatting."
-    )
-
-    userPrompt = (
-        f"Today I have consumed: {totalConsumed}. "
-        f"My goals are: {userTargets}. "
-        f"The foods I logged today: {allLogs}. "
-        "Based on this, what's your advice for my next meal or my current progress?"
-    )
-
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={apiKey}"
-    headers = {'Content-Type': 'application/json'}
-    payload = {
-        "system_instruction": {
-            "parts": [{"text": systemPrompt}]
-        },
-        "contents": [{
-            "parts": [{"text": userPrompt}]
-        }]
-    }
+    import sys
+    print(f"DEBUG: Recommendation for date: {todayDate}", file=sys.stderr)
 
     try:
-        response = requests.post(url, headers=headers, json=payload)
+        user = User.query.get(session["userId"])
+             
+        if not user:
+             print("DEBUG: No user found in session!", file=sys.stderr)
+             return {"error": "User not found"}, 401
+             
+        # Fetch today's totals
+        stats = (
+            db.session.query(
+                func.sum(FoodLog.calories).label("calories"),
+                func.sum(FoodLog.protein).label("protein"),
+                func.sum(FoodLog.carbs).label("carbs"),
+                func.sum(FoodLog.fat).label("fat"),
+                func.sum(FoodLog.fiber).label("fiber"),
+            )
+            .filter(func.date(FoodLog.dateLogged) == todayDate)
+            .filter(FoodLog.userId == user.id)
+            .first()
+        )
+        totalConsumed = {
+            "calories": round(stats.calories or 0, 1),
+            "protein": round(stats.protein or 0, 1),
+            "carbs": round(stats.carbs or 0, 1),
+            "fat": round(stats.fat or 0, 1),
+            "fiber": round(stats.fiber or 0, 1),
+        }
         
-        if response.status_code == 429:
-            return {"recommendation": "The AI assistant is currently resting. Please check back in a bit for more advice!", "status": "quota_exceeded"}
-            
+        print(f"DEBUG: Total Consumed: {totalConsumed}", file=sys.stderr)
+
+        # Fetch today's logs
+        logsForToday = FoodLog.query.filter(
+            func.date(FoodLog.dateLogged) == todayDate,
+            FoodLog.userId == user.id,
+        ).all()
+        allLogs = [log.foodName for log in logsForToday]
+        
+        print(f"DEBUG: All Logs: {allLogs}", file=sys.stderr)
+
+        userTargets = {
+            "calories": user.targetCalories,
+            "protein": user.targetProtein,
+            "carbs": user.targetCarbs,
+            "fat": user.targetFat,
+            "fiber": user.targetFiber
+        }
+
+        systemPrompt = (
+            "You are a helpful nutrition assistant for the NutriTracker app. Your goal is to analyze the user's daily food logs and provide personalized advice tailored to an Indian diet. "
+            "Analyze the user's progress toward their daily goals (Calories, Protein, Carbs, Fat, Fiber) based on their consumed nutrients and targets. "
+            "Suggest common natural Indian food sources to help them reach their goals. "
+            "DO NOT recommend supplements or protein powders. If they have overeaten, suggest how to adjust. "
+            "Keep the response very short, encouraging, and actionable (max 1-2 sentences). "
+            "Use bullet points for the advice if possible. Do not use bold or italics formatting."
+        )
+
+        userPrompt = (
+            f"Today I have consumed: {totalConsumed}. "
+            f"My goals are: {userTargets}. "
+            f"The foods I logged today: {allLogs}. "
+            "Based on this, what's your advice for my next meal or my current progress?"
+        )
+
+        # Call local Ollama instead of Gemini
+        url = "http://localhost:11434/api/generate"
+        payload = {
+            "model": "llama3.2:3b",
+            "prompt": f"System: {systemPrompt}\n\nUser: {userPrompt}",
+            "stream": False
+        }
+
+        print(f"DEBUG: Ollama Prompt: {payload['prompt']}", file=sys.stderr)
+
+        response = requests.post(url, json=payload)
+        print(f"DEBUG: Ollama Status: {response.status_code}", file=sys.stderr)
+        print(f"DEBUG: Ollama Response: {response.text}", file=sys.stderr)
         response.raise_for_status()
         result = response.json()
         
-        advice = result.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text', "Keep going! You're doing great.")
+        advice = result.get('response', "Keep going! You're doing great.")
         return {"recommendation": advice.strip()}
     except Exception as e:
         import traceback
-        traceback.print_exc() # This will print to gunicorn logs/journal
-        return {"error": str(e)}, 500
+        traceback.print_exc()
+        return {"error": f"AI error: {str(e)}"}, 500
 
 
 @mealBp.route("/api/logs/checkAvailability/<int:days>", methods=["GET"])

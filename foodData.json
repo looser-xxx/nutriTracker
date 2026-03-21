@@ -13038,5 +13038,21 @@
         "carbs": 0.0,
         "fat": 99.78,
         "fiber": 0.0
+    },
+    {
+        "foodName": "Sattu Dry Powder",
+        "calories": 400,
+        "protein": 26,
+        "carbs": 60,
+        "fat": 6.9,
+        "fiber": 18
+    },
+    {
+        "foodName": "Dabur Chyawanprash",
+        "calories": 325,
+        "protein": 1.25,
+        "carbs": 77.5,
+        "fat": 1,
+        "fiber": 0.7
     }
 ]

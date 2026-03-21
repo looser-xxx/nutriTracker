@@ -166,29 +166,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const fetchGeminiAdvice = async () => {
+    const fetchAIAdvice = async () => {
         if (!motivationQuote) return;
 
         try {
             const date = getLocalDate();
-            const geminiRes = await fetch(`/api/gemini/recommendation?date=${date}`, {
+            const aiRes = await fetch(`/api/ai/recommendation?date=${date}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            if (geminiRes.ok) {
-                const result = await geminiRes.json();
+            if (aiRes.ok) {
+                const result = await aiRes.json();
                 if (result.recommendation) {
                     typeWriter(`"${result.recommendation}"`, motivationQuote, 40);
                 }
-            } else if (geminiRes.status === 429) {
-                const result = await geminiRes.json();
+            } else if (aiRes.status === 429) {
+                const result = await aiRes.json();
                 if (result.recommendation) {
                     typeWriter(`"${result.recommendation}"`, motivationQuote, 40);
                 }
             }
         } catch (error) {
-            console.error('Error fetching Gemini advice:', error);
+            console.error('Error fetching AI advice:', error);
         }
     };
 
@@ -208,10 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (lastFetchedDate && data.date !== lastFetchedDate) {
                 console.log("Date changed, refreshing stats and advice...");
                 fetchTodayStats();
-                fetchGeminiAdvice();
+                fetchAIAdvice();
             } else if (!lastFetchedDate) {
                 // Initial load: fetch advice once
-                fetchGeminiAdvice();
+                fetchAIAdvice();
             }
             lastFetchedDate = data.date;
 
@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetchTodayStats();
                 fetchAndRenderTodayMeals();
                 renderHomeMealList();
-                fetchGeminiAdvice();
+                fetchAIAdvice();
             } else {
                 alert('Failed to delete log.');
                 btn.disabled = false;
@@ -888,7 +888,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     toggleModal(addMealModal, false);
                     fetchTodayStats();
                     renderHomeMealList();
-                    fetchGeminiAdvice();
+                    fetchAIAdvice();
                     foodSearch.value = '';
                     selectedFoodInput.value = '';
                     selectedFoodInput.removeAttribute('data-id');
