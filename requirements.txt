@@ -3,3 +3,5 @@ Flask-SQLAlchemy
 Authlib
 requests
 python-dotenv
+gunicorn
+gevent

@@ -173,7 +173,8 @@ def generateTargets():
     )
 
     # Call local Ollama instead of Gemini
-    url = "http://localhost:11434/api/generate"
+    ollama_url = os.getenv("OLLAMA_URL", "http://localhost:11434")
+    url = f"{ollama_url}/api/generate"
     payload = {
         "model": "llama3.2:3b",
         "prompt": prompt,
@@ -810,7 +811,8 @@ def getRecommendation():
         )
 
         # Call local Ollama instead of Gemini
-        url = "http://localhost:11434/api/generate"
+        ollama_url = os.getenv("OLLAMA_URL", "http://localhost:11434")
+        url = f"{ollama_url}/api/generate"
         payload = {
             "model": "llama3.2:3b",
             "prompt": f"System: {systemPrompt}\n\nUser: {userPrompt}",

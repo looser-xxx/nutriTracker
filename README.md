@@ -47,6 +47,41 @@ Follow these instructions to set up and run the application on your local machin
 2.  **Access the application:**
     The application will be running at `http://127.0.0.1:5000/`.
 
+## 🐳 Running with Docker
+
+The application is fully containerized and ready for production using **Docker** and **Docker Compose**.
+
+### Prerequisites
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Setup & Run
+1.  **Configure Environment Variables:**
+    Ensure you have a `.env` file in the root directory with the following:
+    ```env
+    SECRET_KEY=your_secret_key
+    GOOGLE_CLIENT_ID=your_google_client_id
+    GOOGLE_CLIENT_SECRET=your_google_client_secret
+    OLLAMA_URL=http://host.docker.internal:11434  # To connect to Ollama on the host
+    ```
+
+2.  **Build and Start the Containers:**
+    ```bash
+    docker compose up -d --build
+    ```
+
+3.  **Access the Application:**
+    The application will be running at `http://localhost:5050`.
+
+### Data Persistence
+- The SQLite database is stored in the `./instance` directory on your host machine, which is mapped to the container. Your data will persist even if the container is removed or updated.
+- Food and exercise data are automatically initialized and synced from `foodData.json` and `exerciseData.json` on the first run.
+
+### Advantages of the Docker Setup
+- **Production Grade:** Uses Gunicorn with Gevent workers for better performance and concurrency.
+- **Easy Deployment:** Ideal for home servers, NAS (like Synology/TrueNAS), or cloud VPS.
+- **Cloudflare Ready:** Pre-configured with `ProxyFix` to work seamlessly behind Cloudflare Tunnels.
+
 ## API Endpoints
 
 ### Food Management
