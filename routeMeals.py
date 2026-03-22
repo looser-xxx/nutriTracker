@@ -65,9 +65,8 @@ def workout():
 @mealBp.route("/hydration")
 @loginRequired
 def hydration():
-    if "userId" not in session:
-        return redirect(url_for("mealBp.onboarding"))
-    return render_template("under_development.html", section="Hydration", version=datetime.now().timestamp())
+    user = User.query.get(session["userId"])
+    return render_template("hydration.html", user_name=user.fullName.split()[0], version=datetime.now().timestamp())
 
 
 @mealBp.route("/login")
