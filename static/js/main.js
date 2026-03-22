@@ -1157,12 +1157,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (saveGoalsBtn) {
         saveGoalsBtn.addEventListener('click', async () => {
             const newTargets = {
-                calories: parseInt(goalInputs.calories.value),
-                protein: parseInt(goalInputs.protein.value),
-                carbs: parseInt(goalInputs.carbs.value),
-                fat: parseInt(goalInputs.fat.value),
-                fiber: parseInt(goalInputs.fiber.value),
-                water: parseInt(goalInputs.water.value)
+                calories: goalInputs.calories ? parseInt(goalInputs.calories.value) : userTargets.calories,
+                protein: goalInputs.protein ? parseInt(goalInputs.protein.value) : userTargets.protein,
+                carbs: goalInputs.carbs ? parseInt(goalInputs.carbs.value) : userTargets.carbs,
+                fat: goalInputs.fat ? parseInt(goalInputs.fat.value) : userTargets.fat,
+                fiber: goalInputs.fiber ? parseInt(goalInputs.fiber.value) : userTargets.fiber,
+                water: goalInputs.water ? parseInt(goalInputs.water.value) : (userTargets.water || 3000)
             };
 
             try {
@@ -1180,6 +1180,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         fetchTodayStats();
                     }
                     toggleModal(userGoalsModal, false);
+                    
+                    // Show a quick success feedback if possible, or just close
+                    console.log('Goals updated successfully');
                 } else {
                     alert('Failed to save goals.');
                 }

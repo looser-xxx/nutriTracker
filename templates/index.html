@@ -517,6 +517,15 @@
                     <button class="stepBtn" onclick="changeVal('goalEditFib', 1)">+</button>
                 </div>
             </div>
+            <!-- Water -->
+            <div class="stepperItem">
+                <span class="stepperLabel">Daily Water (ml)</span>
+                <div class="stepper">
+                    <button class="stepBtn" onclick="changeVal('goalEditWater', -250)">-</button>
+                    <input type="number" id="goalEditWater" value="3000">
+                    <button class="stepBtn" onclick="changeVal('goalEditWater', 250)">+</button>
+                </div>
+            </div>
         </div>
         <div style="display: flex; gap: 10px; margin-top: 25px;">
             <button id="closeGoals" class="closeBtn" style="flex: 1; margin: 0; background: var(--bg-input); color: var(--text-primary);">Cancel</button>

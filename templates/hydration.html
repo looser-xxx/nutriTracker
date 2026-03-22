@@ -497,8 +497,15 @@
 
 <div id="userGoalsModal" class="modalOverlay hiddenView">
     <div class="nutrientModal">
-        <h3>My Hydration Goals</h3>
+        <h3>My Nutrition Goals</h3>
         <div class="stepperList">
+            <!-- Hidden nutrient inputs to support common JS logic -->
+            <input type="hidden" id="goalEditCal" value="2500">
+            <input type="hidden" id="goalEditPro" value="150">
+            <input type="hidden" id="goalEditCar" value="300">
+            <input type="hidden" id="goalEditFat" value="80">
+            <input type="hidden" id="goalEditFib" value="30">
+
             <!-- Water -->
             <div class="stepperItem">
                 <span class="stepperLabel">Daily Water (ml)</span>
