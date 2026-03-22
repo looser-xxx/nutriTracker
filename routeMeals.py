@@ -903,6 +903,53 @@ def getLogsForAvg(days):
     return logsForAvg
 
 
+@mealBp.route("/api/logs/hydration/checkAvailability/<int:days>")
+@loginRequired
+def checkHydrationAvailability(days):
+    distinctDaysCount = (
+        db.session.query(func.count(func.distinct(func.date(HydrationLog.loggedAt))))
+        .filter(HydrationLog.userId == session["userId"])
+        .scalar()
+    )
+
+    return {
+        "available": distinctDaysCount >= 3,  # Limiter: need at least 3 days
+        "daysLogged": distinctDaysCount,
+        "requiredDays": 3
+    }
+
+
+@mealBp.route("/api/logs/hydration/avg/<int:days>", methods=["GET"])
+@loginRequired
+def sendHydrationAvg(days):
+    todayDate = datetime.now(timezone.utc).date()
+    
+    # Get last X days of total water per day
+    stats = (
+        db.session.query(
+            func.date(HydrationLog.loggedAt).label("date"),
+            func.sum(HydrationLog.amountMl).label("total")
+        )
+        .filter(HydrationLog.userId == session["userId"])
+        .filter(func.date(HydrationLog.loggedAt) < todayDate)
+        .group_by(func.date(HydrationLog.loggedAt))
+        .order_by(func.date(HydrationLog.loggedAt).desc())
+        .limit(days)
+        .all()
+    )
+
+    graphData = [float(s.total) for s in stats]
+    avgWater = sum(graphData) / len(graphData) if graphData else 0
+
+    return {
+        "average": {
+            "water": round(avgWater, 1)
+        },
+        "graphData": graphData,
+        "daysFound": len(graphData)
+    }
+
+
 def calculateAvg(logs, days):
     calories = 0
     protein = 0

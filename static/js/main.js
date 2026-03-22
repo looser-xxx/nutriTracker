@@ -248,6 +248,107 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeTodaysMealsBtn = document.getElementById('closeTodaysMeals');
     const todaysMealList = document.getElementById('todaysMealList');
 
+    // Hydration Stats Elements
+    const waterStatsBtn = document.getElementById('waterStatsBtn');
+    const hydrationStatsContainer = document.getElementById('hydrationStatsContainer');
+    const closeHydrationStatsBtn = document.getElementById('closeHydrationStats');
+    const hydrationInsightText = document.getElementById('hydrationInsightText');
+    const avgWaterVal = document.getElementById('avgWaterVal');
+    const avgWaterFill = document.getElementById('avgWaterFill');
+    const statGoalWater = document.getElementById('statGoalWater');
+
+    // --- Helper Functions ---
+
+    const resetHydrationStatsAnimation = () => {
+        const statsModal = document.getElementById('hydrationStatsContainer');
+        if (!statsModal) return;
+        const fills = statsModal.querySelectorAll('.goalFill');
+        const countUps = statsModal.querySelectorAll('.countUp');
+        fills.forEach(f => f.style.width = '0%');
+        countUps.forEach(c => c.textContent = '0');
+        if (hydrationInsightText) hydrationInsightText.innerHTML = '';
+    };
+
+    const playHydrationStatsAnimation = async () => {
+        resetHydrationStatsAnimation();
+        
+        const statsModal = document.getElementById('hydrationStatsContainer');
+        if (!statsModal) return;
+
+        const activeTab = statsModal.querySelector('.tabBtn.active').getAttribute('data-tab');
+        const days = activeTab === 'monthly' ? 30 : 7;
+        const apiUrl = `/api/logs/hydration/avg/${days}`;
+        const availabilityUrl = `/api/logs/hydration/checkAvailability/${days}`;
+        
+        const chartSection = statsModal.querySelector('.chartSection');
+        const avgSection = statsModal.querySelector('.avgSection');
+        const chartPlaceholder = statsModal.querySelector('.chartPlaceholder');
+
+        if (chartSection) chartSection.classList.remove('stats-disabled');
+        if (avgSection) avgSection.classList.remove('stats-disabled');
+        if (hydrationInsightText) hydrationInsightText.innerHTML = 'Analyzing your hydration patterns...';
+
+        try {
+            const availabilityRes = await fetch(availabilityUrl);
+            const availabilityData = await availabilityRes.json();
+
+            if (!availabilityData.available) {
+                if (chartSection) chartSection.classList.add('stats-disabled');
+                if (avgSection) avgSection.classList.add('stats-disabled');
+                
+                const logged = availabilityData.daysLogged || 0;
+                const required = availabilityData.requiredDays || 3;
+                
+                const msg = `<strong>Not enough data yet.</strong><br>You have logged water for ${logged} out of the ${required} days needed to generate ${activeTab} statistics. Keep logging!`;
+                if (hydrationInsightText) hydrationInsightText.innerHTML = msg;
+                return;
+            }
+
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            const avg = data.average.water;
+            const graph = data.graphData;
+
+            setTimeout(() => {
+                if (chartPlaceholder) {
+                    chartPlaceholder.innerHTML = '';
+                    const goal = userTargets.water || 3000;
+                    const maxWater = Math.max(...graph, goal);
+                    
+                    graph.forEach((val) => {
+                        const bar = document.createElement('div');
+                        bar.className = 'bar';
+                        bar.style.backgroundColor = '#3498db'; // Water blue
+                        const height = (val / maxWater) * 100;
+                        bar.style.height = `${height}%`;
+                        bar.style.width = activeTab === 'monthly' ? '2%' : '10%';
+                        chartPlaceholder.appendChild(bar);
+                        setTimeout(() => bar.classList.add('animate'), 10);
+                    });
+                }
+
+                if (avgWaterVal) {
+                    animateValue(avgWaterVal, 0, Math.round(avg), 1000);
+                }
+                if (statGoalWater) {
+                    statGoalWater.textContent = userTargets.water || 3000;
+                }
+                if (avgWaterFill) {
+                    const goal = userTargets.water || 3000;
+                    const pct = Math.min((avg / goal) * 100, 100);
+                    avgWaterFill.style.width = `${pct}%`;
+                }
+
+                const daysMsg = `${data.daysFound} logged days`;
+                const insight = `Based on your ${activeTab} data (${daysMsg}), you're averaging ${Math.round(avg)}ml of water daily. ${avg >= (userTargets.water || 3000) ? "Excellent hydration levels!" : "Try to drink a bit more water consistently."}`;
+                typeWriter(insight, hydrationInsightText, 30);
+            }, 50);
+
+        } catch (error) {
+            console.error("Error loading hydration stats:", error);
+        }
+    };
+
     const dbViewContainer = document.getElementById('dbViewContainer');
     const closeDbViewBtn = document.getElementById('closeDbView');
     const dbFoodList = document.getElementById('dbFoodList');
@@ -557,6 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (show) {
             modal.classList.remove('hiddenView');
             if (statsContainer && modal === statsContainer) playStatsAnimation();
+            if (hydrationStatsContainer && modal === hydrationStatsContainer) playHydrationStatsAnimation();
             if (dbViewContainer && modal === dbViewContainer) fetchAndRenderDb();
             if (todaysMealsContainer && modal === todaysMealsContainer) fetchAndRenderTodayMeals();
             if (modalNutrients && modal === modalNutrients) {
@@ -985,6 +1087,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const action2Btn = document.getElementById('action2Btn');
     if (action2Btn) action2Btn.addEventListener('click', () => toggleModal(statsContainer, true));
     if (closeStatsBtn) closeStatsBtn.addEventListener('click', () => toggleModal(statsContainer, false));
+
+    if (waterStatsBtn) {
+        waterStatsBtn.addEventListener('click', () => toggleModal(hydrationStatsContainer, true));
+    }
+    if (closeHydrationStatsBtn) {
+        closeHydrationStatsBtn.addEventListener('click', () => toggleModal(hydrationStatsContainer, false));
+    }
+
+    if (hydrationStatsContainer) {
+        const hStatsTabs = hydrationStatsContainer.querySelectorAll('.tabBtn');
+        hStatsTabs.forEach(btn => {
+            btn.addEventListener('click', () => {
+                hStatsTabs.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                playHydrationStatsAnimation();
+            });
+        });
+    }
 
     // if (navWorkout) navWorkout.addEventListener('click', () => toggleModal(workoutContainer, true));
     if (closeWorkoutBtn) closeWorkoutBtn.addEventListener('click', () => toggleModal(workoutContainer, false));
