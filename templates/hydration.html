@@ -42,45 +42,31 @@
 
     <main class="contentArea">
         <div id="todayMain" class="card summaryCard">
-            <h3>Calories Left</h3>
+            <h3>Hydration Goal</h3>
             <div class="progressCircle">
-                <h1>0</h1>
-                <p>of -- kcal goal</p>
+                <h1 id="currentWater" class="skeleton" style="min-width: 80px;">0</h1>
+                <p>of <span id="goalWater">--</span> ml goal</p>
             </div>
         </div>
 
         <div class="buttonGroup">
-            <button id="action1Btn" class="actionBtn">View Logs</button>
-            <button id="action2Btn" class="actionBtn">Stats</button>
+            <button id="waterAction1" class="actionBtn">Quick Log (250ml)</button>
+            <button id="waterAction2" class="actionBtn">Custom Log</button>
         </div>
 
         <div id="motivationQuote" class="quoteCard">
-            "Loading motivation..."
+            "Stay hydrated, stay healthy!"
         </div>
 
         <div class="sectionHeader">
-            <h3>Today's Meals</h3>
+            <h3>Today's Hydration</h3>
         </div>
 
-        <ul class="mealList">
+        <ul class="mealList" id="hydrationList">
             <!-- Skeleton Loader Items -->
             <li class="mealItem">
                 <div class="mealInfo" style="width: 60%;">
                     <span class="mealName skeleton skeleton-text" style="width: 80%;"></span>
-                    <span class="mealTime skeleton skeleton-text" style="width: 40%;"></span>
-                </div>
-                <span class="mealCals skeleton skeleton-text" style="width: 20%;"></span>
-            </li>
-            <li class="mealItem">
-                <div class="mealInfo" style="width: 60%;">
-                    <span class="mealName skeleton skeleton-text" style="width: 70%;"></span>
-                    <span class="mealTime skeleton skeleton-text" style="width: 40%;"></span>
-                </div>
-                <span class="mealCals skeleton skeleton-text" style="width: 20%;"></span>
-            </li>
-            <li class="mealItem">
-                <div class="mealInfo" style="width: 60%;">
-                    <span class="mealName skeleton skeleton-text" style="width: 60%;"></span>
                     <span class="mealTime skeleton skeleton-text" style="width: 40%;"></span>
                 </div>
                 <span class="mealCals skeleton skeleton-text" style="width: 20%;"></span>
@@ -275,43 +261,49 @@
     </div>
 </div>
 
-<div id="addMeal" class="modalOverlay hiddenView">
-    <div class="nutrientModal"> <!-- Reusing container style -->
-        <h3>Add Meal</h3>
-        
-        <form id="addMealForm" class="mealForm">
+<div id="addHydration" class="modalOverlay hiddenView">
+    <div class="nutrientModal">
+        <h3>Log Hydration</h3>
+        <form id="addHydrationForm" class="mealForm">
             <div class="formGroup">
-                <label for="foodSearch">Select Food</label>
-                <div class="searchWrapper">
-                    <input type="text" id="foodSearch" class="formControl" placeholder="Search food..." autocomplete="off">
-                    <button type="button" id="clearSearch" class="clearSearchBtn hiddenView">&times;</button>
-                </div>
-                <div id="foodList" class="foodListContainer"></div>
-                <input type="hidden" id="selectedFood">
-            </div>
-
-            <div class="nutritionLogSection">
-                <h4>Nutrition per 100g</h4>
-                <div class="miniNutrientGrid">
-                    <div class="miniItem"><span class="lbl">Cal</span><span class="val" id="infoCal">-</span></div>
-                    <div class="miniItem"><span class="lbl">Pro</span><span class="val" id="infoPro">-</span></div>
-                    <div class="miniItem"><span class="lbl">Carb</span><span class="val" id="infoCarb">-</span></div>
-                    <div class="miniItem"><span class="lbl">Fat</span><span class="val" id="infoFat">-</span></div>
-                </div>
+                <label for="beverageType">Beverage Type</label>
+                <select id="beverageType" class="formControl">
+                    <option value="Water">Water</option>
+                    <option value="Coffee">Coffee</option>
+                    <option value="Tea">Tea</option>
+                    <option value="Juice">Juice</option>
+                    <option value="Milk">Milk</option>
+                    <option value="Soda">Soda</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
 
             <div class="formGroup">
-                <label for="foodQuantity">Quantity (grams)</label>
+                <label for="waterAmount">Amount (ml)</label>
                 <div class="qtyStepper">
-                    <button type="button" id="qtyDec" class="stepperBtn minus">&minus;</button>
-                    <input type="number" id="foodQuantity" class="formControl stepperInput" value="100" min="0">
-                    <button type="button" id="qtyInc" class="stepperBtn plus">&plus;</button>
+                    <button type="button" id="waterDec" class="stepperBtn minus">&minus;</button>
+                    <input type="number" id="waterAmount" class="formControl stepperInput" value="250" min="0" step="50">
+                    <button type="button" id="waterInc" class="stepperBtn plus">&plus;</button>
                 </div>
             </div>
 
-            <button type="submit" class="submitBtn">Add Meal</button>
-            <button type="button" id="closeAddMeal" class="closeBtn secondaryBtn">Cancel</button>
+            <button type="submit" class="submitBtn">Log Hydration</button>
+            <button type="button" id="closeAddHydration" class="closeBtn secondaryBtn">Cancel</button>
         </form>
+    </div>
+</div>
+
+<div id="todaysHydrationContainer" class="modalOverlay hiddenView">
+    <div class="statsView">
+        <header class="statsHeader">
+            <h3>Today's Hydration Logs</h3>
+            <button id="closeTodaysHydration" class="iconBtn">&times;</button>
+        </header>
+        <div class="statsContent">
+            <ul class="mealList" id="todaysHydrationList">
+                <!-- Populated by JS -->
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -499,6 +491,15 @@
                     <button class="stepBtn" onclick="changeVal('goalEditFib', -1)">-</button>
                     <input type="number" id="goalEditFib" value="30">
                     <button class="stepBtn" onclick="changeVal('goalEditFib', 1)">+</button>
+                </div>
+            </div>
+            <!-- Water -->
+            <div class="stepperItem">
+                <span class="stepperLabel">Daily Water (ml)</span>
+                <div class="stepper">
+                    <button class="stepBtn" onclick="changeVal('goalEditWater', -250)">-</button>
+                    <input type="number" id="goalEditWater" value="3000">
+                    <button class="stepBtn" onclick="changeVal('goalEditWater', 250)">+</button>
                 </div>
             </div>
         </div>

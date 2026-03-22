@@ -13,7 +13,164 @@ document.addEventListener('DOMContentLoaded', () => {
     const addMealForm = document.getElementById('addMealForm');
 
     // Hydration Elements
-    const navHydration = document.getElementById('navHydration');
+    const currentWaterText = document.getElementById('currentWater');
+    const goalWaterText = document.getElementById('goalWater');
+    const hydrationList = document.getElementById('hydrationList');
+    const addHydrationModal = document.getElementById('addHydration');
+    const addHydrationForm = document.getElementById('addHydrationForm');
+    const closeAddHydrationBtn = document.getElementById('closeAddHydration');
+    const waterAmountInput = document.getElementById('waterAmount');
+    const waterDecBtn = document.getElementById('waterDec');
+    const waterIncBtn = document.getElementById('waterInc');
+    const beverageTypeSelect = document.getElementById('beverageType');
+
+    const waterAction1 = document.getElementById('waterAction1'); // Quick Log
+    const waterAction2 = document.getElementById('waterAction2'); // Custom Log
+
+    const todaysHydrationContainer = document.getElementById('todaysHydrationContainer');
+    const closeTodaysHydrationBtn = document.getElementById('closeTodaysHydration');
+    const todaysHydrationList = document.getElementById('todaysHydrationList');
+
+    const goalInputs = {
+        calories: document.getElementById('goalEditCal'),
+        protein: document.getElementById('goalEditPro'),
+        carbs: document.getElementById('goalEditCar'),
+        fat: document.getElementById('goalEditFat'),
+        fiber: document.getElementById('goalEditFib'),
+        water: document.getElementById('goalEditWater')
+    };
+
+    let typingTimer = null;
+    let lastFetchedDate = null;
+
+    // --- Helper Functions ---
+
+    const fetchHydrationData = async () => {
+        try {
+            const [targetsRes, logsRes] = await Promise.all([
+                fetch('/api/user/targets'),
+                fetch('/api/logs/today/hydration')
+            ]);
+            
+            const targets = await targetsRes.json();
+            const logs = await logsRes.json();
+
+            if (goalWaterText) goalWaterText.textContent = targets.water || 3000;
+            if (currentWaterText) {
+                currentWaterText.classList.remove('skeleton');
+                animateValue(currentWaterText, 0, logs.total || 0, 1000);
+            }
+
+            const summaryP = (todayMain && window.location.pathname === '/hydration-new') ? todayMain.querySelector('p') : null;
+            if (summaryP) {
+                summaryP.innerHTML = `of <span id="goalWater">${targets.water || 3000}</span> ml goal`;
+            }
+
+            if (hydrationList) {
+                renderHydrationLogs(logs.logs, hydrationList);
+            }
+            if (todaysHydrationList) {
+                renderHydrationLogs(logs.logs, todaysHydrationList);
+            }
+        } catch (err) {
+            console.error('Error fetching hydration data:', err);
+        }
+    };
+
+    const renderHydrationLogs = (logs, container) => {
+        if (!container) return;
+        container.innerHTML = '';
+        
+        if (logs.length === 0) {
+            container.innerHTML = '<li class="mealItem" style="justify-content: center; color: var(--text-muted);">No hydration logged today</li>';
+            return;
+        }
+
+        logs.forEach(log => {
+            const li = document.createElement('li');
+            li.className = 'mealItem';
+            li.innerHTML = `
+                <div class="mealInfo">
+                    <span class="mealName">${log.beverageType}</span>
+                    <span class="mealTime">${new Date(log.loggedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span class="mealCals">${log.amountMl}ml</span>
+                    <button class="deleteHydrationBtn" data-id="${log.id}" style="background: none; border: none; color: #e74c3c; cursor: pointer; padding: 5px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6" />
+                        </svg>
+                    </button>
+                </div>
+            `;
+            container.appendChild(li);
+        });
+
+        // Add delete listeners
+        container.querySelectorAll('.deleteHydrationBtn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const id = btn.getAttribute('data-id');
+                if (confirm('Delete this entry?')) {
+                    try {
+                        const res = await fetch(`/api/logs/today/deleteHydration/${id}`, { method: 'DELETE' });
+                        if (res.ok) fetchHydrationData();
+                    } catch (err) {
+                        console.error('Error deleting hydration log:', err);
+                    }
+                }
+            });
+        });
+    };
+
+    const logHydration = async (amountMl, beverageType = 'Water') => {
+        try {
+            const res = await fetch('/api/logs/hydration', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amountMl, beverageType })
+            });
+            if (res.ok) {
+                fetchHydrationData();
+                if (addHydrationModal) addHydrationModal.classList.add('hiddenView');
+            }
+        } catch (err) {
+            console.error('Error logging hydration:', err);
+        }
+    };
+
+    const populateGoalInputs = () => {
+        if (goalInputs.calories) goalInputs.calories.value = userTargets.calories;
+        if (goalInputs.protein) goalInputs.protein.value = userTargets.protein;
+        if (goalInputs.carbs) goalInputs.carbs.value = userTargets.carbs;
+        if (goalInputs.fat) goalInputs.fat.value = userTargets.fat;
+        if (goalInputs.fiber) goalInputs.fiber.value = userTargets.fiber;
+        if (goalInputs.water) goalInputs.water.value = userTargets.water || 3000;
+    };
+
+    const getLocalDate = () => {
+        const d = new Date();
+        const date = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        return date;
+    };
+
+    // Search Elements
+    const foodSearch = document.getElementById('foodSearch');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const foodListContainer = document.getElementById('foodList');
+    const selectedFoodInput = document.getElementById('selectedFood');
+
+    // Stepper Elements
+    const qtyDec = document.getElementById('qtyDec');
+    const qtyInc = document.getElementById('qtyInc');
+    const foodQuantity = document.getElementById('foodQuantity');
+
+    // Nutrition Info Elements
+    const infoCal = document.getElementById('infoCal');
+    const infoPro = document.getElementById('infoPro');
+    const infoCarb = document.getElementById('infoCarb');
+    const infoFat = document.getElementById('infoFat');
+
     const statsContainer = document.getElementById('statsContainer');
     const closeStatsBtn = document.getElementById('closeStats');
     const tabBtns = document.querySelectorAll('.tabBtn');
@@ -34,43 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeTodaysMealsBtn = document.getElementById('closeTodaysMeals');
     const todaysMealList = document.getElementById('todaysMealList');
 
-    const quotes = [
-        "Believe you can and you're halfway there.",
-        "Your only limit is you.",
-        "Don't stop until you're proud.",
-        "Healthy is a way of life.",
-        "Everything you need is already inside you.",
-        "The only bad workout is the one that didn't happen.",
-        "Fitness is not about being better than someone else. It's about being better than you were yesterday.",
-        "Take care of your body. It's the only place you have to live.",
-        "Fuel your body, feed your soul.",
-        "Success starts with self-discipline."
-    ];
-
-    if (motivationQuote) {
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        motivationQuote.textContent = `"${randomQuote}"`;
-    }
-
-
-    // Search Elements
-    const foodSearch = document.getElementById('foodSearch');
-    const clearSearchBtn = document.getElementById('clearSearch');
-    const foodListContainer = document.getElementById('foodList');
-    const selectedFoodInput = document.getElementById('selectedFood');
-
-    // Stepper Elements
-    const qtyDec = document.getElementById('qtyDec');
-    const qtyInc = document.getElementById('qtyInc');
-    const foodQuantity = document.getElementById('foodQuantity');
-
-    // Nutrition Info Elements
-    const infoCal = document.getElementById('infoCal');
-    const infoPro = document.getElementById('infoPro');
-    const infoCarb = document.getElementById('infoCarb');
-    const infoFat = document.getElementById('infoFat');
-
-    // View DB Elements
     const dbViewContainer = document.getElementById('dbViewContainer');
     const closeDbViewBtn = document.getElementById('closeDbView');
     const dbFoodList = document.getElementById('dbFoodList');
@@ -84,24 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const userGoalsModal = document.getElementById('userGoalsModal');
     const saveGoalsBtn = document.getElementById('saveGoals');
     const closeGoalsBtn = document.getElementById('closeGoals');
-    const goalInputs = {
-        calories: document.getElementById('goalEditCal'),
-        protein: document.getElementById('goalEditPro'),
-        carbs: document.getElementById('goalEditCar'),
-        fat: document.getElementById('goalEditFat'),
-        fiber: document.getElementById('goalEditFib')
-    };
-
-    let typingTimer = null;
-    let lastFetchedDate = null;
-
-    // --- Helper Functions ---
-
-    const getLocalDate = () => {
-        const d = new Date();
-        const date = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-        return date;
-    };
 
     const fetchUserTargets = async () => {
         try {
@@ -128,14 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const populateGoalInputs = () => {
-        if (goalInputs.calories) goalInputs.calories.value = userTargets.calories;
-        if (goalInputs.protein) goalInputs.protein.value = userTargets.protein;
-        if (goalInputs.carbs) goalInputs.carbs.value = userTargets.carbs;
-        if (goalInputs.fat) goalInputs.fat.value = userTargets.fat;
-        if (goalInputs.fiber) goalInputs.fiber.value = userTargets.fiber;
-    };
-
     const fetchTodayStats = async () => {
         try {
             const date = getLocalDate();
@@ -143,24 +237,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Failed to fetch today stats');
             const data = await response.json();
             
-            if (todayMain) {
+            if (todayMain && window.location.pathname === '/') {
                 const h1 = todayMain.querySelector('h1');
                 const p = todayMain.querySelector('p');
-                const dailyGoal = userTargets.calories; 
-                
+                const dailyGoal = userTargets.calories;
+
                 if (h1 && data.calories !== undefined) {
-                    h1.classList.remove('skeleton'); 
+                    h1.classList.remove('skeleton');
                     h1.style.minWidth = '0';
                     const consumed = Math.round(data.calories);
                     const left = Math.max(0, dailyGoal - consumed);
-                    
+
                     animateValue(h1, 0, left, 1000);
                 }
                 if (p) {
                     p.textContent = `of ${dailyGoal.toLocaleString()} kcal goal`;
                 }
-            }
-            return data;
+            }            return data;
         } catch (error) {
             console.error('Error loading today stats:', error);
         }
@@ -171,7 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const date = getLocalDate();
-            const aiRes = await fetch(`/api/ai/recommendation?date=${date}`, {
+            // Using /api/gemini/recommendation as seen in routeMeals.py
+            const aiRes = await fetch(`/api/gemini/recommendation?date=${date}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -618,20 +712,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    const updateNutritionDisplay = (macros) => {
-        if (!macros) {
-            infoCal.textContent = '-';
-            infoPro.textContent = '-';
-            infoCarb.textContent = '-';
-            infoFat.textContent = '-';
-            return;
-        }
-        infoCal.textContent = Math.round(macros.cal || 0);
-        infoPro.textContent = (macros.p || 0) + 'g';
-        infoCarb.textContent = (macros.c || 0) + 'g';
-        infoFat.textContent = (macros.f || 0) + 'g';
-    };
-
     const renderFoodList = (foods) => {
         foodListContainer.innerHTML = '';
         if (foods.length === 0) {
@@ -727,7 +807,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('click', (e) => {
-        if (!foodSearch.contains(e.target) && !foodListContainer.contains(e.target) && e.target !== clearSearchBtn) {
+        if (foodSearch && !foodSearch.contains(e.target) && !foodListContainer.contains(e.target) && e.target !== clearSearchBtn) {
             foodListContainer.classList.remove('active');
         }
     });
@@ -743,6 +823,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const updateNutritionDisplay = (macros) => {
+        if (!infoCal || !infoPro || !infoCarb || !infoFat) return;
+        if (!macros) {
+            infoCal.textContent = '-';
+            infoPro.textContent = '-';
+            infoCarb.textContent = '-';
+            infoFat.textContent = '-';
+            return;
+        }
+        infoCal.textContent = Math.round(macros.cal || 0);
+        infoPro.textContent = (macros.p || 0) + 'g';
+        infoCarb.textContent = (macros.c || 0) + 'g';
+        infoFat.textContent = (macros.f || 0) + 'g';
+    };
+
     if (tabBtns.length > 0) {
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -753,11 +848,80 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (todayMain) todayMain.addEventListener('click', () => toggleModal(modalNutrients, true));
+    // --- Event Listeners ---
+
+    if (waterAction1) {
+        waterAction1.addEventListener('click', () => logHydration(250, 'Water'));
+    }
+
+    if (waterAction2) {
+        waterAction2.addEventListener('click', () => toggleModal(addHydrationModal, true));
+    }
+
+    if (closeAddHydrationBtn) {
+        closeAddHydrationBtn.addEventListener('click', () => toggleModal(addHydrationModal, false));
+    }
+
+    if (addHydrationModal) {
+        addHydrationModal.addEventListener('click', (e) => {
+            if (e.target === addHydrationModal) toggleModal(addHydrationModal, false);
+        });
+    }
+
+    if (addHydrationForm) {
+        addHydrationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const amount = parseFloat(waterAmountInput.value);
+            const type = beverageTypeSelect.value;
+            logHydration(amount, type);
+        });
+    }
+
+    if (waterDecBtn && waterAmountInput) {
+        waterDecBtn.addEventListener('click', () => {
+            waterAmountInput.value = Math.max(0, parseInt(waterAmountInput.value) - 50);
+        });
+    }
+
+    if (waterIncBtn && waterAmountInput) {
+        waterIncBtn.addEventListener('click', () => {
+            waterAmountInput.value = parseInt(waterAmountInput.value) + 50;
+        });
+    }
+
+    if (closeTodaysHydrationBtn) {
+        closeTodaysHydrationBtn.addEventListener('click', () => toggleModal(todaysHydrationContainer, false));
+    }
+
+    if (todaysHydrationContainer) {
+        todaysHydrationContainer.addEventListener('click', (e) => {
+            if (e.target === todaysHydrationContainer) toggleModal(todaysHydrationContainer, false);
+        });
+    }
+
+    if (todayMain) {
+        todayMain.addEventListener('click', () => {
+            if (window.location.pathname === '/hydration') {
+                toggleModal(todaysHydrationContainer, true);
+            } else {
+                toggleModal(modalNutrients, true);
+            }
+        });
+    }
+
     if (closeNutrientsBtn) closeNutrientsBtn.addEventListener('click', () => toggleModal(modalNutrients, false));
     if (modalNutrients) modalNutrients.addEventListener('click', (e) => { if (e.target === modalNutrients) toggleModal(modalNutrients, false); });
 
-    if (navAdd) navAdd.addEventListener('click', () => toggleModal(addMealModal, true));
+    if (navAdd) {
+        navAdd.addEventListener('click', () => {
+            if (window.location.pathname === '/hydration') {
+                toggleModal(addHydrationModal, true);
+            } else {
+                toggleModal(addMealModal, true);
+            }
+        });
+    }
+
     if (closeAddMealBtn) closeAddMealBtn.addEventListener('click', () => toggleModal(addMealModal, false));
     if (addMealModal) addMealModal.addEventListener('click', (e) => { if (e.target === addMealModal) toggleModal(addMealModal, false); });
 
@@ -820,7 +984,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 protein: parseInt(goalInputs.protein.value),
                 carbs: parseInt(goalInputs.carbs.value),
                 fat: parseInt(goalInputs.fat.value),
-                fiber: parseInt(goalInputs.fiber.value)
+                fiber: parseInt(goalInputs.fiber.value),
+                water: parseInt(goalInputs.water.value)
             };
 
             try {
@@ -832,7 +997,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (res.ok) {
                     await fetchUserTargets();
-                    fetchTodayStats();
+                    if (window.location.pathname === '/hydration') {
+                        fetchHydrationData();
+                    } else {
+                        fetchTodayStats();
+                    }
                     toggleModal(userGoalsModal, false);
                 } else {
                     alert('Failed to save goals.');
@@ -942,4 +1111,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Initialize page
+    fetchUserTargets().then(() => {
+        if (window.location.pathname === '/hydration') {
+            fetchHydrationData();
+        } else if (window.location.pathname === '/') {
+            fetchTodayStats();
+            renderHomeMealList();
+            fetchAIAdvice();
+        }
+    });
 });

@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from flask import Blueprint, redirect, render_template, request, session, url_for
 from sqlalchemy import func
 
-from models import FoodDirectory, FoodLog, User, db
+from models import FoodDirectory, FoodLog, HydrationLog, User, db
 
 load_dotenv()
 
@@ -277,7 +277,8 @@ def getUserTargets():
         "protein": user.targetProtein,
         "carbs": user.targetCarbs,
         "fat": user.targetFat,
-        "fiber": user.targetFiber
+        "fiber": user.targetFiber,
+        "water": user.targetWater
     }
 
 
@@ -295,6 +296,7 @@ def updateUserTargets():
     user.targetCarbs = float(data.get("carbs", user.targetCarbs))
     user.targetFat = float(data.get("fat", user.targetFat))
     user.targetFiber = float(data.get("fiber", user.targetFiber))
+    user.targetWater = float(data.get("water", user.targetWater))
     
     db.session.commit()
     return {"message": "Targets updated successfully"}, 200
@@ -593,12 +595,20 @@ def totalNutriConsumed():
         .first()
     )
 
+    hydration_stats = (
+        db.session.query(func.sum(HydrationLog.amountMl).label("water"))
+        .filter(func.date(HydrationLog.loggedAt) == todayDate)
+        .filter(HydrationLog.userId == session["userId"])
+        .first()
+    )
+
     return {
         "calories": round(stats.calories or 0, 1),
         "protein": round(stats.protein or 0, 1),
         "carbs": round(stats.carbs or 0, 1),
         "fat": round(stats.fat or 0, 1),
         "fiber": round(stats.fiber or 0, 1),
+        "water": hydration_stats.water or 0
     }
 
 
@@ -653,7 +663,73 @@ def deleteFood(id):
     return {"id": id}, 200
 
 
-@mealBp.route("/api/ai/recommendation", methods=["POST"])
+@mealBp.route("/api/logs/today/hydration")
+@loginRequired
+def getTodayHydration():
+    todayDate = datetime.now(timezone.utc).date()
+    logsForToday = (
+        HydrationLog.query.filter(
+            func.date(HydrationLog.loggedAt) == todayDate,
+            HydrationLog.userId == session["userId"],
+        )
+        .order_by(HydrationLog.loggedAt.desc())
+        .all()
+    )
+
+    totalAmount = sum(log.amountMl for log in logsForToday)
+
+    output = []
+    for log in logsForToday:
+        output.append(
+            {
+                "id": log.id,
+                "amountMl": log.amountMl,
+                "beverageType": log.beverageType,
+                "loggedAt": log.loggedAt.isoformat(),
+            }
+        )
+
+    return {"total": totalAmount, "logs": output}
+
+
+@mealBp.route("/api/logs/hydration", methods=["POST"])
+@loginRequired
+def logHydration():
+    data = request.json
+    amountMl = float(data.get("amountMl", 0))
+    beverageType = data.get("beverageType", "Water")
+
+    if amountMl <= 0:
+        return {"error": "Invalid amount"}, 400
+
+    newLog = HydrationLog(
+        userId=session["userId"],
+        amountMl=amountMl,
+        beverageType=beverageType,
+        loggedAt=datetime.now(timezone.utc),
+    )
+
+    db.session.add(newLog)
+    db.session.commit()
+
+    return {"message": "Hydration logged successfully", "id": newLog.id}, 201
+
+
+@mealBp.route("/api/logs/today/deleteHydration/<id>", methods=["DELETE"])
+@loginRequired
+def deleteHydrationLog(id):
+    logToDelete = HydrationLog.query.filter_by(id=id, userId=session["userId"]).first()
+
+    if not logToDelete:
+        return {"error": "Log not found"}, 404
+
+    db.session.delete(logToDelete)
+    db.session.commit()
+
+    return {"message": "Log deleted successfully"}, 200
+
+
+@mealBp.route("/api/gemini/recommendation", methods=["POST"])
 @loginRequired
 def getRecommendation():
     # Allow client to specify their local date

@@ -33,6 +33,7 @@ class User(db.Model):
     targetCarbs = db.Column(db.Float, default=300.0)
     targetFat = db.Column(db.Float, default=80.0)
     targetFiber = db.Column(db.Float, default=30.0)
+    targetWater = db.Column(db.Float, default=3000.0)
     
     # System Data
     createdAt = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))

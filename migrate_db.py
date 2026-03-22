@@ -11,7 +11,8 @@ if os.path.exists(db_path):
     columns_to_add = [
         ("weight", "REAL"),
         ("bicepSize", "REAL"),
-        ("age", "INTEGER")
+        ("age", "INTEGER"),
+        ("targetWater", "REAL DEFAULT 3000.0")
     ]
     
     for col_name, col_type in columns_to_add:
