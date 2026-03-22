@@ -208,6 +208,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Today's Meals Elements
     const motivationQuote = document.getElementById('motivationQuote');
+    const quotes = [
+        "Believe you can and you're halfway there.",
+        "Your only limit is you.",
+        "Don't stop until you're proud.",
+        "Healthy is a way of life.",
+        "Everything you need is already inside you.",
+        "The only bad workout is the one that didn't happen.",
+        "Fitness is not about being better than someone else. It's about being better than you were yesterday.",
+        "Take care of your body. It's the only place you have to live.",
+        "Fuel your body, feed your soul.",
+        "Success starts with self-discipline."
+    ];
+
+    const waterQuotes = [
+        "Water is the driving force of all nature.",
+        "Stay hydrated, stay healthy!",
+        "Drink more water. Your skin, your hair, your mind and your body will thank you.",
+        "Pure water is the world's first and foremost medicine.",
+        "A thirsty body is a tired body. Drink up!",
+        "Keep calm and drink water.",
+        "Hydration is the key to energy.",
+        "Water: The original energy drink.",
+        "Don't wait until you're thirsty to drink water.",
+        "Your body is about 60% water. Be good to it."
+    ];
+
+    if (motivationQuote) {
+        if (window.location.pathname === '/hydration') {
+            const randomQuote = waterQuotes[Math.floor(Math.random() * waterQuotes.length)];
+            motivationQuote.textContent = `"${randomQuote}"`;
+        } else {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            motivationQuote.textContent = `"${randomQuote}"`;
+        }
+    }
+
     const todaysMealsContainer = document.getElementById('todaysMealsContainer');
     const closeTodaysMealsBtn = document.getElementById('closeTodaysMeals');
     const todaysMealList = document.getElementById('todaysMealList');
@@ -281,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const fetchAIAdvice = async () => {
-        if (!motivationQuote) return;
+        if (!motivationQuote || window.location.pathname === '/hydration') return;
 
         try {
             const date = getLocalDate();
