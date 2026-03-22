@@ -1091,46 +1091,21 @@ input:checked + .slider:before {
 }
 
 .deleteMealBtn {
-    background-color: rgba(231, 76, 60, 0.1);
+    background-color: transparent;
     color: #e74c3c;
     border: 1px solid rgba(231, 76, 60, 0.2);
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .deleteMealBtn:hover {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.deleteMealBtn svg {
-    flex-shrink: 0;
-}
-
-.confirmBox {
-    max-width: 320px !important;
-    padding: 25px !important;
-    text-align: center;
-}
-
-.confirmActions {
-    display: flex;
-    gap: 12px;
-    margin-top: 10px;
-    width: 100%;
-}
-
-.confirmActions .closeBtn {
-    flex: 1;
-    padding: 12px;
-    font-weight: 600;
-    border-radius: 12px;
+    background-color: rgba(231, 76, 60, 0.1);
 }
 
 .deleteMealBtn.confirming {
@@ -1138,6 +1113,10 @@ input:checked + .slider:before {
     color: white !important;
     border-color: #c0392b !important;
     font-weight: bold;
+}
+
+.deleteMealBtn svg {
+    flex-shrink: 0;
 }
 
 .stepperList {

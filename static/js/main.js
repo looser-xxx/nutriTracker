@@ -96,10 +96,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <span class="mealCals">${log.amountMl}ml</span>
-                    <button class="deleteHydrationBtn" data-id="${log.id}" style="background: none; border: none; color: #e74c3c; cursor: pointer; padding: 5px;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6" />
+                    <button class="deleteHydrationBtn deleteMealBtn" data-id="${log.id}">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
                         </svg>
+                        <span>Delete</span>
                     </button>
                 </div>
             `;
@@ -111,13 +114,31 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', async (e) => {
                 e.stopPropagation();
                 const id = btn.getAttribute('data-id');
-                if (confirm('Delete this entry?')) {
-                    try {
-                        const res = await fetch(`/api/logs/today/deleteHydration/${id}`, { method: 'DELETE' });
-                        if (res.ok) fetchHydrationData();
-                    } catch (err) {
-                        console.error('Error deleting hydration log:', err);
-                    }
+                const isConfirming = btn.classList.contains('confirming');
+
+                if (!isConfirming) {
+                    btn.classList.add('confirming');
+                    const span = btn.querySelector('span');
+                    if (span) span.textContent = 'Confirm?';
+
+                    setTimeout(() => {
+                        if (btn.classList.contains('confirming')) {
+                            btn.classList.remove('confirming');
+                            if (span) span.textContent = 'Delete';
+                        }
+                    }, 3000);
+                    return;
+                }
+
+                try {
+                    btn.disabled = true;
+                    btn.style.opacity = '0.5';
+                    const res = await fetch(`/api/logs/today/deleteHydration/${id}`, { method: 'DELETE' });
+                    if (res.ok) fetchHydrationData();
+                } catch (err) {
+                    console.error('Error deleting hydration log:', err);
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
                 }
             });
         });
